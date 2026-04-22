@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מרכז טל – CRM תרשים זרימה מלא</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #3d7a44;
+  --green-light: #6aaa72;
+  --green-pale: #e6f4e8;
+  --green-deep: #1e4422;
+  --purple: #7c6ab8;
+  --purple-pale: #eeebf9;
+  --amber: #b8860b;
+  --amber-pale: #fef8e6;
+  --red: #b84040;
+  --red-pale: #fceaea;
+  --blue: #2d6fa0;
+  --blue-pale: #e6f1fb;
+  --cream: #f5f8f5;
+  --white: #ffffff;
+  --text: #1a2e1c;
+  --mid: #516453;
+  --border: rgba(61,122,68,0.13);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  padding: 36px 16px 80px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; }
+
+/* ── Header ── */
+.hdr { text-align: center; margin-bottom: 44px; }
+.hdr h1 { font-size: 26px; font-weight: 900; color: var(--green-deep); letter-spacing: -.8px; }
+.hdr p { font-size: 12px; color: var(--mid); margin-top: 4px; }
+
+/* ── Legend ── */
+.legend { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
+.leg { display: flex; align-items: center; gap: 7px; background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 5px 13px; font-size: 11px; font-weight: 600; color: var(--text); }
+.dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── Phase ── */
+.phase { margin-bottom: 36px; }
+.phase-head {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 14px;
+}
+.phase-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  font-size: 13px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.phase-title { font-size: 14px; font-weight: 800; color: var(--green-deep); }
+.phase-sub { font-size: 11px; color: var(--mid); font-weight: 300; }
+
+/* ── Flow row ── */
+.flow { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; padding-bottom: 6px; }
+
+/* ── Node ── */
+.node {
+  flex-shrink: 0; width: 188px;
+  background: var(--white); border-radius: 14px;
+  border: 1.5px solid var(--border);
+  padding: 14px 14px 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  position: relative;
+}
+.node::after {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 4px; height: 100%;
+  border-radius: 0 14px 14px 0;
+}
+.node.auto::after   { background: var(--green); }
+.node.manual::after { background: var(--purple); }
+.node.decide::after { background: var(--amber); }
+.node.stop::after   { background: var(--red); }
+.node.mile::after   { background: var(--green-deep); }
+.node.bot::after    { background: var(--blue); }
+
+.node.auto   { border-color: rgba(61,122,68,.18); }
+.node.bot    { border-color: rgba(45,111,160,.2); background: var(--blue-pale); }
+.node.decide { border-color: rgba(184,134,11,.2); background: var(--amber-pale); }
+.node.stop   { border-color: rgba(184,64,64,.2);  background: var(--red-pale); }
+.node.mile   { border-color: rgba(30,68,34,.2);   background: var(--green-pale); }
+
+.nicon { font-size: 19px; margin-bottom: 7px; display: block; }
+.ntitle { font-size: 12.5px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 4px; }
+.ndesc  { font-size: 11px; color: var(--mid); font-weight: 300; line-height: 1.6; }
+.ntag {
+  display: inline-block; margin-top: 8px;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 9px; border-radius: 10px;
+  background: var(--green-pale); color: var(--green-deep);
+}
+.node.bot    .ntag { background: var(--blue-pale);   color: var(--blue); }
+.node.decide .ntag { background: var(--amber-pale);  color: var(--amber); }
+.node.stop   .ntag { background: var(--red-pale);    color: var(--red); }
+.node.manual .ntag { background: var(--purple-pale); color: var(--purple); }
+.node.mile   .ntag { background: var(--green-pale);  color: var(--green-deep); }
+
+/* ── Arrow ── */
+.arr {
+  flex-shrink: 0; width: 44px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding-top: 26px; color: var(--mid);
+  font-size: 16px;
+}
+.arrlabel { font-size: 10px; text-align: center; color: var(--mid); margin-top: 3px; line-height: 1.2; }
+
+/* ── Branch ── */
+.branch {
+  margin: 14px 0 0 210px;
+  padding: 14px 18px;
+  background: var(--white);
+  border: 1px dashed rgba(184,134,11,.4);
+  border-radius: 14px;
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.btitle { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; color: var(--amber); text-transform: uppercase; width: 100%; margin-bottom: 4px; }
+.bopt {
+  background: var(--amber-pale); border: 1px solid rgba(184,134,11,.25);
+  border-radius: 10px; padding: 9px 13px;
+  font-size: 11px; font-weight: 500; color: var(--text);
+  line-height: 1.5; flex: 1; min-width: 130px;
+}
+
+/* ── FAQ Bot Panel ── */
+.faq-panel {
+  background: var(--blue-pale);
+  border: 1.5px solid rgba(45,111,160,.2);
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 36px;
+}
+.faq-title { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+.faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.faq-item {
+  background: var(--white); border-radius: 10px;
+  border: 1px solid rgba(45,111,160,.15);
+  padding: 12px 14px;
+}
+.faq-q { font-size: 11.5px; font-weight: 700; color: var(--blue); margin-bottom: 3px; }
+.faq-a { font-size: 11px; color: var(--mid); font-weight: 300; line-height: 1.6; }
+
+/* ── Therapist Cards ── */
+.therapist-panel {
+  background: var(--purple-pale);
+  border: 1.5px solid rgba(124,106,184,.2);
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 36px;
+}
+.tp-title { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--purple); margin-bottom: 14px; }
+.tp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.tp-card {
+  background: var(--white); border-radius: 12px;
+  border: 1px solid rgba(124,106,184,.15);
+  padding: 14px;
+  display: flex; align-items: center; gap: 12px;
+}
+.tp-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--purple-pale); border: 2px solid rgba(124,106,184,.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.tp-name { font-size: 12.5px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.tp-spec { font-size: 11px; color: var(--mid); font-weight: 300; line-height: 1.5; }
+
+/* ── Drop-off Recovery ── */
+.dropout-panel {
+  background: var(--red-pale);
+  border: 1.5px solid rgba(184,64,64,.2);
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 36px;
+}
+.dp-title { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
+.dp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
+.dp-item {
+  background: var(--white); border-radius: 10px;
+  border: 1px solid rgba(184,64,64,.15);
+  padding: 13px 15px;
+}
+.dp-when { font-size: 10px; font-weight: 700; color: var(--red); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.dp-action { font-size: 11.5px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.dp-msg { font-size: 11px; color: var(--mid); font-weight: 300; line-height: 1.5; }
+
+/* ── Rules ── */
+.rules {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 22px 24px;
+}
+.rules-title { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+.rule { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+.rnum {
+  background: var(--red-pale); color: var(--red);
+  font-size: 11px; font-weight: 800;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.rule p { font-size: 12px; color: var(--text); line-height: 1.7; }
+.rule strong { color: var(--green-deep); }
+
+/* ── Divider ── */
+hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+@media (max-width: 600px) {
+  .flow { flex-direction: column; }
+  .arr { width: 100%; height: 28px; padding-top: 0; }
+  .node { width: 100%; }
+  .branch { margin-right: 0; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hdr">
+  <h1>מרכז טל · CRM תרשים זרימה מלא</h1>
+  <p>מפנייה ראשונה ועד סיום טיפול · מקסימום אוטומציה · מינימום טרטור</p>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="leg"><div class="dot" style="background:var(--green)"></div>אוטומטי</div>
+  <div class="leg"><div class="dot" style="background:var(--blue)"></div>בוט / FAQ</div>
+  <div class="leg"><div class="dot" style="background:var(--purple)"></div>ידני / שיקול דעת</div>
+  <div class="leg"><div class="dot" style="background:var(--amber)"></div>נקודת החלטה</div>
+  <div class="leg"><div class="dot" style="background:var(--red)"></div>עצירה / דחייה</div>
+  <div class="leg"><div class="dot" style="background:var(--green-deep)"></div>אבן דרך</div>
+</div>
+
+<!-- ══════════════════════════════════
+     שלב 1: פנייה נכנסת
+══════════════════════════════════ -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">1</div>
+    <div>
+      <div class="phase-title">פנייה נכנסת</div>
+      <div class="phase-sub">100% אוטומטי · לירז לא נגעת</div>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="node auto">
+      <span class="nicon">📲</span>
+      <div class="ntitle">פנייה נכנסת</div>
+      <div class="ndesc">ווטסאפ, הפניה, גוגל, סטטוס, קבוצה</div>
+      <span class="ntag">כניסה</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node bot">
+      <span class="nicon">🤖</span>
+      <div class="ntitle">תגובה אוטומטית</div>
+      <div class="ndesc">הודעת פתיחה + הפניה לשרית. שולח כרטיס מידע על המרכז</div>
+      <span class="ntag">תוך שניות</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node bot">
+      <span class="nicon">❓</span>
+      <div class="ntitle">בוט שאלות נפוצות</div>
+      <div class="ndesc">עלות? ביטוח? מטפלות? מיקום? → תשובה אוטומטית מיד</div>
+      <span class="ntag">FAQ אוטומטי</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node auto">
+      <span class="nicon">📋</span>
+      <div class="ntitle">שליחת שאלון</div>
+      <div class="ndesc">שאלון ילדים / בוגרים לפי גיל. "תעדכני כשסיימת"</div>
+      <span class="ntag">אוטומטי</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node auto">
+      <span class="nicon">⏰</span>
+      <div class="ntitle">תזכורת שאלון</div>
+      <div class="ndesc">לא מולא תוך 48 שעות → תזכורת אחת אוטומטית</div>
+      <span class="ntag">48 שעות</span>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ Bot Panel -->
+<div class="faq-panel">
+  <div class="faq-title">🤖 בוט FAQ – תשובות אוטומטיות לשאלות שחוזרות</div>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q">כמה עולה?</div>
+      <div class="faq-a">240 ₪ למפגש קבוצה · 480 ₪ מפגש עם לירז · 960 ₪/חודש למסלול משולב</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">יש החזר מביטוח?</div>
+      <div class="faq-a">כן. קבלות מסודרות + מכתב טיפולי + תעודות מקצועיות לגורמים רלוונטיים</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">איפה הקליניקה?</div>
+      <div class="faq-a">2 קליניקות: הברוש 101 + התאנה 272, מושב צפריה. הוראות הגעה מפורטות</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">מי המטפלות?</div>
+      <div class="faq-a">→ שולח כרטיסי מטפלות אוטומטית עם תמונה + תחומי התמחות</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">מדיניות ביטול?</div>
+      <div class="faq-a">מעל 24 שעות – ללא חיוב. מאוחר / אי-הגעה – חיוב מלא</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">כמה זמן לוקח?</div>
+      <div class="faq-a">קבוצה – 24 מפגשים שבועיים · סדרה פרטנית – 6 מפגשים לפי מסלול</div>
+    </div>
+  </div>
+</div>
+
+<!-- Therapist Cards Panel -->
+<div class="therapist-panel">
+  <div class="tp-title">👩‍⚕️ כרטיסי מטפלות – נשלחים אוטומטית עם שאלת "מי המטפלות?"</div>
+  <div class="tp-grid">
+    <div class="tp-card">
+      <div class="tp-avatar">👩</div>
+      <div>
+        <div class="tp-name">לירז טל</div>
+        <div class="tp-spec">פסיכולוגית חינוכית מומחית · מנהלת המרכז · הדרכת הורים</div>
+      </div>
+    </div>
+    <div class="tp-card">
+      <div class="tp-avatar">👩</div>
+      <div>
+        <div class="tp-name">ליבא</div>
+        <div class="tp-spec">קבוצות טיפוליות · בנות יסודי וחטיבה</div>
+      </div>
+    </div>
+    <div class="tp-card">
+      <div class="tp-avatar">👩</div>
+      <div>
+        <div class="tp-name">שיראל</div>
+        <div class="tp-spec">קבוצות טיפוליות · בנות יסודי · מטפלת באומנות</div>
+      </div>
+    </div>
+    <div class="tp-card">
+      <div class="tp-avatar">👩</div>
+      <div>
+        <div class="tp-name">כרמית</div>
+        <div class="tp-spec">קבוצות טיפוליות · בנים ובנות</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════
+     שלב 2: הצעת טיפול
+══════════════════════════════════ -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">2</div>
+    <div>
+      <div class="phase-title">הצעת טיפול</div>
+      <div class="phase-sub">לירז קוראת שאלון ושולחת PDF/תמונה ידנית · השלב היחיד הידני בשלב זה</div>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="node manual">
+      <span class="nicon">📖</span>
+      <div class="ntitle">לירז קוראת שאלון</div>
+      <div class="ndesc">מזהה קשיים, גיל, רקע, ומחליטה על מסלול מומלץ</div>
+      <span class="ntag">לירז בלבד</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node manual">
+      <span class="nicon">📄</span>
+      <div class="ntitle">הצעת טיפול</div>
+      <div class="ndesc">לירז שולחת PDF/תמונה מותאמת אישית עם מסלול מומלץ ועלות</div>
+      <span class="ntag">ידני – לירז</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node decide">
+      <span class="nicon">🔀</span>
+      <div class="ntitle">תגובת הורה</div>
+      <div class="ndesc">מעוניין? יש שאלות? לא ענה?</div>
+      <span class="ntag">החלטה</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node auto">
+      <span class="nicon">🔔</span>
+      <div class="ntitle">מעקב אוטומטי</div>
+      <div class="ndesc">לא ענה 72 שעות → הודעת "האם קיבלת? אשמח לענות"</div>
+      <span class="ntag">אוטומטי</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════
+     שלב 3: רישום ותשלום
+══════════════════════════════════ -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">3</div>
+    <div>
+      <div class="phase-title">רישום ותשלום</div>
+      <div class="phase-sub">הנקודה שבה אנשים נעצרים · כל הטפסים אוטומטיים</div>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="node auto">
+      <span class="nicon">📝</span>
+      <div class="ntitle">הסכם הצטרפות</div>
+      <div class="ndesc">Google Form חתימה דיגיטלית. חובה לפני כל פגישה</div>
+      <span class="ntag">אוטומטי</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node auto">
+      <span class="nicon">🏦</span>
+      <div class="ntitle">הוראת קבע</div>
+      <div class="ndesc">קישור אוטומטי עם הסכום הנכון לפי מסלול שנבחר</div>
+      <span class="ntag">אוטומטי</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node decide">
+      <span class="nicon">✔️</span>
+      <div class="ntitle">שרית בודקת</div>
+      <div class="ndesc">הסכם חתום? הוראת קבע? → ירוק לתיאום</div>
+      <span class="ntag">שרית</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node auto">
+      <span class="nicon">⏰</span>
+      <div class="ntitle">תזכורת לא-השלים</div>
+      <div class="ndesc">לא חתם תוך 48 שעות → תזכורת אוטומטית · 3 ימים → שרית מתקשרת</div>
+      <span class="ntag">אוטומטי</span>
+    </div>
+  </div>
+
+  <!-- הורים פרודים -->
+  <div class="branch">
+    <div class="btitle">⚖️ הורים פרודים / גרושים – נוהל מיוחד</div>
+    <div class="bopt">📋 CRM מסמן "הורים פרודים"<br>מפעיל תהליך נפרד אוטומטית</div>
+    <div class="bopt">✉️ בקשת אישור שני הורים<br>בכתב לפני פגישה ראשונה</div>
+    <div class="bopt">💳 הסכם תשלום עם ההורה המשלם<br>לפי פסיקה / הסכם</div>
+    <div class="bopt">🚫 ללא אישור שניהם<br>לא מתאמים פגישה</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════
+     שלב 4: פגישה ראשונה
+══════════════════════════════════ -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">4</div>
+    <div>
+      <div class="phase-title">פגישה ראשונה</div>
+      <div class="phase-sub">תיאום + תזכורת אוטומטיים · לירז מתמקדת בתוכן</div>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="node auto">
+      <span class="nicon">📅</span>
+      <div class="ntitle">תיאום אוטומטי</div>
+      <div class="ndesc">שרית שולחת מועדים אפשריים. הורה בוחר → CRM מאשר</div>
+      <span class="ntag">שרית + אוטומטי</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node auto">
+      <span class="nicon">🔔</span>
+      <div class="ntitle">תזכורת + הגעה</div>
+      <div class="ndesc">יום לפני: תזכורת + הוראות הגעה לפי קליניקה. בוקר הפגישה: "נתראה היום"</div>
+      <span class="ntag">אוטומטי</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node mile">
+      <span class="nicon">👨‍👩‍👧</span>
+      <div class="ntitle">פגישה משפחתית</div>
+      <div class="ndesc">לירז + המשפחה. הערכה, היכרות, החלטה על מסלול</div>
+      <span class="ntag">אבן דרך</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node manual">
+      <span class="nicon">🗺️</span>
+      <div class="ntitle">הדרכת הורים</div>
+      <div class="ndesc">1-2 מפגשים עם לירז. בניית תוכנית ומטרות. הכנה לקבוצה / פרטני</div>
+      <span class="ntag">לירז</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════
+     שלב 5: טיפול פעיל
+══════════════════════════════════ -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">5</div>
+    <div>
+      <div class="phase-title">טיפול פעיל</div>
+      <div class="phase-sub">תזכורות, ביטולים, תשלום – הכל אוטומטי</div>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="node auto">
+      <span class="nicon">🌿</span>
+      <div class="ntitle">מפגשים שבועיים</div>
+      <div class="ndesc">קבוצה / פרטני. תזכורת אוטומטית 24 שעות לפני כל מפגש</div>
+      <span class="ntag">מטפלת</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node auto">
+      <span class="nicon">📊</span>
+      <div class="ntitle">תיעוד מטפלת</div>
+      <div class="ndesc">תוך 24 שעות. CRM שולח תזכורת. בלי תיעוד = בלי תשלום</div>
+      <span class="ntag">חובה</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node decide">
+      <span class="nicon">🚨</span>
+      <div class="ntitle">חיסור / ביטול</div>
+      <div class="ndesc">הורה → שרית בלבד. שרית → מטפלת. לא הגיע 2 פעמים → התראה</div>
+      <span class="ntag">נוהל</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node auto">
+      <span class="nicon">💰</span>
+      <div class="ntitle">חיוב חודשי</div>
+      <div class="ndesc">הוראת קבע ב-1-10. קבלות אוטומטיות במייל</div>
+      <span class="ntag">אוטומטי</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════
+     שלב 6: סיום / מעקב
+══════════════════════════════════ -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">6</div>
+    <div>
+      <div class="phase-title">סיום ומעקב</div>
+      <div class="phase-sub">שמירת קשר + פתיחת דלת לאחים ולחזרה</div>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="node manual">
+      <span class="nicon">📈</span>
+      <div class="ntitle">מפגש סיכום</div>
+      <div class="ndesc">לאחר 24 מפגשים. לירז + הורים. המלצה להמשך</div>
+      <span class="ntag">לירז</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node auto">
+      <span class="nicon">📄</span>
+      <div class="ntitle">מכתב סיכום</div>
+      <div class="ndesc">לבית ספר / ביטוח / רווחה. יוצא רק אחרי הדרכת הורים</div>
+      <span class="ntag">אוטומטי לאחר פגישה</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node auto">
+      <span class="nicon">💌</span>
+      <div class="ntitle">שמירת קשר</div>
+      <div class="ndesc">3 חודשים אחרי סיום → הודעת מעקב אוטומטית "מה שלום?"</div>
+      <span class="ntag">אוטומטי</span>
+    </div>
+    <div class="arr">→</div>
+    <div class="node auto">
+      <span class="nicon">👨‍👩‍👧‍👦</span>
+      <div class="ntitle">הפניה לאחים</div>
+      <div class="ndesc">CRM מזהה שיש אחים ברשומה → מציע בעדינות בסיום</div>
+      <span class="ntag">אוטומטי</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════
+     פספוס / נטישה – שלב חמישי בעיתי
+══════════════════════════════════ -->
+<div class="dropout-panel">
+  <div class="dp-title">🚨 מניעת פספוס – הבעיה הכי גדולה: "לא חזרו אחרי הסכם/תשלום"</div>
+  <div class="dp-grid">
+    <div class="dp-item">
+      <div class="dp-when">48 שעות ללא הסכם</div>
+      <div class="dp-action">תזכורת אוטומטית #1</div>
+      <div class="dp-msg">"היי, רצינו לוודא שקיבלת את הקישור לחתימה. אנחנו כאן לכל שאלה 🌿"</div>
+    </div>
+    <div class="dp-item">
+      <div class="dp-when">72 שעות ללא תגובה</div>
+      <div class="dp-action">שרית מתקשרת</div>
+      <div class="dp-msg">שיחה קצרה לברר האם יש מניעה. לרוב: שאלה על עלות / ספק / לחץ יומי</div>
+    </div>
+    <div class="dp-item">
+      <div class="dp-when">חתם אבל לא קבע פגישה</div>
+      <div class="dp-action">תזכורת אוטומטית #2</div>
+      <div class="dp-msg">"מחכים לכם! הלוז מתמלא – מתי מתאים לכם השבוע?"</div>
+    </div>
+    <div class="dp-item">
+      <div class="dp-when">ביטל 2+ פעמים ברצף</div>
+      <div class="dp-action">התראה לשרית</div>
+      <div class="dp-msg">שרית יוצרת קשר ידנית. לירז מחליטה האם להמשיך / לשחרר את המקום</div>
+    </div>
+    <div class="dp-item">
+      <div class="dp-when">לא הגיע ולא הודיע</div>
+      <div class="dp-action">חיוב אוטומטי</div>
+      <div class="dp-msg">לפי מדיניות + הודעה למטפלת שהמפגש בוטל. לא לירז לא שרית מתפנות לזה</div>
+    </div>
+    <div class="dp-item">
+      <div class="dp-when">עצר אחרי שאלון בלי תשובה</div>
+      <div class="dp-action">מעקב אוטומטי + ידני</div>
+      <div class="dp-msg">אחרי 72 שעות: "קיבלת את הצעת הטיפול? יש לך שאלות?" → עוזר לסגור</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     כללי ברזל
+══════════════════════════════════ -->
+<div class="rules">
+  <div class="rules-title">⛔ כללי ברזל – מה שה-CRM אוכף אוטומטית</div>
+  <div class="rule">
+    <div class="rnum">1</div>
+    <p><strong>אין פגישה ללא הסכם חתום + הוראת קבע.</strong> ה-CRM חוסם תיאום פגישה עד שהשניים קיימים.</p>
+  </div>
+  <div class="rule">
+    <div class="rnum">2</div>
+    <p><strong>כל שאלה טכנית → בוט → שרית.</strong> לירז לא מקבלת שאלות על עלות, ביטוח, מיקום, ביטולים.</p>
+  </div>
+  <div class="rule">
+    <div class="rnum">3</div>
+    <p><strong>ביטולים → שרית בלבד, לא מטפלת.</strong> מטפלת מקבלת עדכון מהמרכז, לא מהורה ישירות.</p>
+  </div>
+  <div class="rule">
+    <div class="rnum">4</div>
+    <p><strong>הורים פרודים → אישור שני הורים לפני כל תיאום.</strong> CRM שולח בקשה אוטומטית לשניהם.</p>
+  </div>
+  <div class="rule">
+    <div class="rnum">5</div>
+    <p><strong>מכתב סיכום יוצא רק אחרי הדרכת הורים.</strong> לא ניתן להוציא מסמך מבלי לעבור את השלב.</p>
+  </div>
+  <div class="rule">
+    <div class="rnum">6</div>
+    <p><strong>מטפלת מתעדת תוך 24 שעות.</strong> CRM שולח תזכורת ומנעול תשלום חודשי עד השלמה.</p>
+  </div>
+  <div class="rule">
+    <div class="rnum">7</div>
+    <p><strong>הצעת טיפול – היחיד שיכולה לשלוח זה לירז.</strong> שום אוטומציה לא מחליפה את השיקול המקצועי הזה.</p>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מרכז טל – שאלון סיום ומדד שינוי</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #4e8c54;
+    --sage-light: #7ab880;
+    --sage-pale: #dff0e1;
+    --sage-deep: #2e5c32;
+    --lavender: #9b87c2;
+    --lavender-pale: #ede9f7;
+    --cream: #f7faf7;
+    --text-dark: #1e2a1f;
+    --text-mid: #5a6b5c;
+    --amber: #c9a040;
+    --amber-pale: #fdf3dc;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    padding: 32px 16px 80px;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    background: var(--white);
+    border-radius: 20px;
+    border-top: 6px solid var(--sage);
+    padding: 28px 28px 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  }
+  .logo { font-size: 13px; font-weight: 700; color: var(--sage); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .header h1 { font-size: 22px; font-weight: 900; color: var(--sage-deep); margin-bottom: 8px; }
+  .header p { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
+
+  /* Section */
+  .section {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px 24px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    border: 1px solid rgba(78,140,84,0.1);
+  }
+  .section-title {
+    font-size: 11px; font-weight: 800;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--sage); margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(78,140,84,0.12);
+  }
+
+  /* Question */
+  .q { margin-bottom: 22px; }
+  .q:last-child { margin-bottom: 0; }
+  .q-label {
+    font-size: 14px; font-weight: 600;
+    color: var(--text-dark); margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .q-label .q-num {
+    display: inline-block;
+    background: var(--sage-pale);
+    color: var(--sage-deep);
+    font-size: 11px; font-weight: 800;
+    padding: 2px 8px; border-radius: 6px;
+    margin-left: 6px;
+  }
+  .q-sub { font-size: 12px; color: var(--text-mid); margin-top: 3px; margin-bottom: 10px; font-weight: 300; }
+
+  /* Scale */
+  .scale {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--text-mid);
+    margin-top: 5px;
+    padding: 0 2px;
+  }
+  .scale input[type="radio"] { display: none; }
+  .scale label {
+    flex: 1;
+    text-align: center;
+    padding: 10px 4px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(78,140,84,0.2);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--cream);
+    position: relative;
+  }
+  .scale input:checked + label {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 3px 12px rgba(78,140,84,0.35);
+  }
+  .scale label:hover { border-color: var(--sage-light); background: var(--sage-pale); }
+
+  /* Text input */
+  textarea, input[type="text"] {
+    width: 100%;
+    border: 1.5px solid rgba(78,140,84,0.2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 13px;
+    color: var(--text-dark);
+    background: var(--cream);
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+  textarea:focus, input[type="text"]:focus {
+    outline: none;
+    border-color: var(--sage);
+    background: white;
+  }
+  textarea { min-height: 80px; }
+
+  /* Select */
+  select {
+    width: 100%;
+    border: 1.5px solid rgba(78,140,84,0.2);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 13px;
+    color: var(--text-dark);
+    background: var(--cream);
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+  select:focus { outline: none; border-color: var(--sage); }
+
+  /* Research note */
+  .research-note {
+    background: var(--lavender-pale);
+    border: 1px solid rgba(155,135,194,0.25);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    font-size: 12.5px;
+    color: #4a3b8c;
+    line-height: 1.7;
+  }
+  .research-note strong { font-weight: 700; }
+
+  /* Submit */
+  .submit-btn {
+    display: block; width: 100%;
+    background: var(--sage);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(78,140,84,0.35);
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(78,140,84,0.42); }
+
+  /* Comparison badge */
+  .compare-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--amber-pale);
+    border: 1px solid rgba(201,160,64,0.3);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px; font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 14px;
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-mid);
+    margin-top: 24px;
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">מרכז טל · לירז טל</div>
+    <h1>שאלון סיום תהליך טיפולי</h1>
+    <p>שאלון זה נועד לסכם את התהליך ולמדוד את השינוי שחל. התשובות מסייעות לנו לשפר את המענה לילדים ולמשפחות. ממלא/ת: הורה.</p>
+  </div>
+
+  <!-- Research note -->
+  <div class="research-note">
+    🔬 <strong>מדד שינוי השוואתי:</strong> חלק מהשאלות (סעיפים 1–9) זהות לשאלון המקדים שמילאתם בתחילת התהליך. ניתן יהיה להשוות בין הציונים ולמדוד את השינוי לאורך הטיפול.
+  </div>
+
+  <!-- Section 1: פרטי זיהוי -->
+  <div class="section">
+    <div class="section-title">פרטי זיהוי</div>
+
+    <div class="q">
+      <div class="q-label">שם הילד/ה</div>
+      <input type="text" placeholder="שם פרטי ושם משפחה">
+    </div>
+
+    <div class="q">
+      <div class="q-label">שם ממלא השאלון</div>
+      <select>
+        <option value="">בחר/י</option>
+        <option>אמא</option>
+        <option>אבא</option>
+        <option>שניהם יחד</option>
+      </select>
+    </div>
+
+    <div class="q">
+      <div class="q-label">שם המטפלת / שם הקבוצה</div>
+      <input type="text" placeholder="לדוגמה: ליבא / קבוצת בנות רביעי">
+    </div>
+
+    <div class="q">
+      <div class="q-label">כמה מפגשים עברתם בסך הכל?</div>
+      <select>
+        <option value="">בחר/י</option>
+        <option>עד 6 מפגשים</option>
+        <option>7–12 מפגשים</option>
+        <option>13–18 מפגשים</option>
+        <option>19–24 מפגשים</option>
+        <option>מעל 24 מפגשים</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Section 2: מדד סימפטומים (השוואתי) -->
+  <div class="section">
+    <div class="section-title">מדד סימפטומים – השוואה לתחילת התהליך</div>
+    <div class="compare-badge">📊 זהה לשאלון המקדים · מאפשר השוואה</div>
+    <p class="q-sub" style="margin-bottom:18px">אנא דרגו כל תחום בסולם 1–5:<br>1 = כלל לא מתאר | 3 = במידה בינונית | 5 = מתאר מאוד</p>
+
+    <!-- סימפטום 1 -->
+    <div class="q">
+      <div class="q-label"><span class="q-num">1</span> קשיים חברתיים</div>
+      <div class="q-sub">מריבות מרובות ו/או תחושת בדידות חברתית ו/או תחושת דחייה חברתית</div>
+      <div class="scale">
+        <input type="radio" name="s1" id="s1-1"><label for="s1-1">1</label>
+        <input type="radio" name="s1" id="s1-2"><label for="s1-2">2</label>
+        <input type="radio" name="s1" id="s1-3"><label for="s1-3">3</label>
+        <input type="radio" name="s1" id="s1-4"><label for="s1-4">4</label>
+        <input type="radio" name="s1" id="s1-5"><label for="s1-5">5</label>
+      </div>
+      <div class="scale-labels"><span>כלל לא</span><span>מתאר מאוד</span></div>
+    </div>
+
+    <!-- סימפטום 2 -->
+    <div class="q">
+      <div class="q-label"><span class="q-num">2</span> קושי להקשיב ולציית למורים</div>
+      <div class="scale">
+        <input type="radio" name="s2" id="s2-1"><label for="s2-1">1</label>
+        <input type="radio" name="s2" id="s2-2"><label for="s2-2">2</label>
+        <input type="radio" name="s2" id="s2-3"><label for="s2-3">3</label>
+        <input type="radio" name="s2" id="s2-4"><label for="s2-4">4</label>
+        <input type="radio" name="s2" id="s2-5"><label for="s2-5">5</label>
+      </div>
+      <div class="scale-labels"><span>כלל לא</span><span>מתאר מאוד</span></div>
+    </div>
+
+    <!-- סימפטום 3 -->
+    <div class="q">
+      <div class="q-label"><span class="q-num">3</span> קושי להקשיב ולשתף פעולה בבית</div>
+      <div class="scale">
+        <input type="radio" name="s3" id="s3-1"><label for="s3-1">1</label>
+        <input type="radio" name="s3" id="s3-2"><label for="s3-2">2</label>
+        <input type="radio" name="s3" id="s3-3"><label for="s3-3">3</label>
+        <input type="radio" name="s3" id="s3-4"><label for="s3-4">4</label>
+        <input type="radio" name="s3" id="s3-5"><label for="s3-5">5</label>
+      </div>
+      <div class="scale-labels"><span>כלל לא</span><span>מתאר מאוד</span></div>
+    </div>
+
+    <!-- סימפטום 4 -->
+    <div class="q">
+      <div class="q-label"><span class="q-num">4</span> קשיי התארגנות</div>
+      <div class="q-sub">מפוזרות, מבולגנות, אי יכולת לשמור על החפצים</div>
+      <div class="scale">
+        <input type="radio" name="s4" id="s4-1"><label for="s4-1">1</label>
+        <input type="radio" name="s4" id="s4-2"><label for="s4-2">2</label>
+        <input type="radio" name="s4" id="s4-3"><label for="s4-3">3</label>
+        <input type="radio" name="s4" id="s4-4"><label for="s4-4">4</label>
+        <input type="radio" name="s4" id="s4-5"><label for="s4-5">5</label>
+      </div>
+      <div class="scale-labels"><span>כלל לא</span><span>מתאר מאוד</span></div>
+    </div>
+
+    <!-- סימפטום 5 -->
+    <div class="q">
+      <div class="q-label"><span class="q-num">5</span> היפראקטיביות</div>
+      <div class="q-sub">אימפולסיביות ו/או תזזיתיות ו/או מוסחות מרובה</div>
+      <div class="scale">
+        <input type="radio" name="s5" id="s5-1"><label for="s5-1">1</label>
+        <input type="radio" name="s5" id="s5-2"><label for="s5-2">2</label>
+        <input type="radio" name="s5" id="s5-3"><label for="s5-3">3</label>
+        <input type="radio" name="s5" id="s5-4"><label for="s5-4">4</label>
+        <input type="radio" name="s5" id="s5-5"><label for="s5-5">5</label>
+      </div>
+      <div class="scale-labels"><span>כלל לא</span><span>מתאר מאוד</span></div>
+    </div>
+
+    <!-- סימפטום 6 -->
+    <div class="q">
+      <div class="q-label"><span class="q-num">6</span> קושי בביטחון העצמי</div>
+      <div class="q-sub">לא יוזם ומפחד להתנסות בדברים חדשים, חושש לעמוד על שלו מול חברים</div>
+      <div class="scale">
+        <input type="radio" name="s6" id="s6-1"><label for="s6-1">1</label>
+        <input type="radio" name="s6" id="s6-2"><label for="s6-2">2</label>
+        <input type="radio" name="s6" id="s6-3"><label for="s6-3">3</label>
+        <input type="radio" name="s6" id="s6-4"><label for="s6-4">4</label>
+        <input type="radio" name="s6" id="s6-5"><label for="s6-5">5</label>
+      </div>
+      <div class="scale-labels"><span>כלל לא</span><span>מתאר מאוד</span></div>
+    </div>
+
+    <!-- סימפטום 7 -->
+    <div class="q">
+      <div class="q-label"><span class="q-num">7</span> קושי בוויסות הרגשי</div>
+      <div class="q-sub">התפרצויות זעם, בכי, קושי להירגע</div>
+      <div class="scale">
+        <input type="radio" name="s7" id="s7-1"><label for="s7-1">1</label>
+        <input type="radio" name="s7" id="s7-2"><label for="s7-2">2</label>
+        <input type="radio" name="s7" id="s7-3"><label for="s7-3">3</label>
+        <input type="radio" name="s7" id="s7-4"><label for="s7-4">4</label>
+        <input type="radio" name="s7" id="s7-5"><label for="s7-5">5</label>
+      </div>
+      <div class="scale-labels"><span>כלל לא</span><span>מתאר מאוד</span></div>
+    </div>
+
+    <!-- סימפטום 8 -->
+    <div class="q">
+      <div class="q-label"><span class="q-num">8</span> נוקשות ומאבקי שליטה</div>
+      <div class="q-sub">מצליח לשתף פעולה רק אם מסבירים לו ומפייסים</div>
+      <div class="scale">
+        <input type="radio" name="s8" id="s8-1"><label for="s8-1">1</label>
+        <input type="radio" name="s8" id="s8-2"><label for="s8-2">2</label>
+        <input type="radio" name="s8" id="s8-3"><label for="s8-3">3</label>
+        <input type="radio" name="s8" id="s8-4"><label for="s8-4">4</label>
+        <input type="radio" name="s8" id="s8-5"><label for="s8-5">5</label>
+      </div>
+      <div class="scale-labels"><span>כלל לא</span><span>מתאר מאוד</span></div>
+    </div>
+
+    <!-- סימפטום 9 -->
+    <div class="q">
+      <div class="q-label"><span class="q-num">9</span> חרדות ודאגות רבות</div>
+      <div class="scale">
+        <input type="radio" name="s9" id="s9-1"><label for="s9-1">1</label>
+        <input type="radio" name="s9" id="s9-2"><label for="s9-2">2</label>
+        <input type="radio" name="s9" id="s9-3"><label for="s9-3">3</label>
+        <input type="radio" name="s9" id="s9-4"><label for="s9-4">4</label>
+        <input type="radio" name="s9" id="s9-5"><label for="s9-5">5</label>
+      </div>
+      <div class="scale-labels"><span>כלל לא</span><span>מתאר מאוד</span></div>
+    </div>
+
+    <!-- שעות מסך -->
+    <div class="q">
+      <div class="q-label"><span class="q-num">10</span> מסכים: כמה שעות ביום ילדכם מול המסך?</div>
+      <select>
+        <option value="">בחר/י</option>
+        <option>פחות משעה</option>
+        <option>1–2 שעות</option>
+        <option>2–3 שעות</option>
+        <option>3–4 שעות</option>
+        <option>מעל 4 שעות</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Section 3: תפקוד יומיומי -->
+  <div class="section">
+    <div class="section-title">תפקוד יומיומי – שינוי מורגש</div>
+    <p class="q-sub" style="margin-bottom:18px">דרגו את מידת השינוי שחל בכל תחום לאורך התהליך:<br>1 = ללא שינוי | 3 = שינוי חלקי | 5 = שיפור משמעותי</p>
+
+    <div class="q">
+      <div class="q-label">תפקוד חברתי</div>
+      <div class="q-sub">יחסים עם חברים, שייכות, יוזמה חברתית</div>
+      <div class="scale">
+        <input type="radio" name="f1" id="f1-1"><label for="f1-1">1</label>
+        <input type="radio" name="f1" id="f1-2"><label for="f1-2">2</label>
+        <input type="radio" name="f1" id="f1-3"><label for="f1-3">3</label>
+        <input type="radio" name="f1" id="f1-4"><label for="f1-4">4</label>
+        <input type="radio" name="f1" id="f1-5"><label for="f1-5">5</label>
+      </div>
+      <div class="scale-labels"><span>ללא שינוי</span><span>שיפור משמעותי</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-label">תפקוד בבית</div>
+      <div class="q-sub">שיתוף פעולה, אווירה, יחסים עם אחים</div>
+      <div class="scale">
+        <input type="radio" name="f2" id="f2-1"><label for="f2-1">1</label>
+        <input type="radio" name="f2" id="f2-2"><label for="f2-2">2</label>
+        <input type="radio" name="f2" id="f2-3"><label for="f2-3">3</label>
+        <input type="radio" name="f2" id="f2-4"><label for="f2-4">4</label>
+        <input type="radio" name="f2" id="f2-5"><label for="f2-5">5</label>
+      </div>
+      <div class="scale-labels"><span>ללא שינוי</span><span>שיפור משמעותי</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-label">תפקוד בבית הספר</div>
+      <div class="q-sub">התמדה, שיתוף פעולה עם צוות, הגעה</div>
+      <div class="scale">
+        <input type="radio" name="f3" id="f3-1"><label for="f3-1">1</label>
+        <input type="radio" name="f3" id="f3-2"><label for="f3-2">2</label>
+        <input type="radio" name="f3" id="f3-3"><label for="f3-3">3</label>
+        <input type="radio" name="f3" id="f3-4"><label for="f3-4">4</label>
+        <input type="radio" name="f3" id="f3-5"><label for="f3-5">5</label>
+      </div>
+      <div class="scale-labels"><span>ללא שינוי</span><span>שיפור משמעותי</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-label">ביטחון עצמי ומסוגלות</div>
+      <div class="q-sub">ביטוי עצמי, יוזמה, עמידה על עצמו/ה</div>
+      <div class="scale">
+        <input type="radio" name="f4" id="f4-1"><label for="f4-1">1</label>
+        <input type="radio" name="f4" id="f4-2"><label for="f4-2">2</label>
+        <input type="radio" name="f4" id="f4-3"><label for="f4-3">3</label>
+        <input type="radio" name="f4" id="f4-4"><label for="f4-4">4</label>
+        <input type="radio" name="f4" id="f4-5"><label for="f4-5">5</label>
+      </div>
+      <div class="scale-labels"><span>ללא שינוי</span><span>שיפור משמעותי</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-label">ויסות רגשי</div>
+      <div class="q-sub">יכולת להרגע, פחות התפרצויות, גמישות</div>
+      <div class="scale">
+        <input type="radio" name="f5" id="f5-1"><label for="f5-1">1</label>
+        <input type="radio" name="f5" id="f5-2"><label for="f5-2">2</label>
+        <input type="radio" name="f5" id="f5-3"><label for="f5-3">3</label>
+        <input type="radio" name="f5" id="f5-4"><label for="f5-4">4</label>
+        <input type="radio" name="f5" id="f5-5"><label for="f5-5">5</label>
+      </div>
+      <div class="scale-labels"><span>ללא שינוי</span><span>שיפור משמעותי</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-label">אווירה כללית בבית</div>
+      <div class="q-sub">תחושתכם כהורים, רמת הלחץ בבית</div>
+      <div class="scale">
+        <input type="radio" name="f6" id="f6-1"><label for="f6-1">1</label>
+        <input type="radio" name="f6" id="f6-2"><label for="f6-2">2</label>
+        <input type="radio" name="f6" id="f6-3"><label for="f6-3">3</label>
+        <input type="radio" name="f6" id="f6-4"><label for="f6-4">4</label>
+        <input type="radio" name="f6" id="f6-5"><label for="f6-5">5</label>
+      </div>
+      <div class="scale-labels"><span>ללא שינוי</span><span>שיפור משמעותי</span></div>
+    </div>
+  </div>
+
+  <!-- Section 4: שביעות רצון מהמרכז -->
+  <div class="section">
+    <div class="section-title">שביעות רצון מהמרכז</div>
+    <p class="q-sub" style="margin-bottom:18px">1 = לא מרוצה כלל | 5 = מרוצה מאוד</p>
+
+    <div class="q">
+      <div class="q-label">שביעות רצון כללית מהתהליך</div>
+      <div class="scale">
+        <input type="radio" name="sat1" id="sat1-1"><label for="sat1-1">1</label>
+        <input type="radio" name="sat1" id="sat1-2"><label for="sat1-2">2</label>
+        <input type="radio" name="sat1" id="sat1-3"><label for="sat1-3">3</label>
+        <input type="radio" name="sat1" id="sat1-4"><label for="sat1-4">4</label>
+        <input type="radio" name="sat1" id="sat1-5"><label for="sat1-5">5</label>
+      </div>
+      <div class="scale-labels"><span>לא מרוצה</span><span>מרוצה מאוד</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-label">מקצועיות המטפלת</div>
+      <div class="scale">
+        <input type="radio" name="sat2" id="sat2-1"><label for="sat2-1">1</label>
+        <input type="radio" name="sat2" id="sat2-2"><label for="sat2-2">2</label>
+        <input type="radio" name="sat2" id="sat2-3"><label for="sat2-3">3</label>
+        <input type="radio" name="sat2" id="sat2-4"><label for="sat2-4">4</label>
+        <input type="radio" name="sat2" id="sat2-5"><label for="sat2-5">5</label>
+      </div>
+      <div class="scale-labels"><span>לא מרוצה</span><span>מרוצה מאוד</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-label">זמינות ותקשורת עם המרכז</div>
+      <div class="scale">
+        <input type="radio" name="sat3" id="sat3-1"><label for="sat3-1">1</label>
+        <input type="radio" name="sat3" id="sat3-2"><label for="sat3-2">2</label>
+        <input type="radio" name="sat3" id="sat3-3"><label for="sat3-3">3</label>
+        <input type="radio" name="sat3" id="sat3-4"><label for="sat3-4">4</label>
+        <input type="radio" name="sat3" id="sat3-5"><label for="sat3-5">5</label>
+      </div>
+      <div class="scale-labels"><span>לא מרוצה</span><span>מרוצה מאוד</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-label">האם הציפיות שלכם מהתהליך התממשו?</div>
+      <div class="scale">
+        <input type="radio" name="sat4" id="sat4-1"><label for="sat4-1">1</label>
+        <input type="radio" name="sat4" id="sat4-2"><label for="sat4-2">2</label>
+        <input type="radio" name="sat4" id="sat4-3"><label for="sat4-3">3</label>
+        <input type="radio" name="sat4" id="sat4-4"><label for="sat4-4">4</label>
+        <input type="radio" name="sat4" id="sat4-5"><label for="sat4-5">5</label>
+      </div>
+      <div class="scale-labels"><span>כלל לא</span><span>לחלוטין</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-label">האם תמליצו על מרכז טל לאחרים?</div>
+      <select>
+        <option value="">בחר/י</option>
+        <option>בהחלט כן</option>
+        <option>כנראה כן</option>
+        <option>לא בטוח/ה</option>
+        <option>כנראה לא</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Section 5: שאלות פתוחות -->
+  <div class="section">
+    <div class="section-title">שאלות פתוחות</div>
+
+    <div class="q">
+      <div class="q-label">מה השינוי הבולט ביותר שראיתם בילד/ה?</div>
+      <textarea placeholder="תארו בחופשיות..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-label">מה הציפיות שהגעתם איתן לתהליך? האם הן התממשו?</div>
+      <textarea placeholder="תארו בחופשיות..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-label">מה היה אפשר לשפר?</div>
+      <textarea placeholder="כל משוב יתקבל בתודה..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-label">האם יש ילדים נוספים במשפחה שלדעתכם יכולים להפיק מהתהליך?</div>
+      <select>
+        <option value="">בחר/י</option>
+        <option>כן, יש</option>
+        <option>אולי</option>
+        <option>לא</option>
+      </select>
+    </div>
+
+    <div class="q">
+      <div class="q-label">הערות נוספות</div>
+      <textarea placeholder="כל מה שלא עלה..."></textarea>
+    </div>
+  </div>
+
+  <button class="submit-btn" onclick="alert('תודה רבה על המשוב! 🌿')">שליחה →</button>
+
+  <div class="footer-note">
+    מרכז טל · לירז טל, פסיכולוגית חינוכית מומחית<br>
+    054-2221304 · merkaztal.com
+  </div>
+
+</div>
+</body>
+</html>

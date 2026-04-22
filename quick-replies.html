@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תשובות מהירות – מרכז טל</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --sage: #7a9e7e;
+    --sage-light: #e8f0e9;
+    --sage-dark: #4a7050;
+    --warm: #f5f0eb;
+    --text: #2d3a2e;
+    --text-soft: #6b7c6d;
+    --border: #d4e0d5;
+    --white: #ffffff;
+    --accent: #c9a96e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--warm);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 20px rgba(122,158,126,0.08);
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--sage-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  header p {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    font-weight: 300;
+  }
+
+  .instructions {
+    background: var(--sage-light);
+    border-right: 4px solid var(--sage);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--sage-dark);
+  }
+
+  .instructions strong { font-weight: 600; }
+
+  .section-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 2rem 0 0.8rem;
+    padding-right: 0.5rem;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover { box-shadow: 0 4px 20px rgba(122,158,126,0.12); }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.2rem;
+    background: var(--sage-light);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .card-header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .shortcut {
+    background: var(--sage-dark);
+    color: white;
+    font-family: monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .card-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+
+  .card-note {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    font-weight: 300;
+  }
+
+  .toggle-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: var(--sage-dark);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .card-body {
+    padding: 1.2rem 1.4rem;
+    display: none;
+  }
+
+  .card-body.open { display: block; }
+
+  .message-text {
+    font-size: 0.92rem;
+    line-height: 1.9;
+    color: var(--text);
+    white-space: pre-wrap;
+    background: var(--warm);
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    margin-bottom: 0.8rem;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--sage-dark);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-family: 'Heebo', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: 500;
+  }
+
+  .copy-btn:hover { background: var(--sage); }
+  .copy-btn.copied { background: var(--accent); }
+
+  .fill-note {
+    display: inline-block;
+    margin-right: 0.8rem;
+    font-size: 0.78rem;
+    color: var(--text-soft);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--text-soft);
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>📲 תשובות מהירות – מרכז טל</h1>
+    <p>כל ההודעות החוזרות במקום אחד • להכנסה לוואטסאפ Business</p>
+  </header>
+
+  <div class="instructions">
+    <strong>איך מכניסים לוואטסאפ Business:</strong><br>
+    שלוש נקודות ← כלים לעסק ← תגובות מהירות ← ➕ הוספה<br>
+    <strong>קיצור:</strong> מה שמופיע בעמודה הירוקה (לדוג׳ <code>/התחלה</code>)<br>
+    <strong>הודעה:</strong> תדביקי את הטקסט המלא<br>
+    <strong>שימוש בפועל:</strong> בתוך הצ׳אט כתבי / ותראי את הקיצור 💡
+  </div>
+
+  <!-- קטגוריה: פתיחה ותהליך -->
+  <div class="section-title">פתיחה ותהליך</div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/התחלה</span>
+        <span class="card-title">הודעת פתיחה</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי יקרה 🌷
+
+תודה שפנית למרכז טל.
+
+אשמח להבין קצת יותר כדי לדייק את המענה – מה הסיבה לפנייה?</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/תהליך</span>
+        <span class="card-title">הסבר על מבנה הטיפול</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">תודה על השיתוף 🌿
+
+אצלנו התהליך מתחיל בפגישה משפחתית ולאחריה הדרכת הורים, ובהתאם לכך נבנית המלצה מדויקת להמשך (טיפול פרטני / קבוצה / שילוב).
+
+לפרטים נוספים על המרכז ומסלולי הטיפול 👇
+https://drive.google.com/file/d/1cRYU9vRPxVyvJaO-pAYX7ZBEcR-L30G4/view?usp=drive_link
+
+אשמח לכוון אותך למסגרת הכי מתאימה 🙏</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/סדרה</span>
+        <span class="card-title">הסבר על סדרת 6 מפגשים</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי יקרה 🌷
+
+בשמחה אסביר על תהליך של סדרת 6 מפגשים:
+
+🔹 מבנה התהליך:
+המפגש הראשון הוא לרוב מפגש משפחתי, בו לירז מכירה את הילד/ים לעומק – דרך שיחה, משחק וכלים השלכתיים.
+המטרה היא להבין את הדפוסים, החוזקות וההתנהלות הרגשית והחברתית בצורה רחבה ומדויקת.
+המפגש השני הוא הדרכת הורים ומשוב, בו לירז משתפת במה שעלה במפגש הראשון ובונים יחד כיווני עבודה להמשך.
+
+🔹 משך ועלות מפגש:
+45 דקות: 500 ש״ח
+
+🔹 הטבה בסדרת מפגשים:
+ברכישת סדרה של 6 מפגשים:
+✔ 45 דקות – 480 ש״ח למפגש
+
+הסדרה מאפשרת תהליך ממוקד, רציף ויעיל יותר 🌿
+
+לפרטים נוספים על המרכז ומסלולי הטיפול 👇
+https://drive.google.com/file/d/1cRYU9vRPxVyvJaO-pAYX7ZBEcR-L30G4/view?usp=drive_link
+
+איך תרצי להמשיך?</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <!-- קטגוריה: שאלונים -->
+  <div class="section-title">שאלונים</div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-right">
+          <span class="shortcut">/שאלון_ילדים</span>
+          <span class="card-title">שאלון ילדים</span>
+        </div>
+        <div class="toggle-btn">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="message-text">כדי להתקדם, אשמח שתמלאי שאלון קצר 👇
+
+🔹 שאלון ילדים:
+https://forms.gle/sKWamwHp11ghdDbk8
+
+בסיום המילוי תעדכני אותי 🌷</div>
+        <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" onclick="toggle(this)">
+        <div class="card-header-right">
+          <span class="shortcut">/שאלון_בוגרים</span>
+          <span class="card-title">שאלון מבוגרים</span>
+        </div>
+        <div class="toggle-btn">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="message-text">כדי להתקדם, אשמח שתמלאי שאלון קצר 👇
+
+🔹 שאלון מבוגרים:
+https://forms.gle/bqz7ByLBv8Nm5LQ1A
+
+בסיום המילוי תעדכני אותי 🌷</div>
+        <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/תזכורת_שאלון</span>
+        <span class="card-title">תזכורת מילוי שאלון</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי יקרה 🌷
+
+רק בודקת אם הספקת למלא את השאלון 🙂
+
+אם יש משהו שמעכב – אני כאן</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <!-- קטגוריה: תורים ותשלום -->
+  <div class="section-title">תורים ותשלום</div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/תור</span>
+        <span class="card-title">הצעת תור</span>
+        <span class="card-note">⚠️ למלא תאריך ושעה</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">אפשר להציע פגישה בתאריך ___ בשעה ___
+
+מתאים לך?</div>
+      <span class="fill-note">⚠️ יש למלא תאריך ושעה לפני שליחה</span>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/אישור_תור</span>
+        <span class="card-title">אישור קביעת תור</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">מעולה, קבענו 😊
+
+כדי לשריין את התור יש להסדיר תשלום 👇
+
+ניתן לשלם:
+אשראי (לא אמריקן אקספרס)
+העברה בנקאית:
+ע״ש לירז טל
+בנק לאומי | סניף 678 | חשבון 1805120
+
+ניתן לחלק תשלומים בהסדרת הוראת קבע בנקאית 🏦
+
+📌 בהעברה יש לשלוח צילום מסך לאחר התשלום</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/תשלום</span>
+        <span class="card-title">פרטי תשלום</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">ניתן לשלם:
+
+אשראי (לא אמריקן אקספרס)
+העברה בנקאית:
+ע״ש לירז טל
+בנק לאומי | סניף 678 | חשבון 1805120
+
+ניתן לחלק תשלומים בהסדרת הוראת קבע בנקאית 🏦
+
+📌 בהעברה יש לשלוח צילום מסך לאחר התשלום</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <!-- קטגוריה: הגעה ותזכורות -->
+  <div class="section-title">הגעה ותזכורות</div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/הגעה_ברוש</span>
+        <span class="card-title">הוראות הגעה – קליניקת הברוש</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">מצרפת פרטי הגעה לקליניקת הברוש 🌿
+
+רושמים בווייז:
+הברוש 101, מושב צפריה
+
+לחנות צמוד למדרכה בין הברוש 100 לברוש 101
+להיכנס שמאלה במדרכה בין הגדר במבוק לבניין
+ללכת עד הסוף ואז שמאלה.
+
+כשתראו דלת לבנה ועליה חמסות תדעו שהגעתם 😊</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/הגעה_תאנה</span>
+        <span class="card-title">הוראות הגעה – קליניקת התאנה</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">מצרפת פרטי הגעה לקליניקת התאנה 🌿
+
+📍 רחוב התאנה 272, מושב צפריה – כניסה 1
+
+🚗 חניה:
+יש לחנות מחוץ לרחוב ההולנדי (חשוב!) על הכביש בכחול-לבן.
+
+🚶 הגעה ברגל:
+נכנסים לכניסה 1.
+בכיכר פונים שמאלה.
+הולכים בשביל משמאל – לא יורדים במדרגות.
+עד לדלת עם חלון – זו הקליניקה שלנו בבית הפנימי.
+
+ברוכים הבאים 🌿</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/תזכורת</span>
+        <span class="card-title">תזכורת לפגישה</span>
+        <span class="card-note">⚠️ למלא שעה</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי 🌿
+
+תזכורת לפגישה מחר בשעה ___
+
+מחכה לראותכם 🙂</div>
+      <span class="fill-note">⚠️ יש למלא שעה לפני שליחה</span>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <!-- קטגוריה: מקרים מיוחדים -->
+  <div class="section-title">מקרים מיוחדים</div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/הורים_פרודים</span>
+        <span class="card-title">הורים פרודים – אישור נדרש</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">חשוב לי לעדכן 🌿
+
+במקרה של הורים פרודים / לא נשואים, נדרש אישור חתום מההורה השני לצורך התחלת התהליך.
+
+אפשר לשלוח לי כאן ברגע שיש 👍</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/ביטוח</span>
+        <span class="card-title">החזר ביטוח פרטי</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">בשמחה 🌷
+
+ניתן לקבל קבלות ומכתב טיפולי לצורך החזר מביטוח פרטי.
+
+אם צריך נוסח מותאם – עדכני אותי 🙏</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/מעקב</span>
+        <span class="card-title">המשך מעקב / התלבטות</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי יקרה 🌷
+
+רק רציתי לבדוק אם יצא לך לחשוב על הדברים ואם יש משהו נוסף שיכול לעזור לך להחליט 🙏
+
+אם תרצי, אפשר גם שיחת היכרות קצרה עם לירז.</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/נסיגה</span>
+        <span class="card-title">נסיגה בתהליך</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי יקרה 🌷
+
+רק רציתי לבדוק בעדינות אם משהו השתנה או לא הרגיש מדויק עבורך 🙏
+
+לפעמים אפשר לדייק יחד (מטפלת / מסגרת / זמנים)</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/אחרי_פגישה</span>
+        <span class="card-title">אחרי פגישה ראשונה</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי 🌿
+
+תודה על הפגישה היום, היה חשוב ומשמעותי להכיר אתכם.
+
+נבנה כעת המלצה מותאמת להמשך ונחזור אליכם עם כיוון מדויק 🙏</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <!-- קטגוריה: קבוצות -->
+  <div class="section-title">קבוצות טיפוליות – בנות יסודי</div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/קבוצה_בנות_ראשון_א</span>
+        <span class="card-title">בנות יסודי – ראשון א׳</span>
+        <span class="card-note">א׳ 16:45 | תאנה</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי 🌷 שמחה שפנית אלינו!
+
+🔹 פרטי הקבוצה:
+📅 יום ראשון | ⏰ 16:45
+📍 רחוב התאנה 272, מושב צפריה – כניסה 1
+
+🔹 עלות:
+240 ש״ח למפגש
+
+🔹 ביטוח והחזרים:
+✔ קבלות מסודרות
+✔ מכתב טיפולי לצורך החזר מביטוח פרטי
+✔ תעודות מקצועיות לגורמים רלוונטיים:
+https://drive.google.com/file/d/1U818yjGLSRFIAXAhRAKIgWd3ZLQNQ4HA/view?usp=drivesdk
+
+לפרטים נוספים על המרכז ומסלולי הטיפול 👇
+https://drive.google.com/file/d/1cRYU9vRPxVyvJaO-pAYX7ZBEcR-L30G4/view?usp=drive_link
+
+אפשר לתאם פגישה ראשונה ולהתקדם 🌿</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/קבוצה_בנות_ראשון_ב</span>
+        <span class="card-title">בנות יסודי – ראשון ב׳</span>
+        <span class="card-note">א׳ 17:35 | תאנה</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי 🌷 שמחה שפנית אלינו!
+
+🔹 פרטי הקבוצה:
+📅 יום ראשון | ⏰ 17:35
+📍 רחוב התאנה 272, מושב צפריה – כניסה 1
+
+🔹 עלות:
+240 ש״ח למפגש
+
+🔹 ביטוח והחזרים:
+✔ קבלות מסודרות
+✔ מכתב טיפולי לצורך החזר מביטוח פרטי
+✔ תעודות מקצועיות לגורמים רלוונטיים:
+https://drive.google.com/file/d/1U818yjGLSRFIAXAhRAKIgWd3ZLQNQ4HA/view?usp=drivesdk
+
+לפרטים נוספים על המרכז ומסלולי הטיפול 👇
+https://drive.google.com/file/d/1cRYU9vRPxVyvJaO-pAYX7ZBEcR-L30G4/view?usp=drive_link
+
+אפשר לתאם פגישה ראשונה ולהתקדם 🌿</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/קבוצה_בנות_שני</span>
+        <span class="card-title">בנות יסודי – שני</span>
+        <span class="card-note">ב׳ 17:35 | ברוש</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי 🌷 שמחה שפנית אלינו!
+
+🔹 פרטי הקבוצה:
+📅 יום שני | ⏰ 17:35
+📍 הברוש 101, מושב צפריה
+
+🔹 עלות:
+240 ש״ח למפגש
+
+🔹 ביטוח והחזרים:
+✔ קבלות מסודרות
+✔ מכתב טיפולי לצורך החזר מביטוח פרטי
+✔ תעודות מקצועיות לגורמים רלוונטיים:
+https://drive.google.com/file/d/1U818yjGLSRFIAXAhRAKIgWd3ZLQNQ4HA/view?usp=drivesdk
+
+לפרטים נוספים על המרכז ומסלולי הטיפול 👇
+https://drive.google.com/file/d/1cRYU9vRPxVyvJaO-pAYX7ZBEcR-L30G4/view?usp=drive_link
+
+אפשר לתאם פגישה ראשונה ולהתקדם 🌿</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/קבוצה_בנות_רביעי</span>
+        <span class="card-title">בנות יסודי – רביעי</span>
+        <span class="card-note">ד׳ 17:30 | ברוש</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי 🌷 שמחה שפנית אלינו!
+
+🔹 פרטי הקבוצה:
+📅 יום רביעי | ⏰ 17:30
+📍 הברוש 101, מושב צפריה
+
+🔹 עלות:
+240 ש״ח למפגש
+
+🔹 ביטוח והחזרים:
+✔ קבלות מסודרות
+✔ מכתב טיפולי לצורך החזר מביטוח פרטי
+✔ תעודות מקצועיות לגורמים רלוונטיים:
+https://drive.google.com/file/d/1U818yjGLSRFIAXAhRAKIgWd3ZLQNQ4HA/view?usp=drivesdk
+
+לפרטים נוספים על המרכז ומסלולי הטיפול 👇
+https://drive.google.com/file/d/1cRYU9vRPxVyvJaO-pAYX7ZBEcR-L30G4/view?usp=drive_link
+
+אפשר לתאם פגישה ראשונה ולהתקדם 🌿</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/קבוצה_בנות_חמישי</span>
+        <span class="card-title">בנות יסודי – חמישי</span>
+        <span class="card-note">ה׳ 17:40 | תאנה</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי 🌷 שמחה שפנית אלינו!
+
+🔹 פרטי הקבוצה:
+📅 יום חמישי | ⏰ 17:40
+📍 רחוב התאנה 272, מושב צפריה – כניסה 1
+
+🔹 עלות:
+240 ש״ח למפגש
+
+🔹 ביטוח והחזרים:
+✔ קבלות מסודרות
+✔ מכתב טיפולי לצורך החזר מביטוח פרטי
+✔ תעודות מקצועיות לגורמים רלוונטיים:
+https://drive.google.com/file/d/1U818yjGLSRFIAXAhRAKIgWd3ZLQNQ4HA/view?usp=drivesdk
+
+לפרטים נוספים על המרכז ומסלולי הטיפול 👇
+https://drive.google.com/file/d/1cRYU9vRPxVyvJaO-pAYX7ZBEcR-L30G4/view?usp=drive_link
+
+אפשר לתאם פגישה ראשונה ולהתקדם 🌿</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="section-title">קבוצות טיפוליות – בנים יסודי</div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/קבוצה_בנים_שני</span>
+        <span class="card-title">בנים יסודי – שני</span>
+        <span class="card-note">ב׳ 18:30 | ברוש</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי 🌷 שמחה שפנית אלינו!
+
+🔹 פרטי הקבוצה:
+📅 יום שני | ⏰ 18:30
+📍 הברוש 101, מושב צפריה
+
+🔹 עלות:
+240 ש״ח למפגש
+
+🔹 ביטוח והחזרים:
+✔ קבלות מסודרות
+✔ מכתב טיפולי לצורך החזר מביטוח פרטי
+✔ תעודות מקצועיות לגורמים רלוונטיים:
+https://drive.google.com/file/d/1U818yjGLSRFIAXAhRAKIgWd3ZLQNQ4HA/view?usp=drivesdk
+
+לפרטים נוספים על המרכז ומסלולי הטיפול 👇
+https://drive.google.com/file/d/1cRYU9vRPxVyvJaO-pAYX7ZBEcR-L30G4/view?usp=drive_link
+
+אפשר לתאם פגישה ראשונה ולהתקדם 🌿</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/קבוצה_בנים_רביעי</span>
+        <span class="card-title">בנים יסודי – רביעי</span>
+        <span class="card-note">ד׳ 16:30 | ברוש</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי 🌷 שמחה שפנית אלינו!
+
+🔹 פרטי הקבוצה:
+📅 יום רביעי | ⏰ 16:30
+📍 הברוש 101, מושב צפריה
+
+🔹 עלות:
+240 ש״ח למפגש
+
+🔹 ביטוח והחזרים:
+✔ קבלות מסודרות
+✔ מכתב טיפולי לצורך החזר מביטוח פרטי
+✔ תעודות מקצועיות לגורמים רלוונטיים:
+https://drive.google.com/file/d/1U818yjGLSRFIAXAhRAKIgWd3ZLQNQ4HA/view?usp=drivesdk
+
+לפרטים נוספים על המרכז ומסלולי הטיפול 👇
+https://drive.google.com/file/d/1cRYU9vRPxVyvJaO-pAYX7ZBEcR-L30G4/view?usp=drive_link
+
+אפשר לתאם פגישה ראשונה ולהתקדם 🌿</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="section-title">קבוצות טיפוליות – חטיבת ביניים</div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/קבוצה_בנות_חטיבה</span>
+        <span class="card-title">בנות חטיבה – חמישי</span>
+        <span class="card-note">ה׳ 18:30 | תאנה</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי 🌷 שמחה שפנית אלינו!
+
+🔹 פרטי הקבוצה:
+📅 יום חמישי | ⏰ 18:30
+📍 רחוב התאנה 272, מושב צפריה – כניסה 1
+
+🔹 עלות:
+240 ש״ח למפגש
+
+🔹 ביטוח והחזרים:
+✔ קבלות מסודרות
+✔ מכתב טיפולי לצורך החזר מביטוח פרטי
+✔ תעודות מקצועיות לגורמים רלוונטיים:
+https://drive.google.com/file/d/1U818yjGLSRFIAXAhRAKIgWd3ZLQNQ4HA/view?usp=drivesdk
+
+לפרטים נוספים על המרכז ומסלולי הטיפול 👇
+https://drive.google.com/file/d/1cRYU9vRPxVyvJaO-pAYX7ZBEcR-L30G4/view?usp=drive_link
+
+אפשר לתאם פגישה ראשונה ולהתקדם 🌿</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/קבוצה_בנים_חטיבה</span>
+        <span class="card-title">בנים חטיבה – ראשון</span>
+        <span class="card-note">א׳ 19:30 | ברוש</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">היי 🌷 שמחה שפנית אלינו!
+
+🔹 פרטי הקבוצה:
+📅 יום ראשון | ⏰ 19:30
+📍 הברוש 101, מושב צפריה
+
+🔹 עלות:
+240 ש״ח למפגש
+
+🔹 ביטוח והחזרים:
+✔ קבלות מסודרות
+✔ מכתב טיפולי לצורך החזר מביטוח פרטי
+✔ תעודות מקצועיות לגורמים רלוונטיים:
+https://drive.google.com/file/d/1U818yjGLSRFIAXAhRAKIgWd3ZLQNQ4HA/view?usp=drivesdk
+
+לפרטים נוספים על המרכז ומסלולי הטיפול 👇
+https://drive.google.com/file/d/1cRYU9vRPxVyvJaO-pAYX7ZBEcR-L30G4/view?usp=drive_link
+
+אפשר לתאם פגישה ראשונה ולהתקדם 🌿</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/תקנון_קבוצה</span>
+        <span class="card-title">שליחת תקנון קבוצה</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">מצרפת תקנון קבוצה 📄
+
+אשמח שתקראו ותשלחו חתום לפני תחילת ההשתלבות 🙏
+
+הסכם ותקנון הקבוצה למיומנויות – לקריאה וחתימה:
+https://forms.gle/sUcb5QiPSpJwtEgE7</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/המלצה_קבוצה</span>
+        <span class="card-title">המלצה להצטרפות לקבוצה</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">בהתאם למה שעלה בתהליך, אנחנו ממליצים על שילוב בקבוצה טיפולית 🌿
+
+אפשר לשלוח פרטים מלאים?</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="card-header-right">
+        <span class="shortcut">/תעודות</span>
+        <span class="card-title">שליחת תעודות מקצועיות</span>
+      </div>
+      <div class="toggle-btn">▾</div>
+    </div>
+    <div class="card-body">
+      <div class="message-text">מצרפת את התעודות המקצועיות שלי לשימושכם ולשליחה לגורמים הרלוונטיים 🌿
+👇
+https://drive.google.com/file/d/1U818yjGLSRFIAXAhRAKIgWd3ZLQNQ4HA/view?usp=drivesdk</div>
+      <button class="copy-btn" onclick="copyText(this)">📋 העתקה</button>
+    </div>
+  </div>
+
+  <footer>
+    מרכז טל • נבנה עם Claude 🌿
+  </footer>
+
+</div>
+
+<script>
+  function toggle(header) {
+    const body = header.nextElementSibling;
+    const btn = header.querySelector('.toggle-btn');
+    body.classList.toggle('open');
+    btn.textContent = body.classList.contains('open') ? '▴' : '▾';
+  }
+
+  function copyText(btn) {
+    const text = btn.previousElementSibling.classList.contains('message-text')
+      ? btn.previousElementSibling.innerText
+      : btn.parentElement.querySelector('.message-text').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✅ הועתק!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = '📋 העתקה';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
