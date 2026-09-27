@@ -1,0 +1,495 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>סמכות הורית מארגנת</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #4e8c54;
+    --sage-light: #7ab880;
+    --sage-pale: #e3f1e4;
+    --sage-deep: #2e5c32;
+    --lavender: #5f6f61;
+    --lavender-pale: #edf1ec;
+    --rose: #2e5c32;
+    --rose-pale: #e3f1e4;
+    --bg: #f5f8f4;
+    --surface: #ffffff;
+    --ink: #1e2a1f;
+    --ink-mid: #4f5f51;
+    --ink-soft: #7a887b;
+    --line: rgba(46, 92, 50, 0.14);
+    --shadow: 0 4px 22px rgba(30, 42, 31, 0.06);
+    --serif: 'Frank Ruhl Libre', 'David Libre', 'Times New Roman', serif;
+    --sans: 'Heebo', 'Arial Hebrew', Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --sage: #8cc592;
+      --sage-light: #6fae76;
+      --sage-pale: #22362a;
+      --sage-deep: #b9dfbc;
+      --lavender: #b3c0b4;
+      --lavender-pale: #212a23;
+      --rose: #b9dfbc;
+      --rose-pale: #22362a;
+      --bg: #131a15;
+      --surface: #1b241d;
+      --ink: #e7eee7;
+      --ink-mid: #b3c0b4;
+      --ink-soft: #899689;
+      --line: rgba(185, 223, 188, 0.14);
+      --shadow: 0 4px 22px rgba(0, 0, 0, 0.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --sage: #8cc592;
+    --sage-light: #6fae76;
+    --sage-pale: #22362a;
+    --sage-deep: #b9dfbc;
+    --lavender: #b3c0b4;
+    --lavender-pale: #212a23;
+    --rose: #b9dfbc;
+    --rose-pale: #22362a;
+    --bg: #131a15;
+    --surface: #1b241d;
+    --ink: #e7eee7;
+    --ink-mid: #b3c0b4;
+    --ink-soft: #899689;
+    --line: rgba(185, 223, 188, 0.14);
+    --shadow: 0 4px 22px rgba(0, 0, 0, 0.3);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16.5px;
+    line-height: 1.75;
+    text-align: right;
+    -webkit-text-size-adjust: 100%;
+  }
+  .doc { direction: rtl; max-width: 720px; margin: 0 auto; padding: 28px 18px 64px; }
+  h1, h2, h3 { font-family: var(--serif); text-wrap: balance; margin: 0; color: var(--sage-deep); }
+  p { margin: 0; }
+  a { color: var(--sage); }
+  a:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; border-radius: 4px; }
+
+  /* Header */
+  .masthead { padding-bottom: 26px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+  .eyebrow { font-size: 12.5px; font-weight: 700; letter-spacing: 1.5px; color: var(--sage); margin-bottom: 12px; }
+  .masthead h1 { font-size: clamp(30px, 8vw, 44px); line-height: 1.15; font-weight: 900; margin-bottom: 10px; }
+  .masthead .sub { font-size: 17px; color: var(--ink-mid); font-weight: 400; margin-bottom: 18px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-size: 12.5px; font-weight: 500; padding: 3px 12px; border-radius: 999px; background: var(--sage-pale); color: var(--sage-deep); }
+  .tag.lav { background: var(--lavender-pale); color: var(--lavender); }
+
+  /* Confidentiality */
+  .privacy { display: flex; gap: 12px; align-items: flex-start; background: var(--lavender-pale); border-radius: 14px; padding: 14px 16px; font-size: 14.5px; color: var(--ink-mid); line-height: 1.65; margin-bottom: 18px; }
+  .privacy svg { flex-shrink: 0; margin-top: 3px; color: var(--lavender); }
+  .privacy strong { color: var(--ink); }
+
+  /* Jump nav */
+  .jump { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); margin: 0 -18px 8px; padding: 10px 18px; border-bottom: 1px solid var(--line); display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+  .jump::-webkit-scrollbar { display: none; }
+  .jump a { flex-shrink: 0; text-decoration: none; font-size: 14px; font-weight: 500; color: var(--ink-mid); padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
+  .jump a:hover { color: var(--sage-deep); border-color: var(--sage-light); }
+
+  /* Sections */
+  section { padding-top: 34px; scroll-margin-top: 60px; }
+  .sec-label { font-size: 12.5px; font-weight: 700; letter-spacing: 1.5px; color: var(--sage); margin-bottom: 6px; }
+  section > h2 { font-size: clamp(24px, 6.2vw, 30px); line-height: 1.25; font-weight: 700; margin-bottom: 14px; }
+  .lead { color: var(--ink-mid); margin-bottom: 18px; }
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+
+  /* Thesis */
+  .thesis { font-family: var(--serif); font-size: clamp(21px, 5.4vw, 26px); line-height: 1.5; font-weight: 500; color: var(--ink); border-right: 3px solid var(--sage); padding: 4px 18px 4px 0; margin: 6px 0 16px; }
+
+  /* Timeline */
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: flex; flex-direction: column; }
+  .steps li { position: relative; padding: 0 52px 22px 0; counter-increment: step; }
+  .steps li::before { content: counter(step); position: absolute; right: 0; top: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--sage); color: var(--surface); font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .steps li::after { content: ''; position: absolute; right: 17px; top: 40px; bottom: 4px; width: 2px; background: var(--line); }
+  .steps li:last-child { padding-bottom: 0; }
+  .steps li:last-child::after { display: none; }
+  .steps li.later::before { background: var(--surface); color: var(--sage); border: 2px dashed var(--sage-light); }
+  .steps h3 { font-family: var(--sans); font-size: 17px; font-weight: 800; color: var(--ink); margin-bottom: 2px; padding-top: 5px; }
+  .steps p { color: var(--ink-mid); font-size: 15.5px; }
+
+  /* Two-panel compare: אסור / צריך */
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  @media (max-width: 560px) { .duo { grid-template-columns: 1fr; } }
+  .panel { border-radius: 16px; padding: 18px; background: var(--surface); border: 1px solid var(--line); }
+  .panel .word { font-family: var(--serif); font-size: 34px; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+  .panel .what { font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+  .panel.stop { background: var(--rose-pale); border-color: transparent; }
+  .panel.stop .word, .panel.stop .what { color: var(--rose); }
+  .panel.need .word, .panel.need .what { color: var(--lavender); }
+  .panel ul { margin: 0; padding: 0 18px 0 0; font-size: 15px; color: var(--ink-mid); }
+  .panel .when { margin-top: 12px; font-size: 13.5px; font-weight: 700; color: var(--ink); }
+  .note { font-size: 15px; color: var(--ink-mid); background: var(--sage-pale); border-radius: 12px; padding: 12px 16px; }
+  .note strong { color: var(--sage-deep); }
+
+  /* Principles list */
+  .principles { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .principles li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .principles b { display: block; font-size: 16.5px; color: var(--ink); margin-bottom: 2px; }
+  .principles span { color: var(--ink-mid); font-size: 15.5px; }
+
+  /* Session tools */
+  .tools { display: grid; gap: 12px; }
+  .tool { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; box-shadow: var(--shadow); }
+  .tool h3 { font-family: var(--sans); font-size: 16.5px; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
+  .tool p { color: var(--ink-mid); font-size: 15.5px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chips span { font-size: 13px; padding: 2px 10px; border-radius: 8px; background: var(--sage-pale); color: var(--sage-deep); }
+
+  /* Child case card */
+  .child { background: var(--surface); border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--line); overflow: hidden; }
+  .child-head { padding: 18px 20px 14px; background: var(--sage-pale); }
+  .child.lav .child-head { background: var(--lavender-pale); }
+  .child-head .who { font-size: 13px; font-weight: 700; color: var(--sage); letter-spacing: 0.5px; }
+  .child.lav .child-head .who { color: var(--lavender); }
+  .child-head h3 { font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .child-body { padding: 4px 20px 20px; }
+  .block { padding-top: 16px; }
+  .block-title { font-size: 13px; font-weight: 800; letter-spacing: 1px; color: var(--ink-soft); margin-bottom: 6px; }
+  .block ul { margin: 0; padding: 0 18px 0 0; color: var(--ink-mid); font-size: 15.5px; }
+  .block ul li + li { margin-top: 4px; }
+  .block p { color: var(--ink-mid); font-size: 15.5px; }
+  .hypo { border: 1.5px dashed var(--lavender); border-radius: 12px; padding: 12px 14px; margin-top: 16px; font-size: 15.5px; color: var(--ink-mid); }
+  .hypo .block-title { color: var(--lavender); }
+
+  /* Say this / instead of */
+  .say { margin-top: 16px; display: grid; gap: 8px; }
+  .say-row { display: grid; grid-template-columns: 1fr; gap: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  .say-row .instead { padding: 9px 14px; font-size: 14.5px; color: var(--ink-soft); background: var(--bg); }
+  .say-row .instead::before { content: 'במקום: '; font-weight: 700; }
+  .say-row .instead s { text-decoration-color: var(--rose); }
+  .say-row .quote { padding: 10px 14px; font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--sage-deep); line-height: 1.45; }
+  .say-row .quote::before { content: 'אומרים: '; font-family: var(--sans); font-size: 13px; font-weight: 700; color: var(--sage); }
+
+  .variants { padding: 10px 14px 12px; border-top: 1px dashed var(--line); font-size: 14.5px; color: var(--ink-mid); }
+  .variants span { font-weight: 700; color: var(--ink); }
+  .variants ul { margin: 4px 0 8px; padding: 0 18px 0 0; font-family: var(--serif); font-size: 16.5px; color: var(--sage-deep); }
+  .variants p { font-size: 14.5px; line-height: 1.65; }
+  .watch { margin-top: 16px; display: flex; gap: 10px; background: var(--rose-pale); border-radius: 12px; padding: 12px 14px; font-size: 15px; color: var(--ink); }
+  .watch svg { flex-shrink: 0; color: var(--rose); margin-top: 4px; }
+  .watch b { color: var(--rose); }
+
+  /* Callout */
+  .callout { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; box-shadow: var(--shadow); }
+  .callout h3 { font-family: var(--sans); font-size: 17px; font-weight: 800; color: var(--ink); margin-bottom: 6px; }
+  .callout p { color: var(--ink-mid); font-size: 15.5px; }
+  .callout .boundary { margin-top: 12px; font-size: 15px; font-weight: 500; color: var(--lavender); }
+
+  .pull { font-family: var(--serif); font-size: 21px; font-weight: 700; line-height: 1.5; color: var(--sage-deep); text-align: center; padding: 18px 8px; }
+
+  /* Checklist */
+  .checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .checklist li { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 15.5px; }
+  .checklist li::before { content: ''; flex-shrink: 0; width: 18px; height: 18px; margin-top: 4px; border: 2px solid var(--sage-light); border-radius: 5px; }
+
+  /* Therapist takeaways */
+  .takeaways { list-style: none; margin: 0; padding: 0; counter-reset: t; display: grid; gap: 14px; }
+  .takeaways li { counter-increment: t; display: grid; grid-template-columns: 30px 1fr; gap: 10px; }
+  .takeaways li::before { content: counter(t); font-family: var(--serif); font-size: 26px; font-weight: 900; color: var(--sage-light); line-height: 1.2; }
+  .takeaways b { display: block; color: var(--ink); }
+  .takeaways span { color: var(--ink-mid); font-size: 15.5px; }
+
+  footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
+  footer strong { color: var(--ink-mid); }
+
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="doc" dir="rtl" lang="he">
+
+  <header class="masthead">
+    <div class="eyebrow">מרכז טל · חומר הדרכה למטפלות</div>
+    <h1>הסמכות ההורית המארגנת</h1>
+    <p class="sub">מקרה הדגמה: איך שני מפגשים ראשונים הופכים לתוכנית עבודה עם ההורים</p>
+    <div class="tags">
+      <span class="tag">מפגש משפחתי + הדרכת הורים</span>
+      <span class="tag">שלב ראשון: ה"אסור"</span>
+      <span class="tag lav">מקרה מוסווה</span>
+    </div>
+  </header>
+
+  <div class="privacy" role="note">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+    <p><strong>חיסיון:</strong> כל הפרטים המזהים הוסרו או שונו. אין במסמך שמות, מקום מגורים, תאריכים, עיסוקי ההורים, שמות חברים או פרטי מסגרות. הילדים מוצגים לפי מקומם במשפחה ולפי גיל משוער. המסמך מתמקד בשניים מהילדים לצורך ההדגמה, ומיועד ללמידה מקצועית בלבד.</p>
+  </div>
+
+  <nav class="jump" aria-label="ניווט במסמך">
+    <a href="#method">השיטה</a>
+    <a href="#process">מהלך העבודה</a>
+    <a href="#principles">עקרונות</a>
+    <a href="#room">בחדר</a>
+    <a href="#eldest">הבכורה</a>
+    <a href="#seven">בן ה־7</a>
+    <a href="#home">משימות בית</a>
+    <a href="#next">המשך התהליך</a>
+    <a href="#learn">למטפלת</a>
+  </nav>
+
+  <!-- השיטה -->
+  <section id="method">
+    <div class="sec-label">השיטה במשפט אחד</div>
+    <p class="thesis">ההורה מחזיק את ההחלטה ואת האחריות. כך הילד משתחרר ממה שאינו שלו, ופוגש מבוגר יציב שאפשר להישען עליו וללמוד ממנו ויסות רגשי והתנהגותי.</p>
+    <p class="lead">הפנייה: משפחה עם מספר ילדים בגיל בית ספר. ההורים פנו בעקבות קושי חברתי של הבת הבכורה, לצד קושי כללי בהיענות הילדים לסמכות הורית. במפגש הראשון עלו גם ויסות, המתנה וקבלת גבולות אצל אחד האחים הצעירים. המשפחה חמה, תקשורתית ומעורבת, והילדים בעלי כוחות, סקרנות ויכולת קשר.</p>
+  </section>
+
+  <!-- מהלך -->
+  <section id="process">
+    <div class="sec-label">מהלך העבודה</div>
+    <h2>שלושה שלבים, שניים כבר מאחורינו</h2>
+    <ol class="steps">
+      <li>
+        <h3>מפגש משפחתי: מיפוי והתרשמות</h3>
+        <p>ההורים וחלק מהילדים יחד. משימות ציור, משחק משפחתי מובנה ומיפוי חברתי עם הבכורה. המטרה: לראות את הדינמיקה בפועל, לא רק לשמוע עליה.</p>
+      </li>
+      <li>
+        <h3>הדרכת הורים: משוב ושלב ה"אסור"</h3>
+        <p>ההורים בלבד. משוב על ההתרשמות, דיוק העמדה ההורית מול כל ילד, והתחלת תרגול: עצירה של התנהגויות שההורה יכול לעצור בפועל.</p>
+      </li>
+      <li class="later">
+        <h3>בהמשך: שלב ה"צריך"</h3>
+        <p>רק אחרי שהסמכות התבססה: גיוס שיתוף פעולה במשימות יומיומיות, דרכי תגמול והגברת מוטיבציה, והרחבה לשאר רכיבי הסמכות ההורית.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- עקרונות -->
+  <section id="principles">
+    <div class="sec-label">עקרונות היסוד</div>
+    <h2>ההבחנה שמארגנת את כל העבודה</h2>
+    <div class="duo">
+      <div class="panel stop">
+        <div class="word">אסור</div>
+        <div class="what">התנהגות שההורה עוצר</div>
+        <ul>
+          <li>אלימות</li>
+          <li>הצקה לאחים</li>
+          <li>סיכון בטיחותי</li>
+          <li>דיבור פוגעני כלפי ההורים</li>
+        </ul>
+        <div class="when">מתחילים כאן</div>
+      </div>
+      <div class="panel need">
+        <div class="word">צריך</div>
+        <div class="what">פעולה שמגייסים אליה</div>
+        <ul>
+          <li>חזרה הביתה בזמן</li>
+          <li>שיעורי בית</li>
+          <li>התארגנות ומטלות</li>
+          <li>שמירה על סדר יום</li>
+        </ul>
+        <div class="when">עובדים על זה בשלב הבא</div>
+      </div>
+    </div>
+    <p class="note"><strong>למה בסדר הזה?</strong> את ה"אסור" ההורה יכול לעצור בעצמו, ברגע, בלי תלות ברצון הילד. הצלחה כאן בונה בהורה ובילד את החוויה שהגבול מחזיק. ה"צריך" דורש גיוס, בניית הרגל ושיתוף פעולה, ולכן מגיע אחרי שהתשתית קיימת.</p>
+
+    <ul class="principles" style="margin-top:18px">
+      <li><b>הוראה קצרה במקום שכנוע</b><span>הסבר חוזר להחלטה שכבר התקבלה הופך את הגבול לשאלה הנתונה לשיקול דעתו של הילד. משפט אחד, בטון רגוע והחלטי, בלי משא ומתן בזמן האירוע.</span></li>
+      <li><b>ההורה כמודל</b><span>הורה שמחזיק עמדה ונשאר יציב מול התנגדות מלמד בפועל אסרטיביות. הילד מפנים את הדגם ולוקח אותו גם אל קבוצת השווים.</span></li>
+      <li><b>עקביות בלי פרשנות</b><span>יש ילדים שיזדקקו לחזרות רבות על אותו גבול. הישנות היא לא בהכרח התרסה, ולכן עוצרים שוב, באותו אופן.</span></li>
+      <li><b>כללים אחידים, תגובה מותאמת</b><span>כללי היסוד חלים על כל הילדים. אופן התגובה מותאם לגיל ולצרכים של כל ילד.</span></li>
+      <li><b>תוצאה קצרה ומידתית</b><span>תגובה שאפשר לאכוף ולחזור עליה, כמו המתנה קצרה לפני זמן מסך. ענישה כבדה וממושכת מובילה למאבק ולתחושת "אין לי מה להפסיד". המטרה היא לעצור ולהחזיר למסגרת, לא להכאיב.</span></li>
+      <li><b>בלי בושה ובלי אשמה</b><span>הגבול נאמר בכבוד. המטרה היא לעצור ולארגן, לא להקטין.</span></li>
+    </ul>
+  </section>
+
+  <!-- בחדר -->
+  <section id="room">
+    <div class="sec-label">מפגש 1 · מה המטפלת עושה בחדר</div>
+    <h2>החדר כמעבדה</h2>
+    <p class="lead">במפגש המשפחתי המטפלת לא רק מתרשמת. היא מייצרת מצבים שחושפים את הדינמיקה, ומדגימה בעצמה את אופן ההחזקה.</p>
+    <div class="tools">
+      <div class="tool">
+        <h3>משחק משפחתי מובנה</h3>
+        <p>משחק עם כללים ותורות הוא כלי תצפית ישיר. נצפו עוררות גבוהה, דיבור במקביל ורצון להיות מעורבים במהלך של האחר.</p>
+        <div class="chips"><span>המתנה לתור</span><span>קבלת כללים</span><span>תחרות והפסד</span><span>תסכול</span><span>בחירה של האחר</span></div>
+      </div>
+      <div class="tool">
+        <h3>מיפוי חברתי עם הילדה</h3>
+        <p>הבכורה מיקמה את קבוצות הבנות בכיתה ואת עצמה ביחס אליהן. המיפוי מאפשר לשמוע איך היא עצמה חווה את מקומה, מעבר לדאגת ההורים.</p>
+      </div>
+      <div class="tool">
+        <h3>משימה גרפית</h3>
+        <p>משימה מובנית קצרה מראה יכולת לשתף פעולה, קשב ודיוק, וגם כמה הכוונה הילד צריך.</p>
+      </div>
+    </div>
+    <p class="pull">כאשר הכללים הוחזקו באופן פשוט, עקבי וקצר, הילדים נשארו במשחק, נהנו ממנו וחזרו למסגרת אחרי תיקון.</p>
+    <p class="note"><strong>זו כבר הדגמה של השיטה.</strong> מה שעבד בחדר הוא מה שההורים יתרגלו בבית. במשוב אפשר להפנות אותם לרגע הזה: "ראיתם מה קרה כשהכלל נאמר במשפט אחד?"</p>
+  </section>
+
+  <!-- הבכורה -->
+  <section id="eldest">
+    <div class="sec-label">מקרה 1</div>
+    <h2>הבכורה: להוריד אחריות שאינה שלה</h2>
+    <article class="child">
+      <div class="child-head">
+        <div class="who">הבת הבכורה · כבת 10</div>
+        <h3>יכולות גבוהות, צורך בשליטה, אחריות יתר</h3>
+      </div>
+      <div class="child-body">
+        <div class="block">
+          <div class="block-title">מה ראינו ושמענו</div>
+          <ul>
+            <li>ורבלית, עצמאית, דעתנית, עם שליטה עצמית גבוהה. נרתמת לעזרה ומשתפת פעולה ברוב המצבים.</li>
+            <li>בחדר: עונה גם כשהשאלה הופנתה לאחר, עוקבת ומכוונת את האחים, צריכה תזכורות להמתין.</li>
+            <li>בבית: משווה, מנהלת חשבון, מבקשת הסבר שוב ושוב לכל החלטה ונכנסת למשא ומתן.</li>
+            <li>כשקיבלה הנחיה קצרה וברורה, נענתה ושיתפה פעולה.</li>
+            <li>רגישות תחושתית לריחות, סומנה להמשך בירור.</li>
+          </ul>
+        </div>
+        <div class="hypo">
+          <div class="block-title">ההבנה שמכוונת את ההתערבות</div>
+          נטילת אחריות מוגברת והצורך לשלוט בסביבה יוצרים אצלה עומס רגשי ומצמצמים את הפניות שלה לעצמה. בבית היא דומיננטית ומנהלת, ובקבוצת השווים היא מתארת את עצמה כנחמדה ופחות החלטית. התגובה שלה להורדת האחריות בבית תכוון את השלב הבא.
+        </div>
+        <div class="block">
+          <div class="block-title">העמדה ההורית</div>
+          <p>המטרה אינה להקטין את כוחותיה או את יכולת ההובלה שלה, אלא להוריד ממנה אחריות שאינה שלה. כשההורה מחזיק את ההחלטה, המסר לילדה הוא שהיא לא צריכה לשאת את כל העולם על הכתפיים. במקביל מחזקים אותה על גמישות, היענות ושיתוף פעולה.</p>
+        </div>
+        <div class="say">
+          <div class="say-row">
+            <div class="instead"><s>להסביר שוב ושוב למה ההחלטה נכונה</s></div>
+            <div class="quote">"אני ההורה, ואת זה אני מחליטה."</div>
+            <div class="variants">
+              <span>ניסוחים נוספים, מהרך אל הישיר:</span>
+              <ul>
+                <li>"זו החלטה שלי, ואת יכולה להיות רגועה."</li>
+                <li>"שמעתי אותך. ההחלטה נשארת."</li>
+                <li>"את לא מתערבת בהחלטות שלי."</li>
+              </ul>
+              <p>גם הניסוח הישיר ביותר אינו תוקפני כשהוא נאמר בשקט ובחום. ההחלטיות נמצאת בעמידה ולא בעוצמת הקול. עבור ילדה שנושאת אחריות יתר, משפט כזה יכול להישמע כהקלה: מישהו אחר מחזיק את זה. כל הורה בוחר את הניסוח שהוא יכול לומר באמת ובעקביות.</p>
+            </div>
+          </div>
+          <div class="say-row">
+            <div class="instead"><s>לתת לה לנהל את האחים "כי היא עוזרת"</s></div>
+            <div class="quote">"אני לא מרשה לך להתערב בעניינים של האחים שלך."</div>
+          </div>
+          <div class="say-row">
+            <div class="instead"><s>להיכנס להשוואה מי קיבל יותר</s></div>
+            <div class="quote">"מה ששלך – שלך. מה שלא שלך – את לא מתערבת."</div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-title">הקשר לתחום החברתי</div>
+          <p>ההורים שוקלים מעבר כיתה. זה שיקול לגיטימי, אבל לא פתרון בפני עצמו: בוחנים את מאפייני שתי הכיתות לצד העבודה על עמדתה החברתית של הילדה. כאן נכנס עקרון המודלינג: שינוי בעמדת ההורה מולה בבית מספק לה דגם של עמידה והחלטיות שאותו תוכל להפנים גם מול הבנות. במידת הצורך, שיחה מקצועית עם הצוות החינוכי.</p>
+        </div>
+        <div class="watch">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+          <p><b>שימי לב:</b> הגבול נאמר בלי בושה, בלי אשמה ובלי ניסיון לשכנע. ילדה רגישה וערנית תקלוט טון מבקר מהר יותר מאשר את התוכן.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- בן 7 -->
+  <section id="seven">
+    <div class="sec-label">מקרה 2</div>
+    <h2>בן ה־7: לעצור שוב ושוב, ולתת לגוף מקום</h2>
+    <article class="child lav">
+      <div class="child-head">
+        <div class="who">אחד האחים הצעירים · בן 7</div>
+        <h3>חברותי ומקסים, אימפולסיבי, צריך תנועה</h3>
+      </div>
+      <div class="child-body">
+        <div class="block">
+          <div class="block-title">מה ראינו ושמענו</div>
+          <ul>
+            <li>חברותי, רגיש, בעל קסם אישי. החברים משמעותיים לו מאוד.</li>
+            <li>בחדר: צורך גבוה בתנועה ובעיסוק, רוצה להשתתף כמעט בכל רגע.</li>
+            <li>במשחק: פועל לפני תורו, נוגע בכלים של אחרים, מנסה להשפיע על המהלך.</li>
+            <li>בבית: מציק לאחים ולילדים צעירים ממנו, מתקשה בהפסד.</li>
+            <li>נענה להוראות קצרות וממוקדות וחוזר לפעילות אחרי הכוונה. משימות קצרות ומתחלפות עזרו לו להתארגן.</li>
+          </ul>
+        </div>
+        <div class="hypo">
+          <div class="block-title">ההבנה שמכוונת את ההתערבות</div>
+          ההצקות נובעות בעיקר מהכאן-ועכשיו, מחיפוש גירוי ומקושי בהשהיית תגובה, ולא מכוונה לפגוע. התגובה שלו לעצירה עקבית ולתוספת תנועה תכוון את השלב הבא.
+        </div>
+        <div class="block">
+          <div class="block-title">העמדה ההורית</div>
+          <p>עוצרים התנהגות פוגענית מיד, בקצרה ובעניינית, גם אם זו הפעם העשירית היום. לא נגררים להסברים. במקביל נותנים מענה לצורך: יותר תנועה ועיסוק מובנה, ושקילת ספורט קבוצתי עם כללים ברורים, שמשלב ויסות, שיתוף פעולה ותרגול של הפסד.</p>
+        </div>
+        <div class="say">
+          <div class="say-row">
+            <div class="instead"><s>"כמה פעמים אמרתי לך? למה אתה תמיד..."</s></div>
+            <div class="quote">"אני לא מרשה לך להציק לאחיך."</div>
+          </div>
+          <div class="say-row">
+            <div class="instead"><s>שיחה ארוכה על איך הוא היה מרגיש במקומו</s></div>
+            <div class="quote">"אני לא מרשה להרביץ."</div>
+          </div>
+        </div>
+        <div class="watch">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+          <p><b>שימי לב:</b> הורים של ילד כזה נשחקים מהחזרות ומתחילים לפרש כל הישנות כהתרסה. חשוב להכין אותם מראש שהחזרה היא חלק מהלמידה, לא סימן שהשיטה נכשלה.</p>
+        </div>
+      </div>
+    </article>
+
+    <div class="callout" style="margin-top:14px">
+      <h3>לחבר בין הכוחות: פעילות משותפת מוגדרת</h3>
+      <p>כ־20 דקות של משחק או יצירה שבהן הבכורה מובילה והצעיר מתרגל הקשבה, המתנה ושיתוף פעולה. כך יכולת ההובלה שלה מקבלת ביטוי חיובי במקום שליטה.</p>
+      <p class="boundary">גבול מקצועי: הפעילות מוגדרת בזמן, בהשגחת ההורים, והאחריות להתנהגות של האח נשארת בידי ההורים. אחרת אנחנו מחזקים בדיוק את אחריות היתר שאנחנו מנסים להוריד.</p>
+    </div>
+  </section>
+
+  <!-- משימות -->
+  <section id="home">
+    <div class="sec-label">סיכום המפגש להורים</div>
+    <h2>משימות לתרגול בבית</h2>
+    <ul class="checklist">
+      <li>להתחיל מכללי ה"אסור" בלבד: אלימות, בטיחות, הצקות ודיבור פוגעני.</li>
+      <li>לתת הוראה במשפט אחד, בלי הסבר חוזר ובלי משא ומתן אחרי שהתקבלה החלטה.</li>
+      <li>לשמור על אותם כללי יסוד מול כל הילדים.</li>
+      <li>לעצור את הבכורה כשהיא מנהלת את האחים או מתערבת בהחלטות ההורים, ולחזק אותה על גמישות.</li>
+      <li>לעצור הצקות של בן ה־7 בקצרה ובעקביות, ולתת לו תנועה ועיסוק מובנה במהלך היום.</li>
+      <li>לרשום מצבים שבהם היה קשה להציב גבול. הם יהיו חומר התרגול במפגש הבא.</li>
+    </ul>
+  </section>
+
+  <!-- המשך -->
+  <section id="next">
+    <div class="sec-label">המשך התהליך</div>
+    <h2>על מה נעבוד במפגשים הבאים</h2>
+    <p class="lead">אחרי שה"אסור" מתבסס, ההדרכה מתרחבת בהדרגה לשאר רכיבי הסמכות ההורית המארגנת. כל מפגש נפתח מהמצבים שההורים תיעדו בבית.</p>
+    <ul class="principles">
+      <li><b>מעבר ל"צריך"</b><span>גיוס שיתוף פעולה בשגרות ובהתארגנות היומיומית, בלי להיגרר למאבק.</span></li>
+      <li><b>תגמול והגברת מוטיבציה</b><span>איך בונים הרגל חדש, מתי ואיך מתגמלים, ואיך מפחיתים את התגמול בהדרגה כשההרגל מתבסס.</span></li>
+      <li><b>מסגרת מארגנת</b><span>שגרות צפויות, גבולות ברורים ומרחב בחירה שמותאם לגיל של כל ילד.</span></li>
+      <li><b>תעדוף מאבקים</b><span>על אילו גבולות מתעקשים עכשיו, ומה אפשר לדחות לשלב מאוחר יותר.</span></li>
+      <li><b>הברית ההורית</b><span>לכל הורה יש לגיטימציה לערכים ולדרכי פעולה משלו, ובתהליך מסבירים גם את ההבדלים בין אבא לאמא. לצד השונות, חותרים לכך שהגבולות בהתנהגות יוחזקו בעקביות.</span></li>
+      <li><b>תיקוף לצד הובלה</b><span>להכיר ברגש של הילד בלי לוותר על ההחלטה.</span></li>
+      <li><b>הקרבה שאחרי הגבול</b><span>אחרי שהילד נרגע, הוא מחפש מעצמו את הקרבה, הנוכחות והאישור של ההורה. ההורה לא צריך לרצות או לפצות, רק להישאר זמין. ילד שהגבול החזיק אותו רגוע יותר, משתף פעולה, מאורגן יותר ופנוי רגשית להתפתחות.</span></li>
+    </ul>
+  </section>
+
+  <!-- למטפלת -->
+  <section id="learn">
+    <div class="sec-label">מה לקחת מהמקרה</div>
+    <h2>נקודות למטפלת</h2>
+    <ol class="takeaways">
+      <li><div><b>מתחילים ממה שההורה יכול לעצור בפועל</b><span>גם כשהפנייה היא על "צריך" (חזרה הביתה, שיעורים), הצעד הראשון הוא ביסוס סמכות ב"אסור".</span></div></li>
+      <li><div><b>בונים התערבות ובודקים את התגובה</b><span>ההבנה מהמיפוי מתורגמת מיד להתערבות. לפי התגובה של הילד ושל ההורים ממשיכים לבנות ולדייק אותה (Response to Intervention).</span></div></li>
+      <li><div><b>משתמשים בכוחות בלי להעביר אחריות הורית</b><span>יכולת ההובלה של הבכורה היא משאב, בתנאי שהיא לא הופכת להורה נוסף בבית.</span></div></li>
+      <li><div><b>הסמכות היא גם מודל</b><span>העבודה עם ההורה מול ילד בבית יכולה לשרת גם קושי חברתי מחוץ לבית.</span></div></li>
+      <li><div><b>מחברים את המשוב למה שקרה בחדר</b><span>הדוגמה החזקה ביותר להורים היא הרגע שבו הם ראו את הילדים נענים להוראה קצרה.</span></div></li>
+      <li><div><b>מבקשים מההורים חומר אמיתי</b><span>תיעוד מצבים מהבית הופך את המפגש הבא לתרגול ממוקד ולא לשיחה כללית.</span></div></li>
+    </ol>
+  </section>
+
+  <footer>
+    <strong>מרכז טל</strong> · חומר הדרכה למטפלות ולאנשי מקצוע<br>
+    המקרה מבוסס על סיכומי שני מפגשים ראשונים. כל הפרטים המזהים הוסוו, והמסמך מיועד ללמידה מקצועית בלבד.
+  </footer>
+
+</div>
