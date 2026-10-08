@@ -70,3 +70,5 @@ Use `references/reply_templates.md` (interested / forwarding / price question). 
 ## Next campaign note — schools / קבוצות חברתיות
 
 For יועצות ומנהלי בתי ספר: school emails are often on municipal education pages, school sites (tik-tak, edu.gov.il school pages, `school-name@...`), or the Ministry's school directory by סמל מוסד. Counselors' personal emails are rarely public — the school's office address with "לכבוד היועצת" in the greeting is an acceptable fallback if Liraz agrees. Adapt the content file (what the groups are, age range, format, funding routes such as גפ״ן — she is registered in גפ״ן) before building.
+
+The approved text for this campaign (from 2026-10-08) is in `references/groups_email_template.md`: identification-first opening, no "how" details, landing page then WhatsApp channel at the end.
