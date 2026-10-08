@@ -50,6 +50,8 @@ Design rules learned the hard way:
 
 Show her one rendered sample (or the text) before the first round of a new campaign.
 
+Marketing copy (new offers, webinar invitations, course announcements) follows her standing guidelines in `.claude/skills/marketing-content/SKILL.md`: identification → understanding → hope → one call to action, and never teach the "how" of the method in promotional text.
+
 ## 4. Send
 
 `send_message` once per recipient (`to`, `subject`, `body`, `htmlBody`). Send in batches of ~4–5 calls per turn. For corrections to an existing message, use `replyThreadId` of the original thread so it stays in one conversation.
