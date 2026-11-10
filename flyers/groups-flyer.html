@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>מרכז טל – פלייר קבוצות</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* brand colors sampled from the Merkaz Tal logo: plum #442b49, lime #98c035 */
+    --sage:#5f8a14; --sage-light:#98c035; --sage-pale:#eef5dc; --sage-deep:#442b49;
+    --lav:#7a5a80; --lav-pale:#f2ebf3; --cream:#fbfcf7; --ink:#2a1f2c; --mid:#5b5560;
+    --amber:#e2ac2a; --amber-pale:#fdf3d7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#eceee6}
+  body{font-family:'Heebo',sans-serif;color:var(--ink)}
+  .flyer{width:1080px;height:1920px;margin:0 auto;position:relative;overflow:hidden;background:var(--cream);
+    display:flex;flex-direction:column;padding:52px 64px 0}
+  .flyer>*:not(.blob){flex-shrink:0}
+  .blob{position:absolute;border-radius:50%;filter:blur(2px);z-index:0}
+  .b1{width:760px;height:760px;background:radial-gradient(circle,var(--sage-pale) 0%,rgba(238,245,220,0) 70%);top:-260px;right:-260px}
+  .b2{width:700px;height:700px;background:radial-gradient(circle,var(--lav-pale) 0%,rgba(242,235,243,0) 70%);top:760px;left:-320px}
+  .flyer>*{position:relative;z-index:1}
+
+  /* top bar */
+  .top{display:flex;align-items:flex-start;justify-content:space-between}
+  .logo{height:168px;width:auto;display:block}
+  .loc{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid rgba(78,140,84,.18);
+    padding:12px 24px;border-radius:40px;font-size:26px;font-weight:600;color:var(--sage-deep)}
+  .loc svg{width:24px;height:24px}
+
+  /* hero */
+  .eyebrow{margin-top:26px;font-size:30px;font-weight:700;color:var(--lav);letter-spacing:.5px}
+  h1{font-size:118px;line-height:1.02;font-weight:900;color:var(--sage-deep);letter-spacing:-3px;margin-top:10px}
+  h1 .hl{color:var(--sage);position:relative;display:inline-block}
+  h1 .hl::after{content:'';position:absolute;right:-6px;left:-6px;bottom:10px;height:26px;background:var(--amber-pale);z-index:-1;border-radius:8px}
+  .sub{margin-top:18px;font-size:34px;font-weight:500;color:var(--mid);line-height:1.35}
+  .sub b{color:var(--ink);font-weight:800}
+  .chips{display:flex;gap:14px;margin-top:24px;flex-wrap:wrap}
+  .chip{font-size:28px;font-weight:700;padding:12px 26px;border-radius:40px}
+  .c1{background:var(--sage);color:#fff}
+  .c2{background:var(--lav-pale);color:#5a3d60}
+  .c3{background:var(--amber-pale);color:#8a6408}
+
+  /* illustration */
+  .art{margin-top:30px;height:230px;border-radius:36px;overflow:hidden;background:#fff;box-shadow:0 10px 40px rgba(46,92,50,.08)}
+  .art svg{display:block;width:100%;height:100%}
+
+  /* what */
+  h2{font-size:42px;font-weight:900;color:var(--sage-deep);margin-top:32px;display:flex;align-items:center;gap:16px}
+  h2::after{content:'';flex:1;height:3px;background:linear-gradient(to left,rgba(78,140,84,.25),transparent);border-radius:2px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+  .card{background:#fff;border-radius:28px;padding:22px 24px;display:flex;gap:20px;align-items:flex-start;
+    border:2px solid rgba(78,140,84,.10);box-shadow:0 6px 24px rgba(0,0,0,.04)}
+  .ic{flex-shrink:0;width:76px;height:76px;border-radius:22px;display:flex;align-items:center;justify-content:center}
+  .ic svg{width:42px;height:42px;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .i1{background:var(--sage-pale)} .i1 svg{stroke:var(--sage-deep)}
+  .i2{background:var(--amber-pale)} .i2 svg{stroke:#9a6f06}
+  .i3{background:var(--lav-pale)} .i3 svg{stroke:#5a3d60}
+  .i4{background:#e3eef6} .i4 svg{stroke:#2f6690}
+  .card h3{font-size:32px;font-weight:800;color:var(--ink);line-height:1.15}
+  .card p{font-size:25px;color:var(--mid);margin-top:6px;line-height:1.3}
+
+  /* how */
+  .how{margin-top:20px;background:var(--sage-pale);border-radius:28px;padding:22px 30px;display:flex;align-items:center;gap:22px}
+  .how .lbl{font-size:30px;font-weight:900;color:var(--sage-deep);white-space:nowrap}
+  .how .steps{display:flex;gap:10px;align-items:center;font-size:28px;font-weight:700;color:var(--sage-deep)}
+  .how .steps span.dot{width:8px;height:8px;border-radius:50%;background:var(--sage-light)}
+  .how .res{font-size:26px;color:var(--mid);margin-right:auto;text-align:left;line-height:1.25}
+  .how .res b{color:var(--ink)}
+
+  .trust{margin-top:24px;margin-bottom:36px;display:flex;gap:18px;align-items:center;font-size:25px;color:var(--mid);line-height:1.35}
+  .trust svg{width:54px;height:54px;flex-shrink:0}
+  .trust b{color:var(--ink);font-weight:800}
+
+  /* footer */
+  .foot{margin:auto -64px 0;background:var(--sage-deep);color:#fff;padding:38px 64px 44px;display:flex;align-items:center;gap:28px;
+    border-radius:56px 56px 0 0}
+  .foot .txt{flex:1}
+  .foot .cta{font-size:56px;font-weight:900;line-height:1.1}
+  .foot .cta span{color:var(--sage-light)}
+  .foot .web{font-size:32px;font-weight:500;opacity:.85;margin-top:12px}
+  .foot .web b{font-weight:700}
+  .foot .arrow{width:120px;height:120px;border-radius:50%;background:var(--sage-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .foot .arrow svg{width:56px;height:56px}
+</style>
+</head>
+<body>
+<div class="flyer" id="flyer">
+  <div class="blob b1"></div><div class="blob b2"></div>
+
+  <div class="top">
+    <img class="logo" src="../brand/merkaz-tal-logo-trim.png" alt="מרכז טל – טיפול לילדים בשילוב הדרכת הורים">
+    <div class="loc">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#5f8a14" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      צפריה · ליד כפר חב״ד
+    </div>
+  </div>
+
+  <div class="eyebrow">קבוצות טיפוליות למיומנויות רגשיות-חברתיות</div>
+  <h1>יוצאים לדרך<br><span class="hl">חברתית</span> חדשה</h1>
+  <div class="sub">מרחב בטוח ומכיל שבו ילדים <b>מתנסים, לומדים ומתרגלים</b> אינטראקציות חברתיות — בזמן אמת.</div>
+  <div class="chips">
+    <span class="chip c1">גילאי 5–16</span>
+    <span class="chip c2">קבוצות נפרדות לבנים ולבנות</span>
+    <span class="chip c3">כולל הדרכת הורים</span>
+  </div>
+
+  <div class="art">
+    <svg viewBox="0 30 952 270" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f8f3"/><stop offset="1" stop-color="#fbfdfb"/></linearGradient>
+      </defs>
+      <rect width="952" height="300" fill="url(#sky)"/>
+      <circle cx="160" cy="130" r="46" fill="#fdf3d7"/><circle cx="160" cy="130" r="28" fill="#f6dc8f"/>
+      <path d="M560 112 q10 -10 20 0 q10 -10 20 0" stroke="#7a5a80" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M640 134 q7 -7 14 0 q7 -7 14 0" stroke="#7a5a80" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>
+      <path d="M0 196 C150 150 300 170 470 158 S780 130 952 168 V300 H0Z" fill="#eef5dc"/>
+      <path d="M0 236 C200 206 380 230 560 214 S840 196 952 214 V300 H0Z" fill="#d9eab3"/>
+      <!-- winding road -->
+      <path d="M720 300 C700 262 560 254 470 236 S330 206 230 176" stroke="#fff" stroke-width="34" fill="none" stroke-linecap="round"/>
+      <path d="M720 300 C700 262 560 254 470 236 S330 206 230 176" stroke="#e6d9b0" stroke-width="3" stroke-dasharray="14 14" fill="none" stroke-linecap="round"/>
+      <!-- trees -->
+      <g transform="translate(860 190)"><rect x="-4" y="0" width="8" height="34" rx="4" fill="#9a8f78"/><circle cy="-10" r="30" fill="#98c035"/><circle cx="-14" cy="4" r="20" fill="#6f9a1f"/></g>
+      <g transform="translate(64 214)"><rect x="-3" y="0" width="6" height="26" rx="3" fill="#9a8f78"/><circle cy="-8" r="22" fill="#98c035"/></g>
+      <!-- kids holding hands -->
+      <g stroke-linecap="round">
+        <path d="M402 230 L452 230 M482 232 L532 232 M562 228 L612 228" stroke="#442b49" stroke-width="5"/>
+        <g transform="translate(386 270)"><rect x="-17" y="-62" width="34" height="62" rx="17" fill="#6f9a1f"/><circle cy="-80" r="17" fill="#f2cfae"/></g>
+        <g transform="translate(467 272)"><rect x="-16" y="-54" width="32" height="54" rx="16" fill="#7a5a80"/><circle cy="-71" r="16" fill="#e7b98f"/></g>
+        <g transform="translate(547 272)"><rect x="-17" y="-64" width="34" height="64" rx="17" fill="#e2ac2a"/><circle cy="-82" r="17" fill="#c98f62"/></g>
+        <g transform="translate(627 270)"><rect x="-15" y="-50" width="30" height="50" rx="15" fill="#5d93bd"/><circle cy="-66" r="15" fill="#f2cfae"/></g>
+      </g>
+      <g fill="#98c035"><path d="M300 262 q-6 -18 4 -28 q4 14 -4 28Z"/><path d="M306 262 q10 -14 22 -12 q-6 12 -22 12Z"/><path d="M790 270 q-6 -18 4 -28 q4 14 -4 28Z"/></g>
+    </svg>
+  </div>
+
+  <h2>מה עושים בקבוצה?</h2>
+  <div class="grid">
+    <div class="card"><div class="ic i1"><svg viewBox="0 0 24 24"><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/><path d="M19 9h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-3-3h-4"/></svg></div>
+      <div><h3>תקשורת חברתית</h3><p>הבנת סיטואציות חברתיות</p></div></div>
+    <div class="card"><div class="ic i2"><svg viewBox="0 0 24 24"><path d="m12 3 2.6 5.6 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6L3.4 9.3l6-.7Z"/></svg></div>
+      <div><h3>ביטחון עצמי</h3><p>חיזוק תחושת המסוגלות</p></div></div>
+    <div class="card"><div class="ic i3"><svg viewBox="0 0 24 24"><path d="M12 20s-8-4.6-8-10.2A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8 2.8C20 15.4 12 20 12 20Z"/><path d="M8 11.5h2l1-2 2 4 1-2h2"/></svg></div>
+      <div><h3>ויסות רגשי</h3><p>זיהוי רגשות וניהולם</p></div></div>
+    <div class="card"><div class="ic i4"><svg viewBox="0 0 24 24"><path d="M8 4h3a2 2 0 1 1 4 0h3v4a2 2 0 1 1 0 4v4h-4a2 2 0 1 0-4 0H6v-4a2 2 0 1 0 0-4V6a2 2 0 0 1 2-2Z"/></svg></div>
+      <div><h3>פתרון קונפליקטים</h3><p>התמודדות עם תסכולים</p></div></div>
+  </div>
+
+  <div class="how">
+    <div class="lbl">איך?</div>
+    <div class="steps">משחקים<span class="dot"></span>סימולציות<span class="dot"></span>שיח קבוצתי</div>
+    <div class="res">כלים פרקטיים<br><b>שהילד לוקח לכל מקום</b></div>
+  </div>
+
+  <div class="trust">
+    <svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="27" fill="#f2ebf3"/><path d="M27 13l11 4v9c0 7-5 12-11 15-6-3-11-8-11-15v-9Z" fill="none" stroke="#5a3d60" stroke-width="2.6" stroke-linejoin="round"/><path d="m22 27 4 4 7-8" fill="none" stroke="#5a3d60" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div>מבוסס על <b>מודל הסמכות ההורית המארגנת</b>, שפותח מתוך מאות תהליכים טיפוליים, ומתוך היכרות עמוקה עם המגזר <b>הדתי, החרדי, הדתי-לאומי וחב״ד.</b></div>
+  </div>
+
+  <div class="foot">
+    <div class="txt">
+      <div class="cta">הצטרפו לקבוצה – <span>יוצאים לדרך!</span></div>
+      <div class="web">לפרטים והרשמה – <b class="he">באתר ובוואטסאפ, בקישורים המצורפים</b></div>
+    </div>
+    <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="#442b49" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></div>
+  </div>
+</div>
+</body>
+</html>
