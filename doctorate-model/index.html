@@ -188,14 +188,36 @@ html { scroll-behavior: smooth; }
 </head>
 <body>
 
+<style>
+.cell ul { margin: 4px 0 0; padding-inline-start: 18px; font-size: .85rem; line-height: 1.55; }
+.cell .k { font-size: .74rem; font-weight: 700; letter-spacing: .04em; color: var(--muted); margin-top: 6px; }
+.cell.c1 { background: color-mix(in srgb, var(--protect) 11%, var(--surface)); }
+.cell.c1 .risk { color: var(--protect); }
+.cell.c2 { background: color-mix(in srgb, var(--med) 13%, var(--surface)); }
+.cell.c2 .risk { color: var(--med); }
+.cell.c3 { background: color-mix(in srgb, var(--mod) 12%, var(--surface)); }
+.cell.c3 .risk { color: var(--mod); }
+.cell.c4 { background: color-mix(in srgb, var(--risk) 12%, var(--surface)); }
+.cell.c4 .risk { color: var(--risk); }
+.changes { display: grid; gap: 8px; margin: 1rem 0 0; padding: 16px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.changes div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 12px; font-size: .93rem; }
+.changes div > span:first-child { color: var(--muted); font-weight: 700; font-size: .82rem; }
+.changes div > span { min-width: 0; }
+.bar-lo { fill: color-mix(in srgb, var(--risk) 62%, var(--surface)); }
+.bar-hi { fill: color-mix(in srgb, var(--protect) 62%, var(--surface)); }
+.bar-ctl { fill: color-mix(in srgb, var(--med) 75%, var(--surface)); }
+.bar-thr { fill: color-mix(in srgb, var(--muted) 45%, var(--surface)); }
+.legend .lb::before { border-top-width: 8px; width: 12px; }
+@media (max-width: 720px) { .changes div { grid-template-columns: 1fr; gap: 2px; } }
+</style>
 
 <div class="page" dir="rtl" lang="he">
 
 <header class="top">
-  <div class="eyebrow">מסגרת תאורטית לדוקטורט · מרכז טל</div>
+  <div class="eyebrow">מסגרת תאורטית לדוקטורט · מרכז טל · גרסה 2</div>
   <h1>מודל הסמכות המארגנת</h1>
-  <p class="lede col">סמכות הורית מארגנת, קשיי ויסות תחושתי וקשיים רגשיים, התנהגותיים וחברתיים בילדות: מודל סיכון והגנה, השערות, מערך מחקר ודיון.</p>
-  <div class="meta">טיוטת עבודה · נבנתה מתוך טיוטות המענה לדוקטורט והורחבה למודל מלא · תגית <span class="tag src">מקור</span> מסמנת רעיון מהטיוטות, תגית <span class="tag ext">הרחבה</span> מסמנת הצעה חדשה לבדיקה</div>
+  <p class="lede col">שני פרופילי ויסות, חיפוש שליטה וחיפוש גירוי, ושני מסלולים לקשיים רגשיים, התנהגותיים וחברתיים. סמכות הורית מארגנת אחת שמתאימה לכולם, ואפיון שעוזר להורה לראות את הצורך.</p>
+  <div class="meta">טיוטת עבודה · תגית <span class="tag src">מקור</span> מסמנת רעיון מהטיוטות או מהניסוחים שלך, תגית <span class="tag ext">הרחבה</span> מסמנת הצעה חדשה לבדיקה</div>
 </header>
 
 <nav class="toc" aria-label="תוכן">
@@ -203,7 +225,9 @@ html { scroll-behavior: smooth; }
   <a href="#formulation">ניסוחים תאורטיים</a>
   <a href="#constructs">מושגי המודל</a>
   <a href="#model">המודל המשולב</a>
-  <a href="#matrix">מטריצת הסיכון</a>
+  <a href="#profiles">ארבעת הפרופילים</a>
+  <a href="#paths">שני המסלולים</a>
+  <a href="#insight">תפקיד האפיון</a>
   <a href="#hypotheses">השערות</a>
   <a href="#rq">שאלות מחקר</a>
   <a href="#design">מערך המחקר</a>
@@ -216,9 +240,12 @@ html { scroll-behavior: smooth; }
   <div class="secnum">1</div>
   <h2>תקציר המודל</h2>
   <div class="col">
-    <p>המודל מציע מבנה של <strong>סיכון והגנה</strong>. שני משתנים מרכזיים משפיעים על הסיכון של הילד לפתח קשיים רגשיים, התנהגותיים וחברתיים: <strong>רמת הסמכות ההורית המארגנת</strong>, שהיא גורם הגנה אפשרי, ו<strong>רמת הקשיים בוויסות התחושתי</strong>, שהיא גורם סיכון אפשרי. <span class="tag src">מקור</span></p>
-    <p>הטענה המרכזית רחבה יותר מהשפעה מגינה. הסמכות ההורית המארגנת אינה רק מגינה מפני ההשלכות של הקושי התחושתי. ההשערה היא שהיא גם משפרת את התפקוד התחושתי־ויסותי של הילד עצמו, משום שהיא משנה את ההתנהלות ואת הסביבה שהילד פוגש ומפחיתה את העומס עליו. <span class="tag src">מקור</span></p>
-    <p>מכאן נגזרות שלוש השערות: השפעה עצמאית של כל אחד מהמשתנים, מיתון של הקשר בין הקושי התחושתי לבין הקשיים בתפקוד, ושינוי בתפקוד הוויסותי עצמו. המודל המלא מחבר את השלוש לשרשרת אחת, שבה ההצפה וקשיי הוויסות ביומיום הם החוליה המתווכת. <span class="tag ext">הרחבה</span></p>
+    <p>המודל הוא מודל של <strong>סיכון והגנה</strong>. הסמכות ההורית המארגנת היא גורם ההגנה. גורם הסיכון אינו עוד "כמה קושי תחושתי יש לילד", אלא <strong>פרופיל הוויסות של הילד</strong>, שנע על שני ממדים: <strong>חיפוש שליטה</strong> ו<strong>חיפוש גירוי</strong>. <span class="tag src">מקור</span></p>
+    <p>הילד שמחפש שליטה חווה את העולם כמתקיף. לעיתים הראשית היא בינקות: רגישות טקטילית, בכי רב, מצוקה בלידה או אלרגיה. התענוג שלו הוא שליטה, והוא דומה בתיאורו לילד הנוקשה־נפיץ. הילד שמחפש גירוי מחפש מגע עמוק, חי את הרגע, מתקשה לדחות סיפוקים ומפנים גבולות פחות. יש ילדים שנמצאים גבוה בשני הממדים, והם הילדים המורכבים ביותר. <span class="tag src">מקור</span></p>
+    <p>הסמכות ההורית המארגנת מתאימה לכל הפרופילים, והדרישות שלה מההורה זהות. היא פועלת על כל פרופיל במנגנון אחר: אצל מחפש השליטה היא מורידה את תחושת האיום, ואצל מחפש הגירוי היא מחזיקה את הגבול מבחוץ עד שיופנם. האפיון אינו משנה את מה שההורה עושה. הוא עוזר להורה להיות נפרד מהילד ולראות את הצורך שמאחורי ההתנהגות. <span class="tag src">מקור</span></p>
+  </div>
+  <div class="changes col">
+    <div><span>מה השתנה מגרסה 1</span><span>קשיי הוויסות התחושתי עברו מציר אחד לשני ממדים. נוספו מקורות מוקדמים, שני מסלולים נפרדים לקשיים, ותובנה הורית כגשר בין האפיון לבין מימוש הסמכות. השערת המיתון הוחלפה בהשערת התאמה לכל הפרופילים ובהשערת מסלולים.</span></div>
   </div>
 </section>
 
@@ -226,32 +253,34 @@ html { scroll-behavior: smooth; }
 <section id="formulation">
   <div class="secnum">2</div>
   <h2>הצעות לניסוח תאורטי של השיטה</h2>
-  <p class="col">שלושה ניסוחים של אותה טענה, באורכים שונים. אפשר לבחור לפי ההקשר: שקף, הצעת מחקר או פרק מבוא.</p>
+  <p class="col">שלושה ניסוחים של אותה טענה, באורכים שונים.</p>
   <div class="formulations">
     <div class="form key">
       <div class="lbl">ניסוח מפתח · משפט אחד</div>
-      <p>סמכות הורית מארגנת פועלת על הסביבה שהילד פוגש ולא על הילד עצמו: היא מפחיתה את העומס שהמערכת התחושתית שלו נדרשת לעבד, ובכך ממתנת את הדרך שבה קשיי ויסות תחושתי מתורגמים לקשיים רגשיים, התנהגותיים וחברתיים.</p>
+      <p>ילדים מגיעים לקשיים רגשיים והתנהגותיים בשני מסלולים, דרך חיפוש שליטה או דרך חיפוש גירוי, וסמכות הורית מארגנת אחת עונה על שניהם: היא מורידה את תחושת האיום אצל הילד שמחפש שליטה, ומחזיקה את הגבול מבחוץ אצל הילד שמחפש גירוי.</p>
     </div>
     <div class="form">
       <div class="lbl">ניסוח להצעת המחקר · פסקה</div>
-      <p>המחקר מציע מודל סיכון והגנה, שבו קשיים בוויסות התחושתי מהווים גורם סיכון להתפתחות קשיים רגשיים, התנהגותיים וחברתיים, וסמכות הורית מארגנת מהווה גורם הגנה. לפי המודל, הסמכות ההורית המארגנת אינה מחייבת את ההורה לשנות את הילד או לתקן את מאפייניו התחושתיים. היא משנה את התנהלות ההורה ואת הסביבה שהילד פוגש: צפיות, קצב, טון ותגובה להסלמה. כך היא עשויה להפחית את ההצפה ואת הפגיעה התפקודית הנובעות מהרגישות התחושתית, ולאפשר ליכולות הוויסות של הילד להתפתח. ההשערה היא שהשפעתה המגינה של הסמכות תהיה חזקה במיוחד אצל ילדים עם קשיים תחושתיים משמעותיים.</p>
+      <p>המחקר מציע מודל סיכון והגנה, שבו פרופיל הוויסות של הילד מהווה גורם סיכון לקשיים רגשיים, התנהגותיים וחברתיים, וסמכות הורית מארגנת מהווה גורם הגנה. פרופיל הוויסות מתואר בשני ממדים. חיפוש שליטה מתפתח מתוך חוויה מוקדמת של עולם מאיים, כמו רגישות תחושתית, מצוקה בלידה או מחלה בינקות, ומתבטא בנוקשות ובהתפרצויות. חיפוש גירוי מתבטא בחיפוש מגע עמוק, בקושי לדחות סיפוקים ובהפנמה חלשה של גבולות. ההשערה היא שהסמכות ההורית המארגנת מגינה בכל הפרופילים, ופועלת בכל אחד מהם במנגנון אחר. אפיון הפרופיל אינו משנה את הדרישות מההורה, אך מסייע לו להיות נפרד מהילד, לראות את צרכיו ולממש את הסמכות ביציבות.</p>
     </div>
     <div class="form">
       <div class="lbl">ניסוח מורחב · פרק מבוא</div>
-      <p>ילדים נבדלים זה מזה ברגישות התחושתית הבסיסית שלהם. הרגישות כשלעצמה אינה קושי; הקושי נוצר במפגש בין הרגישות לבין עוצמת הגירוי, אי־הוודאות והלחץ הבין־אישי בסביבה. כאשר העומס עולה על יכולת העיבוד והוויסות של הילד, נוצרת הצפה, וזו מתבטאת בהתפרצויות, בהימנעות, בנסיגה חברתית ובמצוקה רגשית.</p>
-      <p>סמכות הורית מארגנת מתערבת במפגש הזה מצד הסביבה. הורה מארגן נוכח, צפוי ורגוע, דוחה תגובה בזמן הסלמה, מציב גבולות ברורים ומתאים את הסביבה לילד. התנהלות כזו מורידה את העומס ומספקת לילד ויסות משותף. לכן הסמכות צפויה להיות קשורה לפחות קשיים בכלל הילדים, להחליש את הקשר בין קושי תחושתי לקשיים בתפקוד, ולאורך זמן להפחית את ההצפה ואת הפגיעה התפקודית, גם כשהרגישות הבסיסית עצמה נשארת יציבה.</p>
-      <p>המודל נשען על מסורות תאורטיות שכדאי לעגן בהן את הפרק (לבדוק ולהשלים ספרות): מודלים של סיכון והגנה וחוסן (Rutter, 1987), מודל ההתאמה בין הילד לסביבה (goodness of fit; Thomas &amp; Chess, 1977), המודל של Dunn לעיבוד תחושתי (Dunn, 1997), וספרות הוויסות המשותף בין הורה לילד. <span class="tag ext">הרחבה</span></p>
+      <p>ילדים נבדלים בסף התחושתי שלהם. ילד עם סף נמוך קולט גירויים בעוצמה, ובמקרים רבים חווה כבר מהינקות את העולם כמתקיף. ילד כזה לומד שהדרך להרגיש בטוח היא לשלוט: בסדר, במעברים, באנשים. כשהשליטה נלקחת ממנו, הוא מוצף ומתפרץ. ילד עם סף גבוה לא מרגיש מספיק. הוא מחפש גירוי חזק ומגע עמוק, חי את הרגע, וגבולות שלא נחווים בגוף מופנמים אצלו חלש. אלה שני קצוות. יש ילדים שנמצאים גבוה בשניהם, והם המורכבים ביותר.</p>
+      <p>הסמכות ההורית המארגנת אינה דורשת מההורה שיטה שונה לכל ילד. היא דורשת נוכחות, צפיוּת, ויסות עצמי, דחיית תגובה וגבול ברור. אצל הילד שמחפש שליטה, התנהלות כזו מקטינה את האיום ומונעת מאבקי כוח. אצל הילד שמחפש גירוי, היא מספקת מבחוץ את המבנה והגבול שהילד עוד לא הפנים. האפיון התחושתי משמש את ההורה ככלי הבנה: כשההורה רואה את הצורך שמאחורי ההתנהגות, הוא חווה אותה פחות כמופנית נגדו, נפרד ממנה, ויכול להחזיק את הסמכות ביציבות.</p>
+      <p>עיגון תאורטי מוצע (לבדוק ולהשלים): מודל העיבוד התחושתי של Dunn (1997), שמבחין בין סף נוירולוגי נמוך לגבוה; תיאור הילד הנוקשה־נפיץ (Greene, 1998); ספרות דחיית סיפוקים ושליטה מעכבת; מושג התובנה ההורית (Oppenheim &amp; Koren-Karie, 2002); ומודלים של סיכון והגנה (Rutter, 1987). <span class="tag ext">הרחבה</span></p>
     </div>
   </div>
 
   <h3>טענות היסוד של המודל</h3>
   <ol class="props col">
-    <li><div>קשיי ויסות תחושתי הם גורם סיכון לקשיים רגשיים, התנהגותיים וחברתיים. <span class="tag src">מקור</span></div></li>
-    <li><div>סמכות הורית מארגנת היא גורם הגנה, וקשורה לפחות קשיים גם בלי קשר לפרופיל התחושתי של הילד. <span class="tag src">מקור</span></div></li>
-    <li><div>הסמכות ממתנת את הקשר בין הקושי התחושתי לקשיים בתפקוד, ולכן חשובה במיוחד דווקא אצל ילדים עם קשיים תחושתיים משמעותיים. <span class="tag src">מקור</span></div></li>
-    <li><div>הסמכות פועלת דרך ההתנהלות והסביבה ולא דרך שינוי הילד. היא מפחיתה את העומס, וכך את ההצפה. <span class="tag src">מקור</span></div></li>
-    <li><div>צריך להבחין בין רגישות תחושתית בסיסית, שהיא יציבה יחסית, לבין הצפה ופגיעה תפקודית, שתלויות בהקשר וניתנות לשינוי. השיטה צפויה לשנות בעיקר את השנייה. <span class="tag src">מקור</span></div></li>
-    <li><div>לאורך זמן, ירידה בעומס מאפשרת ליכולות הוויסות של הילד להתפתח, ולכן השפעת הסמכות צפויה להצטבר. <span class="tag ext">הרחבה</span></div></li>
+    <li><div>הקושי התחושתי הוא גורם סיכון, אך המשמעות שלו תלויה בכיוון: חיפוש שליטה או חיפוש גירוי. <span class="tag src">מקור</span></div></li>
+    <li><div>חיפוש שליטה מתפתח מתוך חוויה מוקדמת שהעולם מתקיף, והתענוג של הילד הוא שליטה. <span class="tag src">מקור</span></div></li>
+    <li><div>חיפוש גירוי קשור לסף תחושתי גבוה, לחיפוש מגע עמוק, לחיים ברגע ולהפנמה חלשה של גבולות. <span class="tag src">מקור</span></div></li>
+    <li><div>ילדים גבוהים בשני הממדים הם המורכבים ביותר. <span class="tag src">מקור</span></div></li>
+    <li><div>הסמכות ההורית המארגנת מתאימה לכל הפרופילים, והדרישות שלה מההורה זהות. <span class="tag src">מקור</span></div></li>
+    <li><div>הסמכות פועלת על כל פרופיל במנגנון אחר: הפחתת איום אצל מחפש השליטה, החזקת גבול מבחוץ אצל מחפש הגירוי. <span class="tag ext">הרחבה</span></div></li>
+    <li><div>האפיון עוזר להורה להיות נפרד מהילד ולראות את צרכיו, וכך מקל על מימוש הסמכות. <span class="tag src">מקור</span></div></li>
+    <li><div>הסף התחושתי עצמו יציב יחסית. מה שצפוי להשתנות הוא האסטרטגיה: חיפוש השליטה פוחת כשהעולם מרגיש פחות מאיים, והיכולת לדחות סיפוקים גדלה כשהגבול עקבי. <span class="tag ext">הרחבה</span></div></li>
   </ol>
 </section>
 
@@ -260,16 +289,22 @@ html { scroll-behavior: smooth; }
   <div class="secnum">3</div>
   <h2>מושגי המודל</h2>
   <dl class="defs col">
+    <div><dt>חוויות מוקדמות מאיימות <span class="role">E · רקע</span></dt>
+      <dd>חוויות בינקות שעשויות לייצר תחושה שהעולם מתקיף: רגישות טקטילית, בכי רב, מצוקה בלידה, אלרגיה או בעיה רפואית אחרת.</dd></div>
+    <div><dt>חיפוש שליטה <span class="role">P₁ · ממד בפרופיל</span></dt>
+      <dd>צורך לשלוט בסביבה, בסדר ובמעברים כדרך להרגיש בטוח. מתבטא בנוקשות, בקושי עם שינויים ובהתפרצויות כשהשליטה נלקחת. נשען לרוב על סף תחושתי נמוך.</dd></div>
+    <div><dt>חיפוש גירוי <span class="role">P₂ · ממד בפרופיל</span></dt>
+      <dd>חיפוש פעיל של גירוי חזק, בעיקר מגע עמוק. מתבטא בחיים ברגע, בקושי לדחות סיפוקים ובהפנמה חלשה של גבולות. נשען לרוב על סף תחושתי גבוה.</dd></div>
+    <div><dt>תחושת איום והצפה <span class="role">M₁ · מתווך במסלול השליטה</span></dt>
+      <dd>תדירות ועוצמה של מצבי הצפה, ומשך ההתאוששות מהם.</dd></div>
+    <div><dt>הפנמת גבולות ודחיית סיפוקים <span class="role">M₂ · מתווך במסלול הגירוי</span></dt>
+      <dd>היכולת לעצור, לחכות ולפעול לפי גבול גם כשההורה לא נמצא ליד.</dd></div>
     <div><dt>סמכות הורית מארגנת <span class="role">W · גורם הגנה</span></dt>
-      <dd>התנהלות הורית שמייצרת לילד סביבה צפויה ומווסתת: נוכחות הורית, שגרה וצפיות, ויסות עצמי של ההורה ודחיית תגובה בזמן הסלמה, גבולות ברורים שאינם נאכפים בכוח, והתאמה של הסביבה לצורכי הילד. ההגדרה התפעולית מחייבת כלי מדידה ייעודי (ראו סעיף 8).</dd></div>
-    <div><dt>מאפיינים תחושתיים בסיסיים <span class="role">X · גורם סיכון</span></dt>
-      <dd>דפוס העיבוד התחושתי של הילד: רגישות־יתר, הימנעות, חיפוש גירוי או רישום נמוך. נתפסים כתכונה יציבה יחסית.</dd></div>
-    <div><dt>הצפה וקשיי ויסות ביומיום <span class="role">M · מתווך</span></dt>
-      <dd>הביטוי התפקודי של הקושי התחושתי: תדירות ועוצמה של מצבי הצפה, משך ההתאוששות, והקושי לווסת רגש והתנהגות בחיי היומיום. זה המשתנה שהשיטה צפויה לשנות.</dd></div>
-    <div><dt>עומס סביבתי ובין־אישי <span class="role">מנגנון</span></dt>
-      <dd>עוצמת הגירוי, חוסר הצפיות, הקצב והטון שהילד פוגש, כולל הסלמה בין ההורה לילד. דרכו הסמכות משפיעה על ההצפה.</dd></div>
+      <dd>נוכחות הורית, שגרה וצפיוּת, ויסות עצמי ודחיית תגובה בזמן הסלמה, גבולות ברורים שאינם נאכפים בכוח, והתאמת הסביבה. אותן דרישות לכל הפרופילים.</dd></div>
+    <div><dt>תובנה ונפרדות הורית <span class="role">I · גשר</span></dt>
+      <dd>היכולת של ההורה להבין מה הילד מחפש, לראות את הצורך מאחורי ההתנהגות, ולא לחוות אותה כמופנית נגדו.</dd></div>
     <div><dt>קשיים רגשיים, התנהגותיים וחברתיים <span class="role">Y · תוצאה</span></dt>
-      <dd>קשיים מופנמים (חרדה, מצוקה), קשיים מוחצנים (התפרצויות, התנגדות) וקשיים ביחסים עם בני גיל.</dd></div>
+      <dd>נוקשות והתפרצויות, אימפולסיביות, מצוקה רגשית וקשיים ביחסים עם בני גיל.</dd></div>
   </dl>
 </section>
 
@@ -277,328 +312,393 @@ html { scroll-behavior: smooth; }
 <section id="model">
   <div class="secnum">4</div>
   <h2>המודל המשולב</h2>
-  <p class="col">התרשים מחבר את שלוש ההשערות למנגנון אחד. ההצפה נוצרת במפגש בין הרגישות של הילד לבין העומס בסביבה. הסמכות ההורית פועלת מצד הסביבה: היא מורידה את העומס, ממתנת את המעבר מרגישות להצפה, וקשורה ישירות לפחות קשיים.</p>
+  <p class="col">שני ממדי הפרופיל מובילים לקשיים בשני מסלולים נפרדים. הסמכות פועלת על שני המסלולים ממקום אחד. האפיון של הילד מזין את התובנה של ההורה, והתובנה מקלה עליו לממש את הסמכות.</p>
 
   <figure>
     <div class="scroll">
-    <svg viewBox="0 0 960 500" role="img" aria-label="מודל משולב: מאפיינים תחושתיים מגבירים הצפה, הצפה מובילה לקשיים רגשיים־התנהגותיים; סמכות הורית מארגנת מפחיתה עומס סביבתי, ממתנת את הקשר בין רגישות להצפה, ומשפיעה ישירות על הקשיים.">
+    <svg viewBox="0 0 960 470" role="img" aria-label="מודל משולב: חוויות מוקדמות מובילות לחיפוש שליטה; חיפוש שליטה מוביל לתחושת איום והצפה, וחיפוש גירוי מוביל להפנמה חלשה של גבולות; שני המתווכים מובילים לקשיים. הסמכות ההורית מפחיתה איום, מחזיקה את הגבול, ומשפיעה ישירות על הקשיים. האפיון מזין תובנה הורית, שמזינה את הסמכות.">
       <defs>
-        <marker id="m1-fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-fg"/></marker>
-        <marker id="m1-prot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-prot"/></marker>
-        <marker id="m1-risk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-risk"/></marker>
-        <marker id="m1-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-muted"/></marker>
+        <marker id="v1-fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-fg"/></marker>
+        <marker id="v1-prot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-prot"/></marker>
+        <marker id="v1-risk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-risk"/></marker>
+        <marker id="v1-mod" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-mod"/></marker>
+        <marker id="v1-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-muted"/></marker>
       </defs>
 
+      <!-- Early experiences -->
+      <rect class="bx-env" x="730" y="8" width="200" height="64" rx="10"/>
+      <text class="t-sm" x="830" y="34" text-anchor="middle">חוויות מוקדמות מאיימות</text>
+      <text class="ts" x="830" y="54" text-anchor="middle">רגישות טקטילית · בכי · לידה · אלרגיה</text>
+
+      <!-- Profiles -->
+      <rect class="bx-risk" x="730" y="120" width="200" height="70" rx="10"/>
+      <text class="t" x="830" y="151" text-anchor="middle">חיפוש שליטה</text>
+      <text class="ts" x="830" y="172" text-anchor="middle">P₁ · העולם מרגיש מתקיף</text>
+
+      <rect class="bx-risk" x="730" y="380" width="200" height="70" rx="10"/>
+      <text class="t" x="830" y="411" text-anchor="middle">חיפוש גירוי</text>
+      <text class="ts" x="830" y="432" text-anchor="middle">P₂ · מגע עמוק · חי את הרגע</text>
+
+      <!-- Insight -->
+      <rect class="bx-mod" x="730" y="250" width="200" height="70" rx="10"/>
+      <text class="t" x="830" y="281" text-anchor="middle">תובנה ונפרדות הורית</text>
+      <text class="ts" x="830" y="302" text-anchor="middle">I · ההורה רואה את הצורך</text>
+
+      <!-- Mediators -->
+      <rect class="bx-med" x="400" y="120" width="196" height="70" rx="10"/>
+      <text class="t" x="498" y="151" text-anchor="middle">תחושת איום והצפה</text>
+      <text class="ts" x="498" y="172" text-anchor="middle">M₁</text>
+
+      <rect class="bx-med" x="400" y="380" width="196" height="70" rx="10"/>
+      <text class="t-sm" x="498" y="406" text-anchor="middle">הפנמת גבולות ודחיית</text>
+      <text class="t-sm" x="498" y="424" text-anchor="middle">סיפוקים חלשות</text>
+      <text class="ts" x="498" y="441" text-anchor="middle">M₂</text>
+
       <!-- Authority -->
-      <rect class="bx-prot" x="375" y="20" width="210" height="76" rx="10"/>
-      <text class="t" x="480" y="52" text-anchor="middle">סמכות הורית מארגנת</text>
-      <text class="ts" x="480" y="74" text-anchor="middle">W · גורם הגנה</text>
+      <rect class="bx-prot" x="400" y="250" width="196" height="70" rx="10"/>
+      <text class="t" x="498" y="281" text-anchor="middle">סמכות הורית מארגנת</text>
+      <text class="ts" x="498" y="302" text-anchor="middle">W · אותן דרישות לכולם</text>
 
-      <!-- Environment load -->
-      <rect class="bx-env" x="375" y="160" width="210" height="70" rx="10"/>
-      <text class="t-sm" x="480" y="190" text-anchor="middle">עומס סביבתי ובין־אישי</text>
-      <text class="ts" x="480" y="211" text-anchor="middle">גירוי · אי־צפיות · קצב · הסלמה</text>
+      <!-- Outcome -->
+      <rect class="bx-out" x="30" y="240" width="206" height="90" rx="10"/>
+      <text class="t" x="133" y="272" text-anchor="middle">קשיים רגשיים,</text>
+      <text class="t" x="133" y="292" text-anchor="middle">התנהגותיים וחברתיים</text>
+      <text class="ts" x="133" y="314" text-anchor="middle">Y</text>
 
-      <!-- Row: outcome / overwhelm / sensory -->
-      <rect class="bx-out" x="30" y="300" width="210" height="80" rx="10"/>
-      <text class="t" x="135" y="334" text-anchor="middle">קשיים רגשיים,</text>
-      <text class="t" x="135" y="354" text-anchor="middle">התנהגותיים וחברתיים</text>
-      <text class="ts" x="135" y="372" text-anchor="middle">Y · תוצאה</text>
-
-      <rect class="bx-med" x="375" y="300" width="210" height="80" rx="10"/>
-      <text class="t" x="480" y="334" text-anchor="middle">הצפה וקשיי ויסות</text>
-      <text class="t" x="480" y="354" text-anchor="middle">ביומיום</text>
-      <text class="ts" x="480" y="372" text-anchor="middle">M · מתווך</text>
-
-      <rect class="bx-risk" x="720" y="300" width="210" height="80" rx="10"/>
-      <text class="t" x="825" y="334" text-anchor="middle">מאפיינים תחושתיים</text>
-      <text class="t" x="825" y="354" text-anchor="middle">בסיסיים</text>
-      <text class="ts" x="825" y="372" text-anchor="middle">X · גורם סיכון</text>
-
-      <!-- X -> M -->
-      <line class="ln-risk" x1="718" y1="340" x2="590" y2="340" marker-end="url(#m1-risk)"/>
-      <text class="tl" x="652" y="362" text-anchor="middle">a · מגבירים הצפה</text>
+      <!-- E -> P1 -->
+      <line class="ln-muted" x1="830" y1="74" x2="830" y2="115" marker-end="url(#v1-muted)"/>
+      <!-- P1 -> M1, P2 -> M2 -->
+      <line class="ln-risk" x1="728" y1="155" x2="601" y2="155" marker-end="url(#v1-risk)"/>
+      <text class="tl" x="664" y="145" text-anchor="middle" style="fill:var(--risk)">כשהשליטה נלקחת</text>
+      <line class="ln-risk" x1="728" y1="415" x2="601" y2="415" marker-end="url(#v1-risk)"/>
+      <text class="tl" x="664" y="405" text-anchor="middle" style="fill:var(--risk)">גבול לא מורגש</text>
       <!-- M -> Y -->
-      <line class="ln-risk" x1="373" y1="340" x2="245" y2="340" marker-end="url(#m1-risk)"/>
-      <text class="tl" x="309" y="330" text-anchor="middle">b · פוגעת בתפקוד</text>
-      <!-- Env -> M -->
-      <line class="ln-muted" x1="480" y1="232" x2="480" y2="295" marker-end="url(#m1-muted)"/>
-      <text class="ts" x="545" y="268" text-anchor="middle">מזין הצפה</text>
-      <!-- W -> Env -->
-      <line class="ln-prot" x1="480" y1="98" x2="480" y2="155" marker-end="url(#m1-prot)"/>
-      <text class="tl c-prot" x="560" y="132" text-anchor="middle" style="fill:var(--protect)">מפחיתה עומס · H3</text>
-      <!-- W -> Y direct -->
-      <path class="ln-prot" d="M373,58 C220,58 135,120 135,295" marker-end="url(#m1-prot)"/>
-      <text class="tl" x="275" y="170" text-anchor="middle" style="fill:var(--protect)">השפעה ישירה · H1</text>
-      <!-- Moderation W -> path a -->
-      <path class="ln-mod" d="M587,58 C690,58 655,200 655,334"/>
-      <circle cx="655" cy="340" r="5" class="c-mod"/>
-      <text class="tl" x="735" y="160" text-anchor="middle" style="fill:var(--mod)">ממתנת את הקשר · H2</text>
-      <!-- Direct c' -->
-      <path class="ln-faint" d="M825,382 C825,470 135,470 135,386" marker-end="url(#m1-muted)"/>
-      <text class="ts" x="480" y="462" text-anchor="middle">c′ · קשר ישיר בין קושי תחושתי לקשיים (H1)</text>
+      <line class="ln-risk" x1="398" y1="160" x2="242" y2="252" marker-end="url(#v1-risk)"/>
+      <text class="tl" x="300" y="182" text-anchor="middle" style="fill:var(--risk)">נוקשות, התפרצויות</text>
+      <line class="ln-risk" x1="398" y1="410" x2="242" y2="318" marker-end="url(#v1-risk)"/>
+      <text class="tl" x="300" y="395" text-anchor="middle" style="fill:var(--risk)">אימפולסיביות</text>
+      <!-- W -> M1, W -> M2 -->
+      <line class="ln-prot" x1="498" y1="248" x2="498" y2="196" marker-end="url(#v1-prot)"/>
+      <text class="ts" x="480" y="226" text-anchor="start" style="fill:var(--protect)">מורידה איום</text>
+      <line class="ln-prot" x1="498" y1="322" x2="498" y2="374" marker-end="url(#v1-prot)"/>
+      <text class="ts" x="480" y="352" text-anchor="start" style="fill:var(--protect)">מחזיקה את הגבול מבחוץ</text>
+      <!-- W -> Y -->
+      <line class="ln-prot" x1="398" y1="285" x2="242" y2="285" marker-end="url(#v1-prot)"/>
+      <text class="ts" x="320" y="277" text-anchor="middle" style="fill:var(--protect)">השפעה ישירה</text>
+      <!-- profiles -> insight -->
+      <line class="ln-faint" x1="830" y1="192" x2="830" y2="245" marker-end="url(#v1-muted)"/>
+      <line class="ln-faint" x1="830" y1="378" x2="830" y2="325" marker-end="url(#v1-muted)"/>
+      <text class="ts" x="846" y="224" text-anchor="end">אפיון</text>
+      <text class="ts" x="846" y="356" text-anchor="end">אפיון</text>
+      <!-- insight -> W -->
+      <line class="ln-mod" x1="728" y1="285" x2="602" y2="285" marker-end="url(#v1-mod)"/>
+      <text class="ts" x="664" y="276" text-anchor="middle" style="fill:var(--mod)">מקלה על המימוש</text>
     </svg>
     </div>
-    <div class="legend"><span class="lr">מסלול הסיכון</span><span class="lp">השפעת הסמכות</span><span class="lm">מיתון (אינטראקציה)</span></div>
-    <figcaption><span class="fignum">תרשים 1</span><b>המודל המשולב.</b> ההצפה (M) היא נקודת המפגש בין רגישות הילד (X) לבין העומס בסביבה. הסמכות (W) פועלת בשלוש דרכים: מורידה את העומס (H3), מחלישה את המעבר מרגישות להצפה (H2), וקשורה ישירות לפחות קשיים (H1). הסמכות אינה פועלת על המאפיינים התחושתיים עצמם, ולכן אין חץ מ־W ל־X.</figcaption>
+    <div class="legend"><span class="lr">מסלולי הסיכון</span><span class="lp">פעולת הסמכות</span><span class="lm">האפיון והתובנה ההורית</span></div>
+    <figcaption><span class="fignum">תרשים 1</span><b>המודל המשולב.</b> חיפוש שליטה מוביל לקשיים דרך איום והצפה; חיפוש גירוי מוביל לקשיים דרך הפנמה חלשה של גבולות. הסמכות פועלת על שני המסלולים, והאפיון פועל דרך ההורה ולא דרך הילד. ילד בפרופיל המשולב נמצא בשני המסלולים בבת אחת.</figcaption>
   </figure>
-
-  <p class="col">גרסה פשוטה של אותו מודל, כפי שהופיעה בטיוטה המקורית: קשיי ויסות תחושתי מובילים לקשיים רגשיים, התנהגותיים וחברתיים, והסמכות ההורית המארגנת עשויה למתן את הקשר הזה ולצמצם הצפה לאורך זמן. <span class="tag src">מקור</span></p>
 </section>
 
 <!-- 5 -->
-<section id="matrix">
+<section id="profiles">
   <div class="secnum">5</div>
-  <h2>ארבעת המצבים: מטריצת הסיכון</h2>
-  <p class="col">שילוב שני המשתנים יוצר ארבעה מצבים. הדירוג ממחיש את ההשערה בלבד. <span class="tag src">מקור</span></p>
+  <h2>ארבעת הפרופילים</h2>
+  <p class="col">שני הממדים נמדדים כל אחד בנפרד, ולכן יוצרים ארבעה פרופילים. אלה שני קצוות ושילוב ביניהם, ולא סוגים סגורים. <span class="tag src">מקור</span></p>
 
   <figure>
-    <div class="matrix" role="img" aria-label="מטריצה 2 על 2: סמכות גבוהה ללא קשיים – סיכון נמוך במיוחד; סמכות גבוהה עם קשיים – סיכון ממותן; סמכות נמוכה ללא קשיים – סיכון מוגבר אפשרי; סמכות נמוכה עם קשיים – סיכון גבוה במיוחד.">
+    <div class="matrix" role="img" aria-label="מטריצת פרופילים 2 על 2: חיפוש שליטה גבוה או נמוך, וחיפוש גירוי גבוה או נמוך. מחפש שליטה, מחפש גירוי, משולב, ובלי פרופיל בולט.">
       <div></div>
-      <div class="axis">ללא קשיי ויסות תחושתי משמעותיים</div>
-      <div class="axis">עם קשיי ויסות תחושתי</div>
+      <div class="axis">חיפוש גירוי נמוך</div>
+      <div class="axis">חיפוש גירוי גבוה</div>
 
-      <div class="axis rowh">סמכות מארגנת גבוהה</div>
-      <div class="cell c1"><span class="cond">סמכות גבוהה · ללא קשיים</span><span class="risk">סיכון נמוך במיוחד</span><span class="why">שילוב משוער של שני תנאים מיטיבים</span><span class="bar"><i></i></span></div>
-      <div class="cell c2"><span class="cond">סמכות גבוהה · עם קשיים</span><span class="risk">סיכון ממותן</span><span class="why">הסמכות עשויה לצמצם את השפעת הקושי</span><span class="bar"><i></i></span></div>
+      <div class="axis rowh">חיפוש שליטה גבוה</div>
+      <div class="cell c2">
+        <span class="risk">מחפש שליטה</span>
+        <span class="why">רגיש, חווה את העולם כמתקיף, התענוג שלו בשליטה. דומה לילד הנוקשה־נפיץ.</span>
+        <span class="k">איך נראה הקושי</span>
+        <ul><li>נוקשות וקושי במעברים</li><li>התפרצויות כשהשליטה נלקחת</li></ul>
+        <span class="k">מה הסמכות נותנת</span>
+        <ul><li>צפיוּת ושגרה</li><li>נוכחות רגועה, בלי מאבק כוח</li></ul>
+      </div>
+      <div class="cell c4">
+        <span class="risk">משולב</span>
+        <span class="why">רגיש ומחפש שליטה, ובאותו זמן מחפש מגע כל הזמן. הילדים המורכבים ביותר.</span>
+        <span class="k">איך נראה הקושי</span>
+        <ul><li>נוקשות ואימפולסיביות יחד</li><li>התפרצויות תכופות</li></ul>
+        <span class="k">מה הסמכות נותנת</span>
+        <ul><li>אותן דרישות</li><li>ההורה צריך יותר ליווי ויותר סבלנות</li></ul>
+      </div>
 
-      <div class="axis rowh">סמכות מארגנת נמוכה</div>
-      <div class="cell c3"><span class="cond">סמכות נמוכה · ללא קשיים</span><span class="risk">סיכון מוגבר אפשרי</span><span class="why">היעדר הקושי התחושתי עשוי למתן את הסיכון</span><span class="bar"><i></i></span></div>
-      <div class="cell c4"><span class="cond">סמכות נמוכה · עם קשיים</span><span class="risk">סיכון גבוה במיוחד</span><span class="why">הצטברות משוערת של שני גורמי סיכון</span><span class="bar"><i></i></span></div>
+      <div class="axis rowh">חיפוש שליטה נמוך</div>
+      <div class="cell c1">
+        <span class="risk">בלי פרופיל בולט</span>
+        <span class="why">ויסות תחושתי בטווח הרגיל.</span>
+        <span class="k">מה הסמכות נותנת</span>
+        <ul><li>אותה התנהלות, ובה הגנה כללית</li></ul>
+      </div>
+      <div class="cell c3">
+        <span class="risk">מחפש גירוי</span>
+        <span class="why">מחפש מגע עמוק, לא מרגיש מספיק, חי את הרגע.</span>
+        <span class="k">איך נראה הקושי</span>
+        <ul><li>אימפולסיביות</li><li>קושי לדחות סיפוקים ולהפנים גבולות</li></ul>
+        <span class="k">מה הסמכות נותנת</span>
+        <ul><li>השגחה וגבול עקבי מבחוץ</li><li>מענה מאורגן לצורך בגירוי</li></ul>
+      </div>
     </div>
-    <figcaption><span class="fignum">תרשים 2</span><b>מטריצת הסיכון המשוערת.</b> הפסים מסמנים סדר משוער ולא ערכים. הדירוגים אינם מבוססים עדיין על נתונים, ואינם מנבאים את מצבו של ילד מסוים. ההשערה החשובה במטריצה היא שהפער בין שתי השורות גדול יותר בעמודה של ילדים עם קשיים (ראו תרשים 4).</figcaption>
+    <figcaption><span class="fignum">תרשים 2</span><b>מפת הפרופילים.</b> השורות והעמודות הן שני ממדים נפרדים. הסמכות נשארת אותה סמכות בכל ארבעת התאים; מה שמשתנה הוא מה שהיא נותנת לילד. במחקר מומלץ למדוד את שני הממדים ברצף ולגזור את הפרופילים מהנתונים, כדי שהפרופיל המשולב יופיע מעצמו.</figcaption>
   </figure>
 </section>
 
 <!-- 6 -->
-<section id="hypotheses">
+<section id="paths">
   <div class="secnum">6</div>
-  <h2>השערות המחקר</h2>
-  <p class="col">הטיוטה מבחינה בשלוש השערות שונות. <span class="tag src">מקור</span> כל אחת מהן מנוסחת כאן כהשערה אמפירית שאפשר לבדוק, ונוספו שתי השערות שמחברות ביניהן ובודקות אותן לאורך זמן. <span class="tag ext">הרחבה</span></p>
-
+  <h2>שני המסלולים</h2>
+  <p class="col">כל ממד מוביל לקשיים בדרך אחרת, והסמכות נכנסת לכל מסלול בנקודה אחרת. <span class="tag ext">הרחבה</span></p>
   <figure>
     <div class="scroll">
-    <svg viewBox="0 0 960 260" role="img" aria-label="שלושה מודלים סטטיסטיים: H1 השפעות עצמאיות של סמכות ושל קושי תחושתי על הקשיים; H2 הסמכות ממתנת את הקשר בין קושי תחושתי לקשיים; H3 הסמכות מפחיתה הצפה, וההצפה מנבאת קשיים.">
+    <svg viewBox="0 30 960 372" role="img" aria-label="שני מסלולים. מסלול האיום: חוויה מוקדמת מאיימת, העולם מרגיש מתקיף, חיפוש שליטה, נוקשות והתפרצויות; הסמכות מורידה את תחושת האיום. מסלול הגבול: סף תחושתי גבוה, חיפוש מגע עמוק, גבולות לא מופנמים, אימפולסיביות; הסמכות מחזיקה את הגבול מבחוץ.">
       <defs>
-        <marker id="m3-fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-fg"/></marker>
-        <marker id="m3-prot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-prot"/></marker>
-        <marker id="m3-risk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-risk"/></marker>
-        <marker id="m3-mod" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-mod"/></marker>
-        <marker id="m3-med" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-med"/></marker>
+        <marker id="v3-risk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-risk"/></marker>
+        <marker id="v3-prot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-prot"/></marker>
       </defs>
-      <line class="grid-l" x1="640" y1="20" x2="640" y2="240"/>
-      <line class="grid-l" x1="320" y1="20" x2="320" y2="240"/>
+      <!-- Lane 1 -->
+      <text class="th" x="105" y="84" text-anchor="middle" style="fill:var(--med)">מסלול האיום</text>
+      <text class="ts" x="105" y="104" text-anchor="middle">מחפש שליטה</text>
+      <rect class="bx-env" x="790" y="50" width="150" height="62" rx="10"/>
+      <text class="t-sm" x="865" y="77" text-anchor="middle">חוויה מוקדמת</text>
+      <text class="ts" x="865" y="96" text-anchor="middle">רגישות, לידה, אלרגיה</text>
+      <rect class="bx-med" x="600" y="50" width="150" height="62" rx="10"/>
+      <text class="t-sm" x="675" y="77" text-anchor="middle">העולם מרגיש</text>
+      <text class="t-sm" x="675" y="96" text-anchor="middle">מתקיף</text>
+      <rect class="bx-risk" x="410" y="50" width="150" height="62" rx="10"/>
+      <text class="t-sm" x="485" y="77" text-anchor="middle">חיפוש שליטה</text>
+      <text class="ts" x="485" y="96" text-anchor="middle">התענוג בשליטה</text>
+      <rect class="bx-out" x="220" y="50" width="150" height="62" rx="10"/>
+      <text class="t-sm" x="295" y="77" text-anchor="middle">נוקשות</text>
+      <text class="t-sm" x="295" y="96" text-anchor="middle">והתפרצויות</text>
+      <line class="ln-risk" x1="788" y1="81" x2="756" y2="81" marker-end="url(#v3-risk)"/>
+      <line class="ln-risk" x1="598" y1="81" x2="566" y2="81" marker-end="url(#v3-risk)"/>
+      <line class="ln-risk" x1="408" y1="81" x2="376" y2="81" marker-end="url(#v3-risk)"/>
+      <rect class="bx-prot" x="585" y="146" width="180" height="58" rx="10"/>
+      <text class="t-sm" x="675" y="170" text-anchor="middle">צפיוּת · נוכחות רגועה</text>
+      <text class="ts" x="675" y="190" text-anchor="middle">בלי מאבק כוח</text>
+      <line class="ln-prot" x1="675" y1="144" x2="675" y2="117" marker-end="url(#v3-prot)"/>
+      <text class="ts" x="690" y="134" text-anchor="end" style="fill:var(--protect)">מורידה את תחושת האיום</text>
 
-      <!-- H1 panel (right) -->
-      <text class="th" x="800" y="34" text-anchor="middle">H1 · השפעה עצמאית</text>
-      <rect class="bx-prot" x="830" y="62" width="110" height="44" rx="8"/>
-      <text class="t-sm" x="885" y="89" text-anchor="middle">סמכות (W)</text>
-      <rect class="bx-risk" x="830" y="160" width="110" height="44" rx="8"/>
-      <text class="t-sm" x="885" y="187" text-anchor="middle">קושי תחושתי (X)</text>
-      <rect class="bx-out" x="665" y="111" width="110" height="44" rx="8"/>
-      <text class="t-sm" x="720" y="138" text-anchor="middle">קשיים (Y)</text>
-      <line class="ln-prot" x1="828" y1="88" x2="780" y2="122" marker-end="url(#m3-prot)"/>
-      <text class="tl" x="812" y="96" text-anchor="middle" style="fill:var(--protect)">−</text>
-      <line class="ln-risk" x1="828" y1="178" x2="780" y2="146" marker-end="url(#m3-risk)"/>
-      <text class="tl" x="812" y="178" text-anchor="middle" style="fill:var(--risk)">+</text>
-      <text class="ts" x="800" y="234" text-anchor="middle">שני מנבאים, כל אחד בבקרה על השני</text>
+      <line class="grid-l" x1="20" y1="222" x2="940" y2="222"/>
 
-      <!-- H2 panel (middle) -->
-      <text class="th" x="480" y="34" text-anchor="middle">H2 · מיתון</text>
-      <rect class="bx-prot" x="425" y="56" width="110" height="44" rx="8"/>
-      <text class="t-sm" x="480" y="83" text-anchor="middle">סמכות (W)</text>
-      <rect class="bx-risk" x="510" y="150" width="110" height="44" rx="8"/>
-      <text class="t-sm" x="565" y="177" text-anchor="middle">קושי תחושתי (X)</text>
-      <rect class="bx-out" x="340" y="150" width="110" height="44" rx="8"/>
-      <text class="t-sm" x="395" y="177" text-anchor="middle">קשיים (Y)</text>
-      <line class="ln-risk" x1="508" y1="172" x2="455" y2="172" marker-end="url(#m3-risk)"/>
-      <line class="ln-mod" x1="480" y1="102" x2="480" y2="164" marker-end="url(#m3-mod)"/>
-      <text class="tl" x="520" y="136" text-anchor="middle" style="fill:var(--mod)">X × W</text>
-      <text class="ts" x="480" y="234" text-anchor="middle">הקשר X→Y חלש יותר כשהסמכות גבוהה</text>
-
-      <!-- H3 panel (left) -->
-      <text class="th" x="160" y="34" text-anchor="middle">H3 · שינוי בוויסות</text>
-      <rect class="bx-prot" x="195" y="150" width="110" height="44" rx="8"/>
-      <text class="t-sm" x="250" y="177" text-anchor="middle">סמכות (W)</text>
-      <rect class="bx-med" x="105" y="56" width="110" height="44" rx="8"/>
-      <text class="t-sm" x="160" y="83" text-anchor="middle">הצפה (M)</text>
-      <rect class="bx-out" x="15" y="150" width="110" height="44" rx="8"/>
-      <text class="t-sm" x="70" y="177" text-anchor="middle">קשיים (Y)</text>
-      <line class="ln-prot" x1="235" y1="148" x2="195" y2="104" marker-end="url(#m3-prot)"/>
-      <text class="tl" x="236" y="122" text-anchor="middle" style="fill:var(--protect)">a (−)</text>
-      <line class="ln-med" x1="125" y1="104" x2="85" y2="148" marker-end="url(#m3-med)"/>
-      <text class="tl" x="84" y="122" text-anchor="middle" style="fill:var(--med)">b (+)</text>
-      <line class="ln-faint" x1="193" y1="172" x2="130" y2="172" marker-end="url(#m3-fg)"/>
-      <text class="ts" x="160" y="164" text-anchor="middle">c′</text>
-      <text class="ts" x="160" y="234" text-anchor="middle">בבקרה על המאפיינים התחושתיים (X)</text>
+      <!-- Lane 2 -->
+      <text class="th" x="105" y="284" text-anchor="middle" style="fill:var(--mod)">מסלול הגבול</text>
+      <text class="ts" x="105" y="304" text-anchor="middle">מחפש גירוי</text>
+      <rect class="bx-env" x="790" y="250" width="150" height="62" rx="10"/>
+      <text class="t-sm" x="865" y="277" text-anchor="middle">סף תחושתי גבוה</text>
+      <text class="ts" x="865" y="296" text-anchor="middle">לא מרגיש מספיק</text>
+      <rect class="bx-risk" x="600" y="250" width="150" height="62" rx="10"/>
+      <text class="t-sm" x="675" y="277" text-anchor="middle">חיפוש מגע עמוק</text>
+      <text class="ts" x="675" y="296" text-anchor="middle">חי את הרגע</text>
+      <rect class="bx-med" x="410" y="250" width="150" height="62" rx="10"/>
+      <text class="t-sm" x="485" y="277" text-anchor="middle">גבולות לא מופנמים</text>
+      <text class="ts" x="485" y="296" text-anchor="middle">קושי לדחות סיפוקים</text>
+      <rect class="bx-out" x="220" y="250" width="150" height="62" rx="10"/>
+      <text class="t-sm" x="295" y="286" text-anchor="middle">אימפולסיביות</text>
+      <line class="ln-risk" x1="788" y1="281" x2="756" y2="281" marker-end="url(#v3-risk)"/>
+      <line class="ln-risk" x1="598" y1="281" x2="566" y2="281" marker-end="url(#v3-risk)"/>
+      <line class="ln-risk" x1="408" y1="281" x2="376" y2="281" marker-end="url(#v3-risk)"/>
+      <rect class="bx-prot" x="395" y="346" width="180" height="50" rx="10"/>
+      <text class="t-sm" x="485" y="368" text-anchor="middle">השגחה · גבול עקבי</text>
+      <text class="ts" x="485" y="386" text-anchor="middle">מענה מאורגן לגירוי</text>
+      <line class="ln-prot" x1="485" y1="344" x2="485" y2="317" marker-end="url(#v3-prot)"/>
+      <text class="ts" x="500" y="334" text-anchor="end" style="fill:var(--protect)">מחזיקה את הגבול עד שיופנם</text>
     </svg>
     </div>
-    <figcaption><span class="fignum">תרשים 3</span><b>שלוש ההשערות כמודלים סטטיסטיים.</b> H1 בודקת אם לכל משתנה יש קשר משלו לקשיים. H2 בודקת אם הסמכות משנה את עוצמת הקשר בין הקושי התחושתי לקשיים. H3 בודקת אם הסמכות קשורה לפחות הצפה, ואם ההצפה היא הדרך שבה היא קשורה לפחות קשיים.</figcaption>
-  </figure>
-
-  <div class="hyps">
-    <div class="hyp"><code>H1a</code><div><strong>השפעה עצמאית של הסמכות.</strong> ככל שרמת הסמכות ההורית המארגנת גבוהה יותר, כך יימצאו פחות קשיים רגשיים, התנהגותיים וחברתיים, גם בבקרה על הקשיים התחושתיים. <span class="tag src">מקור</span></div></div>
-    <div class="hyp"><code>H1b</code><div><strong>השפעה עצמאית של הקושי התחושתי.</strong> ככל שקשיי הוויסות התחושתי משמעותיים יותר, כך יימצאו יותר קשיים, גם בבקרה על רמת הסמכות. <span class="tag src">מקור</span></div></div>
-    <div class="hyp"><code>H2</code><div><strong>מיתון.</strong> הסמכות ההורית המארגנת תמתן את הקשר בין קשיי ויסות תחושתי לבין קשיים רגשיים־התנהגותיים: הקשר יהיה חלש יותר ברמות סמכות גבוהות. כלומר, גם כאשר קיימת רגישות תחושתית משמעותית, ילד שהוריו מתנהלים באופן מארגן צפוי לתפקד טוב יותר. <span class="tag src">מקור</span></div></div>
-    <div class="hyp"><code>H3a</code><div><strong>שינוי בתפקוד הוויסותי.</strong> סמכות גבוהה יותר תהיה קשורה להצפה מועטה יותר ולתפקוד ויסותי טוב יותר בחיי היומיום, בבקרה על המאפיינים התחושתיים הבסיסיים. <span class="tag src">מקור</span></div></div>
-    <div class="hyp"><code>H3b</code><div><strong>הבחנה בין תכונה למצב.</strong> הקשר בין הסמכות לבין ההצפה והפגיעה התפקודית יהיה חזק יותר מהקשר בין הסמכות לבין הרגישות התחושתית הבסיסית. ההבחנה נבדקת באמצעות מדדים נפרדים. <span class="tag src">מקור</span></div></div>
-    <div class="hyp"><code>H3c</code><div><strong>תיווך.</strong> ההצפה וקשיי הוויסות ביומיום יתווכו את הקשר בין הסמכות ההורית לבין הקשיים הרגשיים־התנהגותיים. <span class="tag ext">הרחבה</span></div></div>
-    <div class="hyp"><code>H4</code><div><strong>תיווך ממותן (המודל המשולב).</strong> המסלול העקיף מקושי תחושתי דרך הצפה לקשיים יהיה חלש יותר ברמות סמכות גבוהות, משום שהסמכות מחלישה את המעבר מרגישות להצפה. <span class="tag ext">הרחבה</span></div></div>
-    <div class="hyp"><code>H5</code><div><strong>אורך.</strong> סמכות במועד מוקדם תנבא ירידה בהצפה במועד הבא, מעבר לרמת ההצפה הקודמת, וירידה זו תנבא פחות קשיים במועד שלאחריו. <span class="tag ext">הרחבה</span></div></div>
-    <div class="hyp"><code>H6</code><div><strong>התערבות.</strong> הדרכת הורים בשיטה תעלה את הסמכות המארגנת, תפחית הצפה וקשיים, והשיפור יהיה גדול יותר אצל ילדים עם קשיים תחושתיים משמעותיים. <span class="tag ext">הרחבה</span></div></div>
-  </div>
-
-  <h3>איך ייראה ממצא שתומך במיתון</h3>
-  <figure>
-    <div class="scroll">
-    <svg class="small" viewBox="0 0 560 340" role="img" aria-label="גרף המחשה: כאשר הסמכות נמוכה, הקשיים עולים בחדות עם הקושי התחושתי; כאשר הסמכות גבוהה, העלייה מתונה. הפער בין הקווים גדל ככל שהקושי התחושתי גבוה יותר.">
-      <line class="grid-l" x1="80" y1="40" x2="510" y2="40"/>
-      <line class="grid-l" x1="80" y1="120" x2="510" y2="120"/>
-      <line class="grid-l" x1="80" y1="200" x2="510" y2="200"/>
-      <line class="ln" x1="80" y1="270" x2="510" y2="270"/>
-      <line class="ln" x1="80" y1="30" x2="80" y2="270"/>
-      <!-- lines -->
-      <line class="ln-risk" x1="100" y1="205" x2="490" y2="62" style="stroke-width:3"/>
-      <line class="ln-prot" x1="100" y1="232" x2="490" y2="188" style="stroke-width:3"/>
-      <circle cx="100" cy="205" r="4.5" class="c-risk"/><circle cx="490" cy="62" r="4.5" class="c-risk"/>
-      <circle cx="100" cy="232" r="4.5" class="c-prot"/><circle cx="490" cy="188" r="4.5" class="c-prot"/>
-      <text class="tl" x="380" y="80" text-anchor="middle" style="fill:var(--risk)">סמכות נמוכה (−1SD)</text>
-      <text class="tl" x="300" y="232" text-anchor="middle" style="fill:var(--protect)">סמכות גבוהה (+1SD)</text>
-      <!-- gap bracket -->
-      <line class="ln-mod" x1="520" y1="66" x2="520" y2="184" style="stroke-dasharray:none;stroke-width:1.6"/>
-      <line class="ln-mod" x1="514" y1="66" x2="526" y2="66" style="stroke-dasharray:none;stroke-width:1.6"/>
-      <line class="ln-mod" x1="514" y1="184" x2="526" y2="184" style="stroke-dasharray:none;stroke-width:1.6"/>
-      <text class="ts" x="540" y="130" text-anchor="middle" style="fill:var(--mod)" transform="rotate(-90 540 130)">פער גדול</text>
-      <line class="ln-mod" x1="108" y1="208" x2="108" y2="229" style="stroke-dasharray:none;stroke-width:1.6"/>
-      <text class="ts" x="128" y="250" text-anchor="middle" style="fill:var(--mod)">פער קטן</text>
-      <!-- axes labels -->
-      <text class="ts" x="100" y="290" text-anchor="middle">נמוך (−1SD)</text>
-      <text class="ts" x="490" y="290" text-anchor="middle">גבוה (+1SD)</text>
-      <text class="t-sm" x="295" y="322" text-anchor="middle">קשיי ויסות תחושתי (X)</text>
-      <text class="t-sm" x="30" y="150" text-anchor="middle" transform="rotate(-90 30 150)">קשיים רגשיים־התנהגותיים (Y)</text>
-    </svg>
-    </div>
-    <figcaption><span class="fignum">תרשים 4</span><b>המחשה של אינטראקציה מסוג מיתון.</b> הקווים אינם נתונים. כך ייראה ניתוח שיפועים פשוטים אם H2 נכונה: אצל ילדים עם קושי תחושתי נמוך ההבדל בין רמות הסמכות קטן, ואצל ילדים עם קושי תחושתי גבוה הוא גדול. זו המשמעות של הטענה שהסמכות חשובה במיוחד דווקא אצל ילדים עם קשיים תחושתיים.</figcaption>
-  </figure>
-
-  <h3>תכונה מול מצב: מה השיטה צפויה לשנות</h3>
-  <p class="col">ההשערה השלישית דורשת הבחנה חשובה. ייתכן שההתנהלות ההורית אינה משנה את הרגישות התחושתית הבסיסית של הילד, אלא מפחיתה את ההצפה ואת הפגיעה התפקודית הנובעות ממנה. <span class="tag src">מקור</span></p>
-  <figure>
-    <div class="scroll">
-    <svg viewBox="0 0 760 330" role="img" aria-label="השוואה בין שני ילדים עם אותה רגישות תחושתית: בסביבה לא מאורגנת העומס גבוה וההצפה גבוהה; בסביבה מאורגנת העומס נמוך וההצפה נמוכה.">
-      <line class="ln" x1="30" y1="250" x2="730" y2="250"/>
-      <line class="grid-l" x1="380" y1="30" x2="380" y2="290"/>
-      <!-- equal sensitivity reference -->
-      <line class="ln-faint" x1="40" y1="100" x2="720" y2="100"/>
-      <text class="ts" x="380" y="92" text-anchor="middle">רגישות זהה</text>
-
-      <!-- Right group: low authority -->
-      <rect class="bar-risk" x="608" y="100" width="56" height="150"/>
-      <rect class="bar-env" x="528" y="80" width="56" height="170"/>
-      <rect class="bar-med" x="448" y="65" width="56" height="185"/>
-      <text class="ts" x="636" y="268" text-anchor="middle">רגישות</text>
-      <text class="ts" x="556" y="268" text-anchor="middle">עומס</text>
-      <text class="ts" x="476" y="268" text-anchor="middle">הצפה</text>
-      <text class="t-sm" x="556" y="300" text-anchor="middle">סמכות מארגנת נמוכה</text>
-      <text class="ts" x="556" y="318" text-anchor="middle">אי־צפיות, הסלמה, עומס גירוי</text>
-
-      <!-- Left group: high authority -->
-      <rect class="bar-risk" x="258" y="100" width="56" height="150"/>
-      <rect class="bar-env" x="178" y="180" width="56" height="70"/>
-      <rect class="bar-med" x="98" y="170" width="56" height="80"/>
-      <text class="ts" x="286" y="268" text-anchor="middle">רגישות</text>
-      <text class="ts" x="206" y="268" text-anchor="middle">עומס</text>
-      <text class="ts" x="126" y="268" text-anchor="middle">הצפה</text>
-      <text class="t-sm" x="206" y="300" text-anchor="middle">סמכות מארגנת גבוהה</text>
-      <text class="ts" x="206" y="318" text-anchor="middle">צפיות, נוכחות רגועה, התאמת סביבה</text>
-    </svg>
-    </div>
-    <div class="legend"><span class="lr">רגישות בסיסית (X)</span><span style="color:var(--muted)">עומס סביבתי</span><span class="ld">הצפה (M)</span></div>
-    <figcaption><span class="fignum">תרשים 5</span><b>אותה רגישות, הצפה שונה.</b> המחשה ולא נתונים. שני ילדים עם רגישות תחושתית זהה. ההבדל ביניהם נמצא בעומס שהסביבה מייצרת, ולכן גם בהצפה. כדי לבדוק את ההבחנה יש למדוד את הרגישות ואת ההצפה בכלים נפרדים, ולצפות שהסמכות תהיה קשורה בעיקר להצפה.</figcaption>
+    <figcaption><span class="fignum">תרשים 3</span><b>שני מסלולים, סמכות אחת.</b> במסלול האיום הסמכות נכנסת בתחילת השרשרת, בתחושה שהעולם מתקיף. במסלול הגבול היא נכנסת בהמשכה, בגבול שעוד לא הופנם. ההתנהלות ההורית זהה בשני המסלולים; נקודת המפגש עם הילד שונה.</figcaption>
   </figure>
 </section>
 
 <!-- 7 -->
-<section id="rq">
+<section id="insight">
   <div class="secnum">7</div>
-  <h2>שאלות המחקר</h2>
-  <ol class="rq col">
-    <li><span>שמ״1</span><div>האם רמת הסמכות ההורית המארגנת ורמת קשיי הוויסות התחושתי קשורות, כל אחת בנפרד, לקשיים הרגשיים, ההתנהגותיים והחברתיים של הילד? (H1)</div></li>
-    <li><span>שמ״2</span><div>האם הקשר בין קשיי ויסות תחושתי לבין קשיים רגשיים־התנהגותיים משתנה לפי רמת הסמכות ההורית המארגנת? באילו רמות סמכות הקשר מפסיק להיות מובהק? (H2)</div></li>
-    <li><span>שמ״3</span><div>האם סמכות הורית מארגנת קשורה להצפה ולתפקוד הוויסותי בחיי היומיום, מעבר למאפיינים התחושתיים הבסיסיים, והאם ההצפה מתווכת את הקשר בינה לבין הקשיים? (H3, H4)</div></li>
-    <li><span>שמ״4</span><div>האם שינוי בסמכות ההורית לאורך זמן מקדים שינוי בהצפה ובקשיים, או שהכיוון הפוך: קשיי הילד הם שמחלישים את הסמכות ההורית? (H5)</div></li>
-    <li><span>שמ״5</span><div>האם הדרכת הורים בשיטה מעלה את הסמכות המארגנת ומפחיתה הצפה וקשיים, והאם התועלת גדולה יותר אצל ילדים עם קשיים תחושתיים? (H6)</div></li>
-  </ol>
+  <h2>תפקיד האפיון</h2>
+  <p class="col">האפיון אינו משנה את מה שההורה עושה. הוא משנה את האופן שבו ההורה רואה את הילד: מה הילד מחפש, ומה הצורך שמאחורי ההתנהגות. מכאן מגיעה הנפרדות שמאפשרת להחזיק את הסמכות ביציבות. <span class="tag src">מקור</span></p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 960 200" role="img" aria-label="שרשרת: אפיון הפרופיל מוביל לתובנה ונפרדות הורית, שמובילה למימוש יציב של הסמכות, שמוביל לפחות הסלמה ויותר מענה לצורך.">
+      <defs>
+        <marker id="v4-mod" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-mod"/></marker>
+      </defs>
+      <rect class="bx" x="750" y="50" width="190" height="72" rx="10"/>
+      <text class="t-sm" x="845" y="82" text-anchor="middle">אפיון הפרופיל</text>
+      <text class="ts" x="845" y="102" text-anchor="middle">שליטה, גירוי או שניהם</text>
+      <rect class="bx-mod" x="510" y="50" width="190" height="72" rx="10"/>
+      <text class="t-sm" x="605" y="82" text-anchor="middle">תובנה ונפרדות הורית</text>
+      <text class="ts" x="605" y="102" text-anchor="middle">I</text>
+      <rect class="bx-prot" x="270" y="50" width="190" height="72" rx="10"/>
+      <text class="t-sm" x="365" y="82" text-anchor="middle">מימוש יציב של הסמכות</text>
+      <text class="ts" x="365" y="102" text-anchor="middle">W · אותן דרישות</text>
+      <rect class="bx-out" x="30" y="50" width="190" height="72" rx="10"/>
+      <text class="t-sm" x="125" y="82" text-anchor="middle">פחות הסלמה</text>
+      <text class="ts" x="125" y="102" text-anchor="middle">יותר מענה לצורך</text>
+      <line class="ln-mod" x1="748" y1="86" x2="706" y2="86" marker-end="url(#v4-mod)" style="stroke-dasharray:none"/>
+      <line class="ln-mod" x1="508" y1="86" x2="466" y2="86" marker-end="url(#v4-mod)" style="stroke-dasharray:none"/>
+      <line class="ln-mod" x1="268" y1="86" x2="226" y2="86" marker-end="url(#v4-mod)" style="stroke-dasharray:none"/>
+      <text class="ts" x="727" y="150" text-anchor="middle">ההורה מבין מה הילד מחפש</text>
+      <text class="ts" x="487" y="172" text-anchor="middle">ההתנהגות נחווית פחות כנגדו</text>
+      <text class="ts" x="247" y="150" text-anchor="middle">פחות נגרר, יותר נוכח</text>
+    </svg>
+    </div>
+    <figcaption><span class="fignum">תרשים 4</span><b>האפיון פועל דרך ההורה.</b> זו השערה של תיווך סדרתי: האפיון מגביר תובנה ונפרדות, אלה מקלות על מימוש הסמכות, והסמכות מפחיתה הסלמה. אפשר לבדוק אותה גם בהתערבות, כשמוסיפים להדרכה רכיב של אפיון ובודקים אם הוא מגביר את התובנה ההורית.</figcaption>
+  </figure>
 </section>
 
 <!-- 8 -->
-<section id="design">
+<section id="hypotheses">
   <div class="secnum">8</div>
-  <h2>מערך המחקר</h2>
-  <p class="col">מחקר חתך יכול לבחון קשרים ואינטראקציות, אך לא לקבוע שהסמכות שינתה את הוויסות התחושתי או הפחיתה סיכון לאורך זמן. לכך נדרש מחקר אורך או מחקר התערבות. <span class="tag src">מקור</span> לכן מוצע מערך של שלושה מחקרים, שכל אחד מהם מוסיף רמת ראיה. <span class="tag ext">הרחבה</span></p>
+  <h2>השערות המחקר</h2>
+  <div class="hyps">
+    <div class="hyp"><code>H1</code><div><strong>פרופיל וקשיים.</strong> רמה גבוהה יותר בכל אחד משני הממדים, חיפוש שליטה וחיפוש גירוי, תהיה קשורה ליותר קשיים רגשיים, התנהגותיים וחברתיים. ילדים בפרופיל המשולב יראו את רמת הקשיים הגבוהה ביותר. <span class="tag src">מקור</span></div></div>
+    <div class="hyp"><code>H2</code><div><strong>התאמה לכל הפרופילים.</strong> סמכות הורית מארגנת גבוהה יותר תהיה קשורה לפחות קשיים בכל ארבעת הפרופילים, ועוצמת הקשר תהיה דומה בין הפרופילים. <span class="tag src">מקור</span></div></div>
+    <div class="hyp"><code>H3a</code><div><strong>מסלול האיום.</strong> אצל ילדים שמחפשים שליטה, הקשר בין הסמכות לבין פחות קשיים יתווך על ידי ירידה בתחושת האיום ובהצפה. <span class="tag ext">הרחבה</span></div></div>
+    <div class="hyp"><code>H3b</code><div><strong>מסלול הגבול.</strong> אצל ילדים שמחפשים גירוי, הקשר בין הסמכות לבין פחות קשיים יתווך על ידי שיפור בדחיית סיפוקים ובהפנמת גבולות. <span class="tag ext">הרחבה</span></div></div>
+    <div class="hyp"><code>H4</code><div><strong>תובנה הורית.</strong> תובנה ונפרדות הורית יתווכו את הקשר בין הבנת הפרופיל לבין מימוש הסמכות. בהתערבות, רכיב של אפיון יגביר את התובנה ההורית. <span class="tag src">מקור</span></div></div>
+    <div class="hyp"><code>H5</code><div><strong>מקורות מוקדמים.</strong> חוויות מוקדמות מאיימות, כמו מצוקה בלידה, אלרגיה, בכי רב ורגישות טקטילית, יהיו קשורות לחיפוש שליטה יותר מאשר לחיפוש גירוי. <span class="tag src">מקור</span></div></div>
+    <div class="hyp"><code>H6</code><div><strong>תכונה מול אסטרטגיה.</strong> לאורך זמן, הסמכות לא תהיה קשורה לשינוי בסף התחושתי, אך תנבא ירידה בחיפוש השליטה ושיפור בדחיית סיפוקים. <span class="tag ext">הרחבה</span></div></div>
+    <div class="hyp"><code>H7</code><div><strong>התערבות.</strong> הדרכת הורים בשיטה תעלה את הסמכות המארגנת ותפחית קשיים בכל הפרופילים. בפרופיל המשולב השיפור צפוי להיות איטי יותר. <span class="tag ext">הרחבה</span></div></div>
+  </div>
 
+  <h3>איך ייראה ממצא שתומך ב־H1 וב־H2</h3>
+  <figure>
+    <div class="scroll">
+    <svg class="small" viewBox="0 0 700 330" role="img" aria-label="גרף המחשה: בכל ארבעת הפרופילים הקשיים נמוכים יותר כשהסמכות גבוהה; הפרופיל המשולב גבוה ביותר, והפרופיל בלי קושי בולט נמוך ביותר.">
+      <line class="grid-l" x1="40" y1="60" x2="680" y2="60"/>
+      <line class="grid-l" x1="40" y1="130" x2="680" y2="130"/>
+      <line class="grid-l" x1="40" y1="200" x2="680" y2="200"/>
+      <!-- groups: centers 590 (none), 430 (control), 270 (seek), 110 (mixed) -->
+      <rect class="bar-lo" x="594" y="200" width="44" height="70"/>
+      <rect class="bar-hi" x="542" y="230" width="44" height="40"/>
+      <rect class="bar-lo" x="434" y="130" width="44" height="140"/>
+      <rect class="bar-hi" x="382" y="185" width="44" height="85"/>
+      <rect class="bar-lo" x="274" y="130" width="44" height="140"/>
+      <rect class="bar-hi" x="222" y="185" width="44" height="85"/>
+      <rect class="bar-lo" x="114" y="60" width="44" height="210"/>
+      <rect class="bar-hi" x="62" y="130" width="44" height="140"/>
+      <line class="ln" x1="40" y1="270" x2="680" y2="270"/>
+      <text class="t-sm" x="590" y="292" text-anchor="middle">בלי פרופיל בולט</text>
+      <text class="t-sm" x="430" y="292" text-anchor="middle">מחפש שליטה</text>
+      <text class="t-sm" x="270" y="292" text-anchor="middle">מחפש גירוי</text>
+      <text class="t-sm" x="110" y="292" text-anchor="middle">משולב</text>
+      <text class="ts" x="360" y="320" text-anchor="middle">רמת קשיים רגשיים־התנהגותיים (המחשה, בלי יחידות)</text>
+      <text class="ts" x="110" y="48" text-anchor="middle">הגבוה ביותר</text>
+    </svg>
+    </div>
+    <div class="legend"><span class="lr lb">סמכות נמוכה</span><span class="lp lb">סמכות גבוהה</span></div>
+    <figcaption><span class="fignum">תרשים 5</span><b>המחשה של ההשערות, לא נתונים.</b> H1: הקשיים עולים מפרופיל בלי קושי בולט, דרך שני הפרופילים החד־ממדיים, אל המשולב. H2: בכל פרופיל העמודה של סמכות גבוהה נמוכה יותר. כדי לטעון שהקשר דומה בין הפרופילים יש להשתמש במבחן שקילות, ולא להסתפק בהיעדר הבדל מובהק.</figcaption>
+  </figure>
+
+  <h3>תכונה מול אסטרטגיה: מה צפוי להשתנות</h3>
+  <p class="col">הסמכות לא משנה את הסף התחושתי של הילד. ההשערה היא שהיא משנה את מה שהילד עושה עם הסף הזה: ילד שהעולם מרגיש לו פחות מאיים צריך פחות שליטה. <span class="tag ext">הרחבה</span></p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 760 330" role="img" aria-label="השוואה בין שני ילדים שמחפשים שליטה, עם רגישות זהה: בסביבה לא מאורגנת תחושת האיום וחיפוש השליטה גבוהים; בסביבה מאורגנת שניהם נמוכים.">
+      <line class="ln" x1="30" y1="250" x2="730" y2="250"/>
+      <line class="grid-l" x1="380" y1="30" x2="380" y2="290"/>
+      <line class="ln-faint" x1="40" y1="100" x2="720" y2="100"/>
+      <text class="ts" x="380" y="92" text-anchor="middle">רגישות זהה</text>
+      <rect class="bar-risk" x="608" y="100" width="56" height="150"/>
+      <rect class="bar-thr" x="528" y="70" width="56" height="180"/>
+      <rect class="bar-ctl" x="448" y="60" width="56" height="190"/>
+      <text class="ts" x="636" y="268" text-anchor="middle">רגישות</text>
+      <text class="ts" x="556" y="268" text-anchor="middle">איום</text>
+      <text class="ts" x="476" y="268" text-anchor="middle">חיפוש שליטה</text>
+      <text class="t-sm" x="556" y="300" text-anchor="middle">סמכות מארגנת נמוכה</text>
+      <text class="ts" x="556" y="318" text-anchor="middle">אי־צפיות, מאבקי כוח</text>
+      <rect class="bar-risk" x="258" y="100" width="56" height="150"/>
+      <rect class="bar-thr" x="178" y="175" width="56" height="75"/>
+      <rect class="bar-ctl" x="98" y="165" width="56" height="85"/>
+      <text class="ts" x="286" y="268" text-anchor="middle">רגישות</text>
+      <text class="ts" x="206" y="268" text-anchor="middle">איום</text>
+      <text class="ts" x="126" y="268" text-anchor="middle">חיפוש שליטה</text>
+      <text class="t-sm" x="206" y="300" text-anchor="middle">סמכות מארגנת גבוהה</text>
+      <text class="ts" x="206" y="318" text-anchor="middle">צפיוּת, נוכחות רגועה</text>
+    </svg>
+    </div>
+    <div class="legend"><span class="lr lb">רגישות (סף תחושתי)</span><span class="lb" style="color:var(--muted)">תחושת איום</span><span class="ld lb">חיפוש שליטה</span></div>
+    <figcaption><span class="fignum">תרשים 6</span><b>אותה רגישות, פחות צורך בשליטה.</b> המחשה ולא נתונים. כדי לבדוק את H6 יש למדוד את הסף התחושתי ואת חיפוש השליטה בכלים נפרדים. אותו היגיון חל על מחפש הגירוי: הצורך בגירוי נשאר, והיכולת לחכות ולעצור גדלה.</figcaption>
+  </figure>
+</section>
+
+<!-- 9 -->
+<section id="rq">
+  <div class="secnum">9</div>
+  <h2>שאלות המחקר</h2>
+  <ol class="rq col">
+    <li><span>שמ״1</span><div>האם ניתן לזהות בנתונים את שני ממדי הפרופיל, חיפוש שליטה וחיפוש גירוי, ואת ארבעת הפרופילים שהם יוצרים? (H1)</div></li>
+    <li><span>שמ״2</span><div>האם הסמכות ההורית המארגנת קשורה לפחות קשיים בכל הפרופילים, ובעוצמה דומה? (H2)</div></li>
+    <li><span>שמ״3</span><div>האם הסמכות פועלת דרך הפחתת איום אצל מחפשי שליטה, ודרך הפנמת גבולות אצל מחפשי גירוי? (H3)</div></li>
+    <li><span>שמ״4</span><div>האם הבנת הפרופיל מגבירה את התובנה והנפרדות של ההורה, והאם אלה מקלות על מימוש הסמכות? (H4)</div></li>
+    <li><span>שמ״5</span><div>האם חוויות מוקדמות מאיימות קשורות במיוחד לחיפוש שליטה? (H5)</div></li>
+    <li><span>שמ״6</span><div>לאורך זמן ובהתערבות, האם הסמכות משנה את האסטרטגיה של הילד ולא את הסף התחושתי שלו? (H6, H7)</div></li>
+  </ol>
+</section>
+
+<!-- 10 -->
+<section id="design">
+  <div class="secnum">10</div>
+  <h2>מערך המחקר</h2>
+  <p class="col">מחקר חתך יכול לבחון קשרים, אך לא שינוי וסיבתיות. לכן מוצע מערך של שלושה מחקרים, שכל אחד מוסיף רמת ראיה.</p>
   <div class="studies">
-    <div class="study"><h4>מחקר 1 · חתך</h4><p>בודק את H1–H4. מדידה אחת, הורים ומורים. נותן תמונה ראשונה של המודל ושל המיתון.</p></div>
-    <div class="study"><h4>מחקר 2 · אורך</h4><p>בודק את H5. שלוש נקודות מדידה בהפרש של כחצי שנה. בודק את כיוון ההשפעה.</p></div>
-    <div class="study"><h4>מחקר 3 · התערבות</h4><p>בודק את H6. הדרכת הורים בשיטה מול קבוצת רשימת המתנה. מספק את הראיה הסיבתית החזקה ביותר.</p></div>
+    <div class="study"><h4>מחקר 1 · חתך</h4><p>זיהוי הפרופילים, H1–H5. הורים ומורים, מדידה אחת, כולל תשאול על הינקות.</p></div>
+    <div class="study"><h4>מחקר 2 · אורך</h4><p>H6. שלוש מדידות בהפרש של כחצי שנה. בודק מה משתנה ומה יציב.</p></div>
+    <div class="study"><h4>מחקר 3 · התערבות</h4><p>H4, H7. הדרכה בשיטה, עם רכיב אפיון ובלעדיו, מול רשימת המתנה.</p></div>
   </div>
 
   <figure>
     <div class="scroll">
-    <svg viewBox="0 0 960 300" role="img" aria-label="ציר זמן של שלושה מחקרים: מחקר חתך במדידה אחת; מחקר אורך בשלוש מדידות, בתחילה, אחרי 6 חודשים ואחרי 12 חודשים; מחקר התערבות עם מדידה לפני, אחרי ומעקב, בשתי קבוצות.">
+    <svg viewBox="0 0 960 300" role="img" aria-label="ציר זמן של שלושה מחקרים: מחקר חתך במדידה אחת; מחקר אורך בשלוש מדידות; מחקר התערבות עם מדידה לפני, אחרי ומעקב.">
       <defs>
-        <marker id="m7-fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-muted"/></marker>
+        <marker id="v7-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-muted"/></marker>
       </defs>
-      <line class="ln-muted" x1="800" y1="34" x2="160" y2="34" marker-end="url(#m7-fg)"/>
+      <line class="ln-muted" x1="800" y1="34" x2="160" y2="34" marker-end="url(#v7-m)"/>
       <text class="ts" x="150" y="38" text-anchor="start">זמן</text>
       <text class="tm" x="760" y="24" text-anchor="middle">T1</text>
       <text class="tm" x="530" y="24" text-anchor="middle">T2 · חצי שנה</text>
       <text class="tm" x="300" y="24" text-anchor="middle">T3 · שנה</text>
-
-      <!-- lane labels -->
-      <text class="t-sm" x="945" y="84" text-anchor="start">מחקר 1 · חתך</text>
-      <text class="t-sm" x="945" y="164" text-anchor="start">מחקר 2 · אורך</text>
-      <text class="t-sm" x="945" y="234" text-anchor="start">מחקר 3 · התערבות</text>
+      <text class="t-sm" x="956" y="84" text-anchor="start">מחקר 1 · חתך</text>
+      <text class="t-sm" x="956" y="164" text-anchor="start">מחקר 2 · אורך</text>
+      <text class="t-sm" x="956" y="234" text-anchor="start" style="font-size:12px">מחקר 3 · התערבות</text>
       <line class="grid-l" x1="30" y1="120" x2="950" y2="120"/>
       <line class="grid-l" x1="30" y1="198" x2="950" y2="198"/>
-
-      <!-- Study 1 -->
-      <rect class="bx-prot" x="690" y="62" width="140" height="40" rx="8"/>
-      <text class="t-sm" x="760" y="87" text-anchor="middle">X · W · M · Y</text>
-
-      <!-- Study 2 -->
-      <rect class="bx-prot" x="690" y="142" width="140" height="40" rx="8"/>
-      <text class="t-sm" x="760" y="167" text-anchor="middle">X · W · M · Y</text>
-      <rect class="bx-prot" x="460" y="142" width="140" height="40" rx="8"/>
-      <text class="t-sm" x="530" y="167" text-anchor="middle">W · M · Y</text>
-      <rect class="bx-prot" x="230" y="142" width="140" height="40" rx="8"/>
-      <text class="t-sm" x="300" y="167" text-anchor="middle">W · M · Y</text>
-      <line class="ln-muted" x1="688" y1="162" x2="606" y2="162" marker-end="url(#m7-fg)"/>
-      <line class="ln-muted" x1="458" y1="162" x2="376" y2="162" marker-end="url(#m7-fg)"/>
-
-      <!-- Study 3 -->
-      <rect class="bx-mod" x="690" y="212" width="140" height="40" rx="8"/>
+      <rect class="bx-prot" x="680" y="62" width="160" height="40" rx="8"/>
+      <text class="t-sm" x="760" y="87" text-anchor="middle">E · P · W · I · M · Y</text>
+      <rect class="bx-prot" x="680" y="142" width="160" height="40" rx="8"/>
+      <text class="t-sm" x="760" y="167" text-anchor="middle">E · P · W · I · M · Y</text>
+      <rect class="bx-prot" x="450" y="142" width="160" height="40" rx="8"/>
+      <text class="t-sm" x="530" y="167" text-anchor="middle">P · W · M · Y</text>
+      <rect class="bx-prot" x="220" y="142" width="160" height="40" rx="8"/>
+      <text class="t-sm" x="300" y="167" text-anchor="middle">P · W · M · Y</text>
+      <line class="ln-muted" x1="678" y1="162" x2="616" y2="162" marker-end="url(#v7-m)"/>
+      <line class="ln-muted" x1="448" y1="162" x2="386" y2="162" marker-end="url(#v7-m)"/>
+      <rect class="bx-mod" x="680" y="212" width="160" height="40" rx="8"/>
       <text class="t-sm" x="760" y="237" text-anchor="middle">לפני · הקצאה</text>
-      <rect class="bx-mod" x="460" y="212" width="140" height="40" rx="8"/>
+      <rect class="bx-mod" x="450" y="212" width="160" height="40" rx="8"/>
       <text class="t-sm" x="530" y="237" text-anchor="middle">אחרי ההדרכה</text>
-      <rect class="bx-mod" x="230" y="212" width="140" height="40" rx="8"/>
+      <rect class="bx-mod" x="220" y="212" width="160" height="40" rx="8"/>
       <text class="t-sm" x="300" y="237" text-anchor="middle">מעקב</text>
-      <line class="ln-mod" x1="688" y1="226" x2="606" y2="226"/>
-      <text class="ts" x="647" y="219" text-anchor="middle">הדרכה</text>
-      <line class="ln-faint" x1="688" y1="244" x2="606" y2="244"/>
-      <text class="ts" x="647" y="262" text-anchor="middle">המתנה</text>
-      <line class="ln-muted" x1="458" y1="232" x2="376" y2="232" marker-end="url(#m7-fg)"/>
-      <text class="ts" x="415" y="278" text-anchor="middle">קבוצת ההמתנה מקבלת הדרכה</text>
-      <text class="ts" x="110" y="237" text-anchor="middle">שתי זרועות</text>
+      <line class="ln-mod" x1="678" y1="222" x2="616" y2="222" style="stroke-dasharray:none"/>
+      <line class="ln-mod" x1="678" y1="232" x2="616" y2="232"/>
+      <line class="ln-faint" x1="678" y1="244" x2="616" y2="244"/>
+      <text class="ts" x="647" y="214" text-anchor="middle">+ אפיון</text>
+      <text class="ts" x="647" y="264" text-anchor="middle">המתנה</text>
+      <line class="ln-muted" x1="448" y1="232" x2="386" y2="232" marker-end="url(#v7-m)"/>
+      <text class="ts" x="110" y="237" text-anchor="middle">שלוש זרועות</text>
     </svg>
     </div>
-    <figcaption><span class="fignum">תרשים 6</span><b>מערך שלושת המחקרים.</b> המאפיינים התחושתיים הבסיסיים (X) נמדדים בתחילה בכל המחקרים, ובמחקר האורך גם בסופו, כדי לבדוק את יציבותם. המרווחים בין המדידות הם הצעה; יש לבחור אותם לפי קצב השינוי הצפוי ולפי משך ההדרכה בשיטה.</figcaption>
+    <figcaption><span class="fignum">תרשים 7</span><b>מערך שלושת המחקרים.</b> במחקר ההתערבות שלוש זרועות: הדרכה בשיטה עם רכיב אפיון, הדרכה בשיטה בלעדיו, ורשימת המתנה. ההשוואה בין שתי זרועות ההדרכה בודקת את H4 ישירות. E = חוויות מוקדמות, P = פרופיל, W = סמכות, I = תובנה הורית, M = מתווכים, Y = קשיים.</figcaption>
   </figure>
 
   <h3>אוכלוסייה ומדגם</h3>
   <div class="col">
-    <p>הורים לילדים בגילאי 4–12 ומורות או גננות של הילדים. מומלץ לגייס גם מהקהילה וגם ממסגרות טיפוליות, ולהגדיל במכוון את מספר הילדים עם קשיים תחושתיים משמעותיים, כדי שיהיה מספיק שונות במשתנה X לבדיקת המיתון.</p>
-    <p>אפקטי אינטראקציה בדרך כלל קטנים. לבדיקת H2 בעוצמה של 0.80, ברמת מובהקות 0.05 ובגודל אפקט קטן (f² = 0.03), נדרשים כ־270 משתתפים במחקר 1. במחקר האורך מומלץ לגייס כ־320 בתחילה, בהנחה של נשירה של 15%–20%. את גודל המדגם במחקר ההתערבות יש לחשב לפי גדלי אפקט מדווחים בתוכניות הדרכת הורים.</p>
+    <p>הורים לילדים בגילאי 4–12, ומורות או גננות של הילדים. מומלץ לגייס מהקהילה וממסגרות טיפוליות, כדי שיהיו מספיק ילדים בכל אחד מארבעת הפרופילים, ובמיוחד בפרופיל המשולב, שצפוי להיות הקטן ביותר. ניתוח פרופילים סמויים והשוואה בין קבוצות דורשים מדגם גדול: לפחות 300 משתתפים במחקר 1, ורצוי יותר. את גודל המדגם הסופי יש לחשב לפי מספר הפרופילים והאפקטים הצפויים.</p>
   </div>
 
   <h3>מדדים</h3>
@@ -606,184 +706,121 @@ html { scroll-behavior: smooth; }
     <table>
       <thead><tr><th>משתנה</th><th>תפקיד במודל</th><th>כלי מוצע</th><th>מקור דיווח</th></tr></thead>
       <tbody>
-        <tr><td><strong>סמכות הורית מארגנת</strong></td><td>W · גורם הגנה</td><td>שאלון ייעודי שייבנה ויתוקף במסגרת המחקר, עם ממדים של נוכחות הורית, שגרה וצפיות, ויסות עצמי של ההורה ודחיית תגובה, גבולות ברורים והתאמת סביבה. בנוסף, תצפית מקודדת על אינטראקציה בין הורה לילד במשימה מתסכלת.</td><td>הורה, בן או בת זוג, תצפית</td></tr>
-        <tr><td><strong>מאפיינים תחושתיים בסיסיים</strong></td><td>X · גורם סיכון</td><td>Sensory Profile 2 <span class="en">(Dunn, 2014)</span> או SPM-2 <span class="en">(Parham et al., 2021)</span></td><td>הורה, מורה</td></tr>
-        <tr><td><strong>הצפה ותפקוד ויסותי ביומיום</strong></td><td>M · מתווך</td><td>Emotion Regulation Checklist <span class="en">(Shields &amp; Cicchetti, 1997)</span>, ויומן יומי קצר של שבועיים: תדירות מצבי הצפה, עוצמתם ומשך ההתאוששות</td><td>הורה, יומן</td></tr>
-        <tr><td><strong>קשיים רגשיים, התנהגותיים וחברתיים</strong></td><td>Y · תוצאה</td><td>SDQ <span class="en">(Goodman, 1997)</span>: סולמות רגשי, התנהגותי, בני גיל; או CBCL ו־TRF <span class="en">(Achenbach &amp; Rescorla, 2001)</span></td><td>הורה, מורה</td></tr>
-        <tr><td><strong>משתני בקרה</strong></td><td>בקרה</td><td>גיל, מין, אבחנות (ADHD, ASD), מצב חברתי־כלכלי, לחץ הורי PSI-4-SF <span class="en">(Abidin, 2012)</span></td><td>הורה</td></tr>
+        <tr><td><strong>חוויות מוקדמות</strong></td><td>E</td><td>שאלון רטרוספקטיבי שייבנה למחקר: סיבוכי לידה, אלרגיות ובעיות רפואיות, בכי ורגישות טקטילית בינקות. רצוי לאמת מול רשומות רפואיות כשאפשר.</td><td>הורה, רשומות</td></tr>
+        <tr><td><strong>סף תחושתי ודפוס עיבוד</strong></td><td>בסיס לפרופיל</td><td>Sensory Profile 2 <span class="en">(Dunn, 2014)</span>: רגישות והימנעות (סף נמוך), חיפוש ורישום נמוך (סף גבוה)</td><td>הורה, מורה</td></tr>
+        <tr><td><strong>חיפוש שליטה ונוקשות</strong></td><td>P₁</td><td>אין כלי מוכן שמתאים בדיוק. לבדוק כלים לנוקשות ממסורת העבודה של Greene, או לבנות ולתקף פריטים ייעודיים לצורך בשליטה.</td><td>הורה, מורה</td></tr>
+        <tr><td><strong>חיפוש גירוי</strong></td><td>P₂</td><td>סולם החיפוש ב־Sensory Profile 2, יחד עם פריטים על חיפוש מגע עמוק</td><td>הורה</td></tr>
+        <tr><td><strong>איום והצפה</strong></td><td>M₁</td><td>Emotion Regulation Checklist <span class="en">(Shields &amp; Cicchetti, 1997)</span>, ויומן יומי: תדירות הצפות, עוצמה ומשך התאוששות</td><td>הורה, יומן</td></tr>
+        <tr><td><strong>דחיית סיפוקים והפנמת גבולות</strong></td><td>M₂</td><td>סולם השליטה המעכבת ב־CBQ <span class="en">(Rothbart et al., 2001)</span> או BRIEF-2 <span class="en">(Gioia et al., 2015)</span>, ומשימת דחיית סיפוקים התנהגותית</td><td>הורה, מורה, משימה</td></tr>
+        <tr><td><strong>סמכות הורית מארגנת</strong></td><td>W</td><td>שאלון ייעודי שייבנה ויתוקף, ותצפית מקודדת על אינטראקציה במשימה מתסכלת</td><td>הורה, תצפית</td></tr>
+        <tr><td><strong>תובנה ונפרדות הורית</strong></td><td>I</td><td>Insightfulness Assessment <span class="en">(Oppenheim &amp; Koren-Karie, 2002)</span>, ראיון עם צפייה בווידאו</td><td>ראיון מקודד</td></tr>
+        <tr><td><strong>קשיים רגשיים, התנהגותיים וחברתיים</strong></td><td>Y</td><td>SDQ <span class="en">(Goodman, 1997)</span> או CBCL ו־TRF <span class="en">(Achenbach &amp; Rescorla, 2001)</span></td><td>הורה, מורה</td></tr>
+        <tr><td><strong>משתני בקרה</strong></td><td>בקרה</td><td>גיל, מין, אבחנות (ADHD, ASD, חרדה), מצב חברתי־כלכלי, לחץ הורי PSI-4-SF <span class="en">(Abidin, 2012)</span></td><td>הורה</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="col">שני מדדים נפרדים לתחום התחושתי הם תנאי לבדיקת H3b: כלי שמתאר את דפוס העיבוד התחושתי, וכלי שמתאר את ההצפה ואת הפגיעה התפקודית ביומיום. דיווח מורה על התוצאה מצמצם את ההטיה שנוצרת כשההורה מדווח על כל המשתנים.</p>
 
   <h3>תוכנית הניתוח</h3>
   <div class="tablewrap">
     <table>
       <thead><tr><th>השערה</th><th>ניתוח</th><th>ממצא תומך</th></tr></thead>
       <tbody>
-        <tr><td><code>H1</code></td><td>רגרסיה היררכית: שלב 1 משתני בקרה, שלב 2 סמכות וקושי תחושתי</td><td>מקדם שלילי לסמכות, מקדם חיובי לקושי התחושתי, שניהם מובהקים</td></tr>
-        <tr><td><code>H2</code></td><td>מודל מיתון <span class="en">(PROCESS Model 1; Hayes, 2022)</span> עם משתנים ממורכזים; שיפועים פשוטים ב־±1SD ושיטת Johnson–Neyman</td><td>אינטראקציה X×W מובהקת; שיפוע X חלש יותר בסמכות גבוהה</td></tr>
-        <tr><td><code>H3a–b</code></td><td>רגרסיה עם ההצפה כמשתנה תלוי, בבקרה על המאפיינים התחושתיים; השוואת מתאמים תלויים <span class="en">(Steiger, 1980)</span></td><td>סמכות מנבאת הצפה מעבר ל־X; הקשר לרגישות הבסיסית חלש יותר</td></tr>
-        <tr><td><code>H3c</code></td><td>מודל תיווך <span class="en">(PROCESS Model 4)</span> עם 5,000 דגימות bootstrap</td><td>רווח הסמך של האפקט העקיף אינו כולל 0</td></tr>
-        <tr><td><code>H4</code></td><td>תיווך ממותן <span class="en">(PROCESS Model 7)</span>: W ממתן את המסלול X→M</td><td>מדד התיווך הממותן מובהק</td></tr>
-        <tr><td><code>H5</code></td><td>מודל השהיה מוצלב עם יירוטים אקראיים <span class="en">(RI-CLPM; Hamaker et al., 2015)</span></td><td>מסלולים מוצלבים W→M→Y ברמת התוך־אישי, אחרי הפרדת ההבדלים היציבים בין משפחות</td></tr>
-        <tr><td><code>H6</code></td><td>מודל רב־רמתי למדידות חוזרות; אינטראקציה קבוצה × זמן × X</td><td>שיפור גדול יותר בקבוצת ההדרכה, והגדול ביותר אצל ילדים עם X גבוה</td></tr>
+        <tr><td><code>זיהוי</code></td><td>ניתוח פרופילים סמויים <span class="en">(Latent Profile Analysis)</span> על שני הממדים; במקביל, ניתוח של שני הממדים כרציפים</td><td>פתרון של ארבעה פרופילים שמתאים לתיאור התאורטי</td></tr>
+        <tr><td><code>H1</code></td><td>רגרסיה עם שני הממדים והאינטראקציה ביניהם; השוואת ממוצעים בין הפרופילים</td><td>שני הממדים מנבאים קשיים; הפרופיל המשולב הגבוה ביותר</td></tr>
+        <tr><td><code>H2</code></td><td>מודל משוואות מבניות רב־קבוצתי לפי פרופיל; השוואת מקדמי הסמכות ומבחן שקילות <span class="en">(TOST)</span></td><td>מקדם שלילי בכל הפרופילים, ושקילות בין הפרופילים בגבולות שנקבעו מראש</td></tr>
+        <tr><td><code>H3</code></td><td>תיווך מקביל דרך M₁ ו־M₂, עם מיתון של השלב השני לפי ממדי הפרופיל <span class="en">(PROCESS Model 14)</span></td><td>M₁ מתווך בעיקר כשחיפוש השליטה גבוה, M₂ בעיקר כשחיפוש הגירוי גבוה</td></tr>
+        <tr><td><code>H4</code></td><td>תיווך סדרתי: הבנת הפרופיל → תובנה → סמכות → קשיים <span class="en">(PROCESS Model 6)</span>; בהתערבות, השוואת זרועות</td><td>אפקט עקיף סדרתי מובהק; תובנה גבוהה יותר בזרוע עם האפיון</td></tr>
+        <tr><td><code>H5</code></td><td>רגרסיה של שני הממדים על החוויות המוקדמות; השוואת מתאמים תלויים</td><td>קשר חזק יותר לחיפוש שליטה מאשר לחיפוש גירוי</td></tr>
+        <tr><td><code>H6</code></td><td>מודל שינוי סמוי או RI-CLPM <span class="en">(Hamaker et al., 2015)</span></td><td>סמכות מנבאת ירידה בחיפוש שליטה ושיפור בדחיית סיפוקים, אך לא שינוי בסף התחושתי</td></tr>
+        <tr><td><code>H7</code></td><td>מודל רב־רמתי למדידות חוזרות: זרוע × זמן × פרופיל</td><td>שיפור בכל הפרופילים; קצב איטי יותר בפרופיל המשולב</td></tr>
       </tbody>
     </table>
   </div>
-
-  <figure>
-    <div class="scroll">
-    <svg viewBox="0 0 960 340" role="img" aria-label="מודל השהיה מוצלב בשלוש מדידות: סמכות במדידה הראשונה מנבאת הצפה במדידה השנייה, והצפה במדידה השנייה מנבאת קשיים במדידה השלישית. מסלול הפוך מבדוק את השפעת הילד על ההורה.">
-      <defs>
-        <marker id="m8-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-muted"/></marker>
-        <marker id="m8-prot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-prot"/></marker>
-        <marker id="m8-risk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-risk"/></marker>
-      </defs>
-      <text class="tm" x="760" y="24" text-anchor="middle">T1</text>
-      <text class="tm" x="480" y="24" text-anchor="middle">T2</text>
-      <text class="tm" x="200" y="24" text-anchor="middle">T3</text>
-      <text class="ts" x="945" y="74" text-anchor="start">סמכות</text>
-      <text class="ts" x="945" y="174" text-anchor="start">הצפה</text>
-      <text class="ts" x="945" y="274" text-anchor="start">קשיים</text>
-
-      <!-- boxes -->
-      <rect class="bx-prot" x="690" y="48" width="140" height="44" rx="8"/><text class="t-sm" x="760" y="75" text-anchor="middle">W₁</text>
-      <rect class="bx-prot" x="410" y="48" width="140" height="44" rx="8"/><text class="t-sm" x="480" y="75" text-anchor="middle">W₂</text>
-      <rect class="bx-prot" x="130" y="48" width="140" height="44" rx="8"/><text class="t-sm" x="200" y="75" text-anchor="middle">W₃</text>
-      <rect class="bx-med" x="690" y="148" width="140" height="44" rx="8"/><text class="t-sm" x="760" y="175" text-anchor="middle">M₁</text>
-      <rect class="bx-med" x="410" y="148" width="140" height="44" rx="8"/><text class="t-sm" x="480" y="175" text-anchor="middle">M₂</text>
-      <rect class="bx-med" x="130" y="148" width="140" height="44" rx="8"/><text class="t-sm" x="200" y="175" text-anchor="middle">M₃</text>
-      <rect class="bx-out" x="690" y="248" width="140" height="44" rx="8"/><text class="t-sm" x="760" y="275" text-anchor="middle">Y₁</text>
-      <rect class="bx-out" x="410" y="248" width="140" height="44" rx="8"/><text class="t-sm" x="480" y="275" text-anchor="middle">Y₂</text>
-      <rect class="bx-out" x="130" y="248" width="140" height="44" rx="8"/><text class="t-sm" x="200" y="275" text-anchor="middle">Y₃</text>
-
-      <!-- autoregressive -->
-      <line class="ln-muted" x1="688" y1="70" x2="556" y2="70" marker-end="url(#m8-muted)"/>
-      <line class="ln-muted" x1="408" y1="70" x2="276" y2="70" marker-end="url(#m8-muted)"/>
-      <line class="ln-muted" x1="688" y1="170" x2="556" y2="170" marker-end="url(#m8-muted)"/>
-      <line class="ln-muted" x1="408" y1="170" x2="276" y2="170" marker-end="url(#m8-muted)"/>
-      <line class="ln-muted" x1="688" y1="270" x2="556" y2="270" marker-end="url(#m8-muted)"/>
-      <line class="ln-muted" x1="408" y1="270" x2="276" y2="270" marker-end="url(#m8-muted)"/>
-
-      <!-- secondary cross-lags -->
-      <line class="ln-faint" x1="408" y1="84" x2="278" y2="152" marker-end="url(#m8-muted)"/>
-      <line class="ln-faint" x1="688" y1="186" x2="558" y2="254" marker-end="url(#m8-muted)"/>
-
-      <!-- highlighted mediation chain W1 -> M2 -> Y3 -->
-      <line class="ln-prot" x1="688" y1="86" x2="558" y2="152" marker-end="url(#m8-prot)" style="stroke-width:2.8"/>
-      <line class="ln-prot" x1="408" y1="186" x2="278" y2="252" marker-end="url(#m8-prot)" style="stroke-width:2.8"/>
-      <text class="tl" x="640" y="132" text-anchor="middle" style="fill:var(--protect)">a</text>
-      <text class="tl" x="360" y="232" text-anchor="middle" style="fill:var(--protect)">b</text>
-
-      <!-- child effect: M1 -> W2 -->
-      <path class="ln-risk" d="M688,156 C620,140 600,110 558,92" marker-end="url(#m8-risk)" style="stroke-dasharray:6 4"/>
-      <text class="ts" x="600" y="112" text-anchor="middle" style="fill:var(--risk)">השפעת הילד</text>
-    </svg>
-    </div>
-    <div class="legend"><span class="lp">שרשרת התיווך לאורך זמן</span><span class="lr" style="color:var(--risk)">מסלול הפוך: הילד משפיע על ההורה</span></div>
-    <figcaption><span class="fignum">תרשים 7</span><b>בדיקת הכיוון לאורך זמן (H5).</b> השרשרת המודגשת היא ההשערה: סמכות ב־T1 מנבאת פחות הצפה ב־T2, והצפה ב־T2 מנבאת קשיים ב־T3. המסלול המקווקו בודק את ההסבר החלופי, שלפיו הצפה של הילד מחלישה את הסמכות ההורית. במודל RI-CLPM כל המסלולים נאמדים אחרי הפרדת ההבדלים היציבים בין משפחות.</figcaption>
-  </figure>
-
-  <h3>סוגיות מתודולוגיות</h3>
-  <ul class="col">
-    <li><strong>שונות משותפת לשיטה.</strong> כשההורה מדווח על כל המשתנים, הקשרים עלולים להתנפח. מומלץ דיווח מורה על התוצאה ותצפית על ההתנהלות ההורית.</li>
-    <li><strong>סיבתיות הפוכה.</strong> ילד מוצף עלול להחליש את יכולת ההורה להתנהל באופן מארגן. מחקר האורך בודק זאת ישירות.</li>
-    <li><strong>תוקף מבנה.</strong> לפני בדיקת ההשערות יש לבדוק את מבנה הגורמים של שאלון הסמכות ואת ההבחנה בינו לבין סגנונות הורות קיימים, כמו סמכותיות לפי Baumrind.</li>
-    <li><strong>אבחנות נלוות.</strong> קשיי ויסות תחושתי שכיחים יותר בקרב ילדים עם ADHD ו־ASD. יש לבקר עליהן או לבדוק את המודל בנפרד בתתי־קבוצות.</li>
-  </ul>
 </section>
 
-<!-- 9 -->
+<!-- 11 -->
 <section id="discussion">
-  <div class="secnum">9</div>
+  <div class="secnum">11</div>
   <h2>דיון: משמעות תאורטית ויישומית</h2>
-
   <h3>משמעות תאורטית</h3>
   <div class="col">
-    <p><strong>מיקום ההשפעה בסביבה ולא בילד.</strong> הנקודה התאורטית המרכזית היא שהסמכות ההורית המארגנת אינה מחייבת את ההורה לשנות את הילד או לתקן את מאפייניו התחושתיים. היא משנה את ההתנהלות ואת הסביבה שהילד פוגש, ובכך עשויה להפחית את העומס עליו ולאפשר ליכולות הוויסות שלו להתפתח. <span class="tag src">מקור</span></p>
-    <p><strong>חיבור בין שני תחומי ידע.</strong> ספרות העיבוד התחושתי עוסקת בעיקר בילד, וספרות ההורות עוסקת בעיקר בהתנהגות ההורה. המודל מחבר ביניהן דרך משתנה אחד, ההצפה, שנמצא בדיוק במפגש ביניהם. <span class="tag ext">הרחבה</span></p>
-    <p><strong>הסבר לרלוונטיות הרחבה של השיטה.</strong> אם הסמכות פועלת על העומס ולא על הרגישות, אותה שיטה רלוונטית לילדים עם פרופילים תחושתיים שונים, ואינה דורשת התאמה נפרדת לכל אבחנה. <span class="tag src">מקור</span></p>
-    <p><strong>ממצא המיתון כתרומה העיקרית.</strong> השערת המיתון מאפשרת לבדוק לא רק אם סמכות הורית מארגנת קשורה לתפקוד טוב יותר, אלא גם אם היא חשובה במיוחד דווקא אצל ילדים עם קשיים תחושתיים משמעותיים. ממצא כזה יציב את הסמכות כגורם הגנה במובן המלא, כלומר גורם שפועל בעיקר בנוכחות סיכון. <span class="tag src">מקור</span></p>
+    <p><strong>שני מסלולים לאותה תוצאה.</strong> נוקשות־נפיצות ואימפולסיביות נראות שונות מאוד, אבל שתיהן מגיעות מפרופיל ויסות. המודל מסביר למה ילדים כל כך שונים מגיעים לאותו מקום, ולמה אותה התערבות יכולה להתאים לשניהם. <span class="tag ext">הרחבה</span></p>
+    <p><strong>הסמכות פועלת על ההתנהלות, לא על הילד.</strong> ההורה לא נדרש לשנות את הסף התחושתי של הילד. הוא משנה את ההתנהלות ואת הסביבה, ובכך משנה את האסטרטגיה שהילד צריך: פחות שליטה כשהעולם פחות מאיים, יותר המתנה כשהגבול עקבי. <span class="tag src">מקור</span></p>
+    <p><strong>תפקיד חדש לאפיון.</strong> בדרך כלל אפיון תחושתי משמש לבניית טיפול בילד. במודל הזה הוא משמש גם את ההורה: הוא עוזר לו לראות את הילד כנפרד ממנו ואת ההתנהגות כביטוי של צורך. <span class="tag src">מקור</span></p>
   </div>
 
   <h3>המנגנון הקליני: שני מעגלים</h3>
-  <p class="col">ההשערה על שינוי בוויסות מתארת מעגל. בלי סמכות מארגנת, תגובת ההורה להצפה מוסיפה עומס, וההצפה הבאה מגיעה מהר יותר. עם סמכות מארגנת, תגובת ההורה מורידה את העומס, והמעגל נחלש. <span class="tag ext">הרחבה</span></p>
+  <p class="col">אצל הילד שמחפש שליטה, מעגל ההסלמה הוא מאבק על שליטה. אצל הילד שמחפש גירוי, הוא גבול שמתרופף ונאכף בכעס. בשני המקרים החוליה שאפשר לשנות היא תגובת ההורה.</p>
   <figure>
     <div class="scroll">
-    <svg viewBox="0 0 960 390" role="img" aria-label="שני מעגלים. מעגל ההסלמה: הצפה, התפרצות או הימנעות, הסלמה או כניעה של ההורה, עומס ואי־צפיות גדלים, וחזרה להצפה. מעגל הארגון: הצפה, הורה נוכח ורגוע שדוחה תגובה, מבנה וצפיות והפחתת גירוי, עומס יורד והוויסות מתאפשר, וחזרה להצפה חלשה יותר.">
+    <svg viewBox="0 0 960 390" role="img" aria-label="שני מעגלים. מעגל ההסלמה: הילד מוצף או נסחף, מתפרץ או חוצה גבול, ההורה נגרר למאבק או מוותר, העומס ואי־הצפיות גדלים. מעגל הארגון: אותה נקודת פתיחה, ההורה נוכח ורגוע ודוחה תגובה, מבנה וגבול עקבי, העומס יורד והגבול מופנם בהדרגה.">
       <defs>
-        <marker id="m9-risk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-risk"/></marker>
-        <marker id="m9-prot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-prot"/></marker>
+        <marker id="v8-risk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-risk"/></marker>
+        <marker id="v8-prot" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="c-prot"/></marker>
       </defs>
-      <!-- Right loop: escalation, center (720,205) -->
       <text class="th" x="720" y="26" text-anchor="middle" style="fill:var(--risk)">מעגל ההסלמה</text>
       <rect class="bx-med" x="635" y="58" width="170" height="50" rx="10"/>
-      <text class="t-sm" x="720" y="88" text-anchor="middle">הצפה של הילד</text>
+      <text class="t-sm" x="720" y="80" text-anchor="middle">הילד מוצף</text>
+      <text class="ts" x="720" y="98" text-anchor="middle">או נסחף ברגע</text>
       <rect class="bx" x="755" y="180" width="170" height="50" rx="10"/>
-      <text class="t-sm" x="840" y="202" text-anchor="middle">התפרצות</text>
-      <text class="ts" x="840" y="220" text-anchor="middle">או הימנעות</text>
+      <text class="t-sm" x="840" y="202" text-anchor="middle">מתפרץ</text>
+      <text class="ts" x="840" y="220" text-anchor="middle">או חוצה גבול</text>
       <rect class="bx-risk" x="635" y="302" width="170" height="50" rx="10"/>
-      <text class="t-sm" x="720" y="324" text-anchor="middle">תגובת ההורה:</text>
-      <text class="ts" x="720" y="342" text-anchor="middle">הסלמה, ויכוח או כניעה</text>
+      <text class="t-sm" x="720" y="324" text-anchor="middle">ההורה נגרר</text>
+      <text class="ts" x="720" y="342" text-anchor="middle">למאבק שליטה, או מוותר</text>
       <rect class="bx" x="515" y="180" width="170" height="50" rx="10"/>
-      <text class="t-sm" x="600" y="202" text-anchor="middle">העומס ואי־הצפיות</text>
+      <text class="t-sm" x="600" y="202" text-anchor="middle">האיום והבלבול</text>
       <text class="ts" x="600" y="220" text-anchor="middle">גדלים</text>
-      <path class="ln-risk" d="M807,83 C840,83 840,130 840,176" marker-end="url(#m9-risk)"/>
-      <path class="ln-risk" d="M840,232 C840,300 830,327 809,327" marker-end="url(#m9-risk)"/>
-      <path class="ln-risk" d="M633,327 C610,327 600,300 600,234" marker-end="url(#m9-risk)"/>
-      <path class="ln-risk" d="M600,178 C600,130 600,83 631,83" marker-end="url(#m9-risk)"/>
+      <path class="ln-risk" d="M807,83 C840,83 840,130 840,176" marker-end="url(#v8-risk)"/>
+      <path class="ln-risk" d="M840,232 C840,300 830,327 809,327" marker-end="url(#v8-risk)"/>
+      <path class="ln-risk" d="M633,327 C610,327 600,300 600,234" marker-end="url(#v8-risk)"/>
+      <path class="ln-risk" d="M600,178 C600,130 600,83 631,83" marker-end="url(#v8-risk)"/>
       <text class="ts" x="720" y="205" text-anchor="middle" style="fill:var(--risk)">מתחזק</text>
 
-      <!-- Left loop: organizing, center (240,205) -->
       <text class="th" x="240" y="26" text-anchor="middle" style="fill:var(--protect)">מעגל הארגון</text>
       <rect class="bx-med" x="155" y="58" width="170" height="50" rx="10"/>
-      <text class="t-sm" x="240" y="88" text-anchor="middle">הצפה של הילד</text>
+      <text class="t-sm" x="240" y="80" text-anchor="middle">הילד מוצף</text>
+      <text class="ts" x="240" y="98" text-anchor="middle">או נסחף ברגע</text>
       <rect class="bx" x="275" y="180" width="170" height="50" rx="10"/>
       <text class="t-sm" x="360" y="202" text-anchor="middle">הורה נוכח ורגוע</text>
       <text class="ts" x="360" y="220" text-anchor="middle">דוחה תגובה</text>
       <rect class="bx-prot" x="155" y="302" width="170" height="50" rx="10"/>
-      <text class="t-sm" x="240" y="324" text-anchor="middle">מבנה וצפיות</text>
-      <text class="ts" x="240" y="342" text-anchor="middle">הפחתת גירוי, ויסות משותף</text>
+      <text class="t-sm" x="240" y="324" text-anchor="middle">מבנה וגבול עקבי</text>
+      <text class="ts" x="240" y="342" text-anchor="middle">בלי מאבק כוח</text>
       <rect class="bx" x="35" y="180" width="170" height="50" rx="10"/>
-      <text class="t-sm" x="120" y="202" text-anchor="middle">העומס יורד</text>
-      <text class="ts" x="120" y="220" text-anchor="middle">הוויסות מתאפשר</text>
-      <path class="ln-prot" d="M327,83 C360,83 360,130 360,176" marker-end="url(#m9-prot)"/>
-      <path class="ln-prot" d="M360,232 C360,300 350,327 329,327" marker-end="url(#m9-prot)"/>
-      <path class="ln-prot" d="M153,327 C130,327 120,300 120,234" marker-end="url(#m9-prot)"/>
-      <path class="ln-prot" d="M120,178 C120,130 120,83 151,83" marker-end="url(#m9-prot)"/>
+      <text class="t-sm" x="120" y="202" text-anchor="middle">פחות איום</text>
+      <text class="ts" x="120" y="220" text-anchor="middle">הגבול מופנם בהדרגה</text>
+      <path class="ln-prot" d="M327,83 C360,83 360,130 360,176" marker-end="url(#v8-prot)"/>
+      <path class="ln-prot" d="M360,232 C360,300 350,327 329,327" marker-end="url(#v8-prot)"/>
+      <path class="ln-prot" d="M153,327 C130,327 120,300 120,234" marker-end="url(#v8-prot)"/>
+      <path class="ln-prot" d="M120,178 C120,130 120,83 151,83" marker-end="url(#v8-prot)"/>
       <text class="ts" x="240" y="198" text-anchor="middle" style="fill:var(--protect)">נחלש</text>
       <text class="ts" x="240" y="216" text-anchor="middle" style="fill:var(--protect)">לאורך זמן</text>
       <line class="grid-l" x1="480" y1="40" x2="480" y2="370"/>
     </svg>
     </div>
-    <figcaption><span class="fignum">תרשים 8</span><b>אותה נקודת פתיחה, שני מסלולים.</b> בשני המעגלים הילד מגיע מוצף באותה מידה. ההבדל הוא בחוליה של ההורה. במעגל ההסלמה תגובת ההורה מוסיפה עומס ומזינה את ההצפה הבאה. במעגל הארגון היא מורידה עומס, ולאורך זמן ההצפות נעשות חלשות ונדירות יותר. זה המנגנון ש־H3 ו־H5 בודקות.</figcaption>
+    <figcaption><span class="fignum">תרשים 8</span><b>אותה נקודת פתיחה, שני מסלולים.</b> בשני המעגלים הילד מגיע באותו מצב. במעגל ההסלמה תגובת ההורה מוסיפה איום או מפרקת את הגבול. במעגל הארגון היא מורידה איום ומחזיקה את הגבול, ולאורך זמן ההתפרצויות נחלשות.</figcaption>
   </figure>
 
   <h3>השלכות קליניות</h3>
   <ul class="col">
-    <li><strong>הדרכת הורים בלי דרישה "לתקן" את הילד.</strong> המטרה בהדרכה היא שינוי בהתנהלות ההורה ובסביבה. זה מפחית אשמה ומאפשר להורה לפעול גם כשהרגישות של הילד אינה משתנה.</li>
-    <li><strong>הערכה תחושתית ככלי להתאמת ההדרכה.</strong> אם המיתון יימצא, ילדים עם קשיים תחושתיים משמעותיים הם הקבוצה שתרוויח הכי הרבה, ולכן כדאי להעריך את הפרופיל התחושתי כבר בקליטה.</li>
-    <li><strong>מטרות טיפול שאפשר למדוד.</strong> תדירות ההצפות, עוצמתן ומשך ההתאוששות הם מדדים יומיומיים פשוטים שמראים להורה אם השינוי עובד.</li>
-    <li><strong>שילוב עם ריפוי בעיסוק.</strong> המודל מציע חלוקת עבודה: טיפול ישיר בילד עוסק ביכולות העיבוד, והדרכת ההורים עוסקת בעומס הסביבתי. שני המסלולים משלימים זה את זה.</li>
-  </ul>
-
-  <h3>כיווני מחקר המשך</h3>
-  <ul class="col">
-    <li>בדיקת המודל במסגרות חינוך: האם סמכות מארגנת של צוות חינוכי ממלאת תפקיד דומה.</li>
-    <li>מדידה רגעית (EMA) של הצפה ותגובת הורה, כדי לבחון את המעגל ברמת האירוע הבודד.</li>
-    <li>בדיקה אם המודל שונה לפי סוג הפרופיל התחושתי, למשל רגישות־יתר לעומת חיפוש גירוי.</li>
+    <li><strong>אפיון כחלק מהדרכת ההורים.</strong> אפשר להציג להורה את הפרופיל של הילד בשפה פשוטה: מחפש שליטה, מחפש גירוי, או שניהם. המטרה היא הבנה ונפרדות, לא תוכנית נפרדת.</li>
+    <li><strong>אותן דרישות, הדגשים שונים.</strong> מול מחפש שליטה כדאי להדגיש צפיוּת והימנעות ממאבקי כוח. מול מחפש גירוי כדאי להדגיש השגחה, עקביות ומענה מאורגן לצורך בגירוי.</li>
+    <li><strong>הפרופיל המשולב.</strong> ההורים של הילדים האלה צריכים יותר ליווי, ציפיות מציאותיות לקצב השינוי ותמיכה בוויסות העצמי שלהם.</li>
+    <li><strong>תשאול על הינקות.</strong> שאלה על תינוקות בכיינית, רגישות, לידה ואלרגיות עשויה לעזור להורה להבין מאיפה מגיע הצורך בשליטה, ולהפחית אשמה.</li>
   </ul>
 </section>
 
-<!-- 10 -->
+<!-- 12 -->
 <section id="limits">
-  <div class="secnum">10</div>
+  <div class="secnum">12</div>
   <h2>הסתייגויות</h2>
   <div class="col">
-    <div class="note">הדירוגים במטריצה ובתרשימי ההמחשה ממחישים את ההשערה בלבד. הם אינם מבוססים עדיין על נתונים, ואינם מנבאים את מצבו של ילד מסוים.</div>
-    <p>מחקר חתך יכול להראות קשרים ואינטראקציות, אך לא שהסמכות שינתה את הוויסות התחושתי או הפחיתה סיכון לאורך זמן. טענות סיבתיות דורשות את מחקר האורך או את מחקר ההתערבות.</p>
-    <p>הטיוטה המקורית ציינה שחלק מהקבצים שהועלו קודם אינם זמינים. לפני שילוב המסמך בהצעה, יש להשוות את המודל לנוסח המדויק של הצעת המחקר ולהתאים את המונחים. ההפניות לספרות ולכלי המדידה הן הצעות שיש לאמת מול המקורות.</p>
+    <div class="note">כל הגרפים בעמוד הם המחשה של ההשערות. הם אינם מבוססים על נתונים, ואינם מנבאים את מצבו של ילד מסוים.</div>
+    <p><strong>חיפוש שליטה צריך כלי מדידה.</strong> הוא אסטרטגיה רגשית־התנהגותית ולא מאפיין תחושתי, ולכן ה־Sensory Profile אינו מודד אותו. פיתוח ותיקוף של כלי מתאים הוא שלב ראשון במחקר.</p>
+    <p><strong>דיווח רטרוספקטיבי על הינקות.</strong> הורים לילד עם קשיים עשויים לזכור את הינקות כקשה יותר. רשומות רפואיות ונתונים אובייקטיביים, כמו סיבוכי לידה, מצמצמים את ההטיה.</p>
+    <p><strong>חפיפה לאבחנות.</strong> חיפוש גירוי חופף חלקית ל־ADHD, וחיפוש שליטה חופף לחרדה ול־ASD. יש לבקר על האבחנות ולבדוק אם המודל מוסיף הסבר מעבר להן.</p>
+    <p><strong>סיבתיות.</strong> מחקר חתך יכול להראות קשרים בלבד. טענות על שינוי דורשות את מחקר האורך ואת מחקר ההתערבות. ההפניות לספרות ולכלים הן הצעות שיש לאמת מול המקורות.</p>
   </div>
 </section>
 
